@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Benja — Creative Director & Experience Designer</title>
+<title>Benja â Creative Director & Experience Designer</title>
 <meta name="description" content="Portfolio of Benja, a creative director and experience designer crafting large-scale immersive events, brand activations, and interactive installations for Google, Riot Games, and more." />
 <link rel="canonical" href="https://benja.art/" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://benja.art/" />
-<meta property="og:title" content="Benja — Creative Director & Experience Designer" />
+<meta property="og:title" content="Benja â Creative Director & Experience Designer" />
 <meta property="og:description" content="Large-scale immersive events, brand activations, and interactive installations for Google, Riot Games, and more." />
 <meta property="og:image" content="https://benja.art/img/gcs-14.jpg" />
 <meta property="og:image:width" content="1200" />
@@ -18,7 +18,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Benja — Creative Director & Experience Designer" />
+<meta name="twitter:title" content="Benja â Creative Director & Experience Designer" />
 <meta name="twitter:description" content="Large-scale immersive events, brand activations, and interactive installations for Google, Riot Games, and more." />
 <meta name="twitter:image" content="https://benja.art/img/gcs-14.jpg" />
 
@@ -31,7 +31,9 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BHF065CB4Y');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" /></noscript>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js"></script>
@@ -64,7 +66,7 @@
   @keyframes float2 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(-50px,30px) scale(0.95); } 66%{ transform: translate(60px,-40px) scale(1.05); } }
   @keyframes float3 { 0%,100%{ transform: translate(0,0) scale(1.05); } 50%{ transform: translate(30px,50px) scale(0.95); } }
   @keyframes dotPulse { 0%,100%{ opacity: 0.03; } 50%{ opacity: 0.07; } }
-  /* bgDrift removed — static gradients avoid flicker on high-refresh monitors */
+  /* bgDrift removed â static gradients avoid flicker on high-refresh monitors */
   @keyframes hueShift { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
   @keyframes gradientDrift {
     0% { background-position: 0% 0%; }
@@ -146,14 +148,14 @@
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
-// ─── DESIGN TOKENS ───
+// âââ DESIGN TOKENS âââ
 const T = {
   bg: "#0A0A0A",
   bgLight: "#111111",
   surface: "#1A1A1A",
   text: "#FFFFFF",
   textMuted: "rgba(255,255,255,0.5)",
-  textFaint: "rgba(255,255,255,0.25)",
+  textFaint: "rgba(255,255,255,0.5)",
   accent: "#FF4D00",
   accentGlow: "rgba(255,77,0,0.15)",
   border: "rgba(255,255,255,0.08)",
@@ -162,10 +164,10 @@ const T = {
   sans: "'Space Grotesk', 'Inter', system-ui, sans-serif",
 };
 
-// ─── PROJECT DATA ───
+// âââ PROJECT DATA âââ
 // All images now served locally from img/ folder
 
-// 6 curated hero activations — ordered for visual rhythm (alternating aspect ratios)
+// 6 curated hero activations â ordered for visual rhythm (alternating aspect ratios)
 const featured = [
   { title: "Google Cloud Next '25", category: "Executive Production", year: "2025", client: "Google",
     desc: "Led creative for Google's flagship conference: a 35,000 sq ft AI-generated city with 40+ interactive activations for 36,000 attendees. From wayfinding to workshop zones, every touchpoint was designed to be intuitive, future-forward, and human.",
@@ -322,7 +324,7 @@ const selectedWork = [
 const clients = ["Google", "Riot Games", "Nike", "Red Bull", "GoPro", "Apple", "PepsiCo", "Yuga Labs", "Twitch", "Stripe", "Doritos", "USC"];
 const disciplines = ["Experiential Strategy", "Creative Leadership", "Brand Experience", "Audience Engagement", "Immersive Design", "Large-Scale Production"];
 
-// ─── HOOKS ───
+// âââ HOOKS âââ
 function useInView(opts = {}) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -357,7 +359,7 @@ function useScrollProgress(ref) {
   return progress;
 }
 
-// ─── RESPONSIVE HOOK ───
+// âââ RESPONSIVE HOOK âââ
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
   useEffect(() => {
@@ -369,8 +371,8 @@ function useIsMobile(breakpoint = 768) {
   return isMobile;
 }
 
-// ─── CUSTOM CURSOR (FIX #3: Faster + new hover style) ───
-// Changed: smoothing 0.15 → 0.45, hover is now a crosshair/ring with no fill
+// âââ CUSTOM CURSOR (FIX #3: Faster + new hover style) âââ
+// Changed: smoothing 0.15 â 0.45, hover is now a crosshair/ring with no fill
 function CustomCursor() {
   const isMobile = useIsMobile();
   const [pos, setPos] = useState({ x: -100, y: -100 });
@@ -399,7 +401,7 @@ function CustomCursor() {
     };
   }, []);
 
-  // Smooth follow — FASTER lerp factor (was 0.15, now 0.45)
+  // Smooth follow â FASTER lerp factor (was 0.15, now 0.45)
   useEffect(() => {
     const animate = () => {
       smoothPos.current.x += (pos.x - smoothPos.current.x) * 0.45;
@@ -426,7 +428,7 @@ function CustomCursor() {
     return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
   }, [pos, isHovering]);
 
-  // Hide custom cursor on touch/mobile — restore default cursor
+  // Hide custom cursor on touch/mobile â restore default cursor
   useEffect(() => {
     document.body.style.cursor = isMobile ? "auto" : "none";
     return () => { document.body.style.cursor = "auto"; };
@@ -442,7 +444,7 @@ function CustomCursor() {
         background: T.accent,
         pointerEvents: "none", zIndex: 9999, mixBlendMode: "difference",
       }} />
-      {/* Outer ring — expands on hover, follows slightly behind */}
+      {/* Outer ring â expands on hover, follows slightly behind */}
       <div id="cursor-ring" data-x="-100" data-y="-100" style={{
         position: "fixed", top: 0, left: 0, width: 48, height: 48, borderRadius: "50%",
         border: `1.5px solid ${isHovering ? T.accent : "rgba(255,255,255,0.2)"}`,
@@ -462,7 +464,7 @@ function CustomCursor() {
   );
 }
 
-// ─── ETHEREAL BACKGROUND — Intentional ambient layer ───
+// âââ ETHEREAL BACKGROUND â Intentional ambient layer âââ
 function EtherealBackground() {
   // Single-element approach: all gradients layered as backgrounds on one full-screen div.
   // No child divs with edges = no subpixel flicker on high-refresh monitors.
@@ -488,7 +490,7 @@ function EtherealBackground() {
   );
 }
 
-// ─── NAV ───
+// âââ NAV âââ
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -544,7 +546,7 @@ function Nav() {
 
       {/* Mobile hamburger */}
       {isMobile && (
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{
+        <button aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)} style={{
           background: "none", border: "none", cursor: "pointer", padding: 8,
           display: "flex", flexDirection: "column", gap: menuOpen ? 0 : 5, alignItems: "center", justifyContent: "center",
           width: 36, height: 36, position: "relative",
@@ -593,7 +595,7 @@ function Nav() {
   );
 }
 
-// ─── HERO: SCROLL-EXPANSION + IMAGE CROSSFADE + ATMOSPHERIC ───
+// âââ HERO: SCROLL-EXPANSION + IMAGE CROSSFADE + ATMOSPHERIC âââ
 const heroImages = [
   "img/hero-valorant.jpg",
   "img/hero-cloudspace.jpg",
@@ -646,7 +648,7 @@ function Hero() {
         transition: loaded ? "none" : "all 1s cubic-bezier(0.16, 1, 0.3, 1)",
       }}>
 
-        {/* ── Image crossfade layers ── */}
+        {/* ââ Image crossfade layers ââ */}
         {heroImages.map((img, i) => {
           const isActive = i === activeImg;
           const kbX = i % 2 === 0 ? "52%" : "48%";
@@ -665,7 +667,7 @@ function Hero() {
           );
         })}
 
-        {/* ── Dot grid texture overlay ── */}
+        {/* ââ Dot grid texture overlay ââ */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
           backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)`,
@@ -675,7 +677,7 @@ function Hero() {
           pointerEvents: "none",
         }} />
 
-        {/* ── Ethereal glow orbs ── */}
+        {/* ââ Ethereal glow orbs ââ */}
         <div style={{
           position: "absolute", top: "15%", left: "10%", width: "40vw", height: "40vw",
           borderRadius: "50%",
@@ -698,11 +700,11 @@ function Hero() {
           pointerEvents: "none", zIndex: 1,
         }} />
 
-        {/* ── Gradient overlays ── */}
+        {/* ââ Gradient overlays ââ */}
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 25%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.2) 75%, rgba(10,10,10,0.3) 100%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse at 30% 80%, rgba(255,77,0,0.05) 0%, transparent 60%)" }} />
 
-        {/* ── Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ── */}
+        {/* ââ Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ââ */}
         <div style={{
           position: "absolute", bottom: 28, left: 28, zIndex: 5,
           display: "flex", gap: 6, alignItems: "center",
@@ -718,7 +720,7 @@ function Hero() {
           ))}
         </div>
 
-        {/* ── Main hero content ── */}
+        {/* ââ Main hero content ââ */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 3,
           display: "flex", flexDirection: "column", justifyContent: "flex-end",
@@ -807,7 +809,7 @@ function Hero() {
           </div>
         </div>
 
-        {/* ── Corner frame marks ── */}
+        {/* ââ Corner frame marks ââ */}
         {[{ top: 20, left: 20 }, { top: 20, right: 20 }, { bottom: 20, left: 20 }, { bottom: 20, right: 20 }].map((pos, i) => (
           <div key={i} style={{
             position: "absolute", ...pos, width: 24, height: 24, zIndex: 4,
@@ -822,7 +824,7 @@ function Hero() {
         ))}
       </div>
 
-      {/* ── Scroll indicator — large bouncing chevron ── */}
+      {/* ââ Scroll indicator â large bouncing chevron ââ */}
       <div style={{
         position: "absolute", bottom: 24, left: "50%", zIndex: 10,
         display: isMobile ? "none" : "flex", flexDirection: "column", alignItems: "center", gap: 8,
@@ -843,14 +845,14 @@ function Hero() {
   );
 }
 
-// ─── IMMERSIVE TEXT MOMENT (replaces showreel) ───
-// ─── STATEMENT SECTION — simple fade-in, no sticky scroll ───
+// âââ IMMERSIVE TEXT MOMENT (replaces showreel) âââ
+// âââ STATEMENT SECTION â simple fade-in, no sticky scroll âââ
 function StatementSection() {
   const sectionRef = useRef(null);
   const progress = useScrollProgress(sectionRef);
   const words = ["Vision.", "Strategy.", "Production.", "Experience."];
   // progress 0 = section enters bottom of viewport, 1 = leaves top
-  // We want reveals to happen in the 0.15–0.55 range (early-to-mid scroll)
+  // We want reveals to happen in the 0.15â0.55 range (early-to-mid scroll)
   const labelOpacity = Math.max(0, Math.min(1, (progress - 0.1) * 6));
   const pOpacity = Math.max(0, Math.min(1, (progress - 0.35) * 5));
   const pY = Math.max(0, 20 * (1 - pOpacity));
@@ -891,7 +893,7 @@ function StatementSection() {
   );
 }
 
-// ─── MARQUEE ───
+// âââ MARQUEE âââ
 function Marquee() {
   const doubled = [...disciplines, ...disciplines, ...disciplines, ...disciplines];
   return (
@@ -915,7 +917,7 @@ function Marquee() {
   );
 }
 
-// ─── FEATURED PROJECTS — BENTO LAYOUT ───
+// âââ FEATURED PROJECTS â BENTO LAYOUT âââ
 function FeaturedShowcase() {
   const isMobile = useIsMobile();
   const gap = isMobile ? 12 : "clamp(10px, 1.2vw, 16px)";
@@ -965,7 +967,7 @@ function ProjectCard({ project, index, variant = "square" }) {
   const cardRef = useRef(null);
   const progress = useScrollProgress(cardRef);
   const ref = cardRef;
-  // Card fades/slides in based on scroll position — appears during 0.05–0.3 range
+  // Card fades/slides in based on scroll position â appears during 0.05â0.3 range
   const enterOpacity = Math.max(0, Math.min(1, (progress - 0.05) * 4));
   const enterY = Math.max(0, 60 * (1 - enterOpacity));
   const parallaxY = enterOpacity >= 1 ? (progress - 0.5) * -20 : 0;
@@ -1052,7 +1054,7 @@ function ProjectCard({ project, index, variant = "square" }) {
   );
 }
 
-// ─── PHILOSOPHY TEXT — SCROLL REVEAL (FIX #2: More impactful entry) ───
+// âââ PHILOSOPHY TEXT â SCROLL REVEAL (FIX #2: More impactful entry) âââ
 // Added: accent line that draws in, scale entrance, counter on side
 function PhilosophySection() {
   const ref = useRef(null);
@@ -1112,7 +1114,7 @@ function PhilosophySection() {
   );
 }
 
-// ─── SELECTED WORK INDEX (FIX #6: Redesigned hover — sliding thumbnail + accent bar) ───
+// âââ SELECTED WORK INDEX (FIX #6: Redesigned hover â sliding thumbnail + accent bar) âââ
 function ArchiveList() {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [expanded, setExpanded] = useState(false);
@@ -1216,7 +1218,7 @@ function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         transitionDelay: `${(index % 8) * 0.03}s`,
       }}
     >
-      {/* Floating preview image — desktop only */}
+      {/* Floating preview image â desktop only */}
       {!isMobile && project.image && (
         <div style={{
           position: "absolute",
@@ -1244,7 +1246,7 @@ function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         </div>
       )}
 
-      {/* Hover accent bar on left — desktop only */}
+      {/* Hover accent bar on left â desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
         width: 3, height: isHovered ? "60%" : 0,
@@ -1292,7 +1294,7 @@ function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
   );
 }
 
-// ─── CLIENT LOGOS — Inline SVG wordmarks, all white, optically balanced ───
+// âââ CLIENT LOGOS â Inline SVG wordmarks, all white, optically balanced âââ
 const CLIENT_LOGOS = {
   "Google": { h: 20, mh: 15, svg: (fill) => React.createElement("svg", { viewBox: "0 0 272 92", fill: "none", xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
     React.createElement("path", { fill, d: "M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" }),
@@ -1454,7 +1456,7 @@ function ClientLogos() {
   );
 }
 
-// ─── ABOUT SECTION — Dramatic entrance ───
+// âââ ABOUT SECTION â Dramatic entrance âââ
 function AboutSection() {
   const sectionRef = useRef(null);
   const progress = useScrollProgress(sectionRef);
@@ -1483,7 +1485,7 @@ function AboutSection() {
         transform: visible ? "translateY(0)" : "translateY(40px)",
       }}>15+</div>}
 
-      {/* Animated vertical divider line — desktop only */}
+      {/* Animated vertical divider line â desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: "50%", top: "15%", bottom: "15%", width: 1,
         background: `linear-gradient(to bottom, transparent, ${T.accent}, transparent)`,
@@ -1497,7 +1499,7 @@ function AboutSection() {
         gap: isMobile ? 32 : "clamp(40px, 6vw, 100px)", alignItems: "center",
         width: "100%",
       }}>
-        {/* Image side — clip-path wipe reveal */}
+        {/* Image side â clip-path wipe reveal */}
         <div style={{
           transform: `translateY(${imageY}px)`,
           animation: visible ? "clipRevealLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both" : "none",
@@ -1532,7 +1534,7 @@ function AboutSection() {
           </div>
         </div>
 
-        {/* Text side — staggered reveal */}
+        {/* Text side â staggered reveal */}
         <div style={{ transform: `translateY(${textY}px)` }}>
           {/* Label with animated accent line */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
@@ -1574,7 +1576,7 @@ function AboutSection() {
             </span>
           </h2>
 
-          {/* Body text — fade up */}
+          {/* Body text â fade up */}
           <p style={{
             fontFamily: T.sans, fontSize: "clamp(14px, 1.2vw, 16px)", color: T.textMuted,
             lineHeight: 1.75, marginTop: 24, maxWidth: 480,
@@ -1584,7 +1586,7 @@ function AboutSection() {
             Fifteen years leading experiential creative for the world's most ambitious brands. I've managed multidisciplinary teams of 50+ across five continents and budgets exceeding $30M, from large-scale activations to intimate immersive moments that turn complex narratives into human stories. I also serve on the Board of Directors for Take 3 Presents, a nonprofit nurturing creativity through experiential art.
           </p>
 
-          {/* Discipline tags — cascading entrance, evenly stacked */}
+          {/* Discipline tags â cascading entrance, evenly stacked */}
           <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: isMobile ? "repeat(2, auto)" : "repeat(3, auto)", gap: 8, justifyContent: isMobile ? "center" : "start", justifyItems: "start" }}>
             {disciplines.map((d, i) => (
               <span key={d} style={{
@@ -1605,7 +1607,7 @@ function AboutSection() {
   );
 }
 
-// ─── HIGHLIGHTS + CLIENTS STRIP ───
+// âââ HIGHLIGHTS + CLIENTS STRIP âââ
 function HighlightsStrip() {
   const isMobile = useIsMobile();
   const [ref, visible] = useInView(0.2);
@@ -1661,7 +1663,7 @@ function HighlightsStrip() {
   );
 }
 
-// ─── FOOTER SHADER — Mouse-reactive WebGL aurora background ───
+// âââ FOOTER SHADER â Mouse-reactive WebGL aurora background âââ
 function FooterShader({ containerRef }) {
   const canvasRef = useRef(null);
 
@@ -1714,7 +1716,7 @@ function FooterShader({ containerRef }) {
         float f = fbm(vec2(p.x * 2.5, p.y * 1.5 + t));
         float curtain = smoothstep(0.15, 0.55, f) * (1.0 - p.y * 0.8);
 
-        // Mouse flare — warm glow follows cursor
+        // Mouse flare â warm glow follows cursor
         float d = length(uv - mouse);
         float flare = smoothstep(0.35, 0.0, d);
 
@@ -1732,7 +1734,7 @@ function FooterShader({ containerRef }) {
         float vignette = smoothstep(1.2, 0.3, length(uv * vec2(0.8, 1.0)));
         color *= vignette;
 
-        // Keep it subtle — this is a background
+        // Keep it subtle â this is a background
         color *= 0.5;
 
         gl_FragColor = vec4(color, 1.0);
@@ -1783,7 +1785,7 @@ function FooterShader({ containerRef }) {
   return null;
 }
 
-// ─── FOOTER CSS HAZE — Layered animated gradients that mimic smoke/aurora ───
+// âââ FOOTER CSS HAZE â Layered animated gradients that mimic smoke/aurora âââ
 function FooterCSSHaze() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -1821,7 +1823,7 @@ function FooterCSSHaze() {
   );
 }
 
-// ─── FOOTER DIVIDER — Bold accent seam with glow pulse ───
+// âââ FOOTER DIVIDER â Bold accent seam with glow pulse âââ
 function FooterDivider({ visible, isMobile }) {
   return (
     <div style={{
@@ -1845,7 +1847,7 @@ function FooterDivider({ visible, isMobile }) {
         opacity: visible ? 0.45 : 0,
         transition: "opacity 1s ease 0.1s",
       }} />
-      {/* Breathing wide glow — slow pulse */}
+      {/* Breathing wide glow â slow pulse */}
       <div style={{
         position: "absolute", left: "5%", right: "5%", top: "50%",
         height: 24, transform: "translateY(-50%)",
@@ -1860,7 +1862,7 @@ function FooterDivider({ visible, isMobile }) {
   );
 }
 
-// ─── FOOTER ───
+// âââ FOOTER âââ
 function Footer() {
   const [footerContainerRef, visible] = useInView({ threshold: 0.05 });
   const [btnHover, setBtnHover] = useState(false);
@@ -1901,13 +1903,13 @@ function Footer() {
       {/* Divider at the exact seam */}
       <FooterDivider visible={visible} isMobile={isMobile} />
 
-      {/* Top fade — the shader canvas will show through, and this fades it to bg color at the top edge */}
+      {/* Top fade â the shader canvas will show through, and this fades it to bg color at the top edge */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: "30%",
         background: `linear-gradient(to bottom, ${T.bg} 0%, transparent 100%)`,
         pointerEvents: "none", zIndex: 2,
       }} />
-      {/* Background effect — WebGL shader on desktop, CSS haze on mobile */}
+      {/* Background effect â WebGL shader on desktop, CSS haze on mobile */}
       {shaderReady && (isMobile
         ? <FooterCSSHaze />
         : <FooterShader containerRef={footerContainerRef} />
@@ -1951,7 +1953,7 @@ function Footer() {
               transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.6 + i * 0.08}s`,
             }}>{word}</span>
           ))}
-          {/* "life." with wave animation — each letter undulates independently */}
+          {/* "life." with wave animation â each letter undulates independently */}
           <span style={{
             display: "inline-block",
             opacity: visible ? 1 : 0,
@@ -2019,7 +2021,7 @@ function Footer() {
         position: "relative", zIndex: 1,
       }}>
         <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textFaint }}>
-          © 2026 Benja Juster. Los Angeles, CA.
+          Â© 2026 Benja Juster. Los Angeles, CA.
         </span>
         <div style={{ display: "flex", gap: 28 }}>
           <a href="https://www.linkedin.com/in/benjajuster/" target="_blank" rel="noopener noreferrer" style={{
@@ -2035,7 +2037,7 @@ function Footer() {
   );
 }
 
-// ─── SCROLL PROGRESS BAR ───
+// âââ SCROLL PROGRESS BAR âââ
 function ScrollProgress() {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
@@ -2053,7 +2055,7 @@ function ScrollProgress() {
   );
 }
 
-// ─── PROJECT DETAIL OVERLAY ───
+// âââ PROJECT DETAIL OVERLAY âââ
 const ProjectContext = React.createContext();
 
 function ProjectDetailOverlay() {
@@ -2170,7 +2172,7 @@ function ProjectDetailOverlay() {
       alignItems: isMobile ? "stretch" : "flex-start", justifyContent: "center",
       overflowY: isMobile ? "hidden" : "auto", cursor: "pointer",
     }}>
-      {/* Mobile: fixed top bar OUTSIDE scroll container — never scrolls away */}
+      {/* Mobile: fixed top bar OUTSIDE scroll container â never scrolls away */}
       {isMobile && (
         <div onClick={(e) => e.stopPropagation()} style={{
           flexShrink: 0, display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -2193,7 +2195,7 @@ function ProjectDetailOverlay() {
         </div>
       )}
 
-      {/* Prev / Next arrows — desktop only */}
+      {/* Prev / Next arrows â desktop only */}
       {!isMobile && <NavArrow dir={-1} onClick={() => goToProject(-1)} />}
       {!isMobile && <NavArrow dir={1} onClick={() => goToProject(1)} />}
 
@@ -2205,7 +2207,7 @@ function ProjectDetailOverlay() {
         cursor: "default",
         ...(isMobile ? { flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" } : {}),
       }}>
-        {/* Top bar — counter + close (desktop only; mobile version is above scroll container) */}
+        {/* Top bar â counter + close (desktop only; mobile version is above scroll container) */}
         {!isMobile && (
           <div style={{
             display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -2230,7 +2232,7 @@ function ProjectDetailOverlay() {
           </div>
         )}
 
-        {/* Hero image / gallery — click to advance, hover arrows */}
+        {/* Hero image / gallery â click to advance, hover arrows */}
         {(() => {
           const goPrev = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx - 1 + allMedia.length) % allMedia.length); };
           const goNext = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx + 1) % allMedia.length); };
@@ -2341,7 +2343,7 @@ function ProjectDetailOverlay() {
           );
         })()}
 
-        {/* YouTube video embed — works on benja.art (domain-restricted on localhost) */}
+        {/* YouTube video embed â works on benja.art (domain-restricted on localhost) */}
         {hasVideo && (
           <div style={{
             width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden",
@@ -2434,7 +2436,7 @@ function ProjectDetailOverlay() {
   );
 }
 
-// ─── APP ───
+// âââ APP âââ
 function App() {
   const [activeProject, setActiveProject] = useState(null);
 
