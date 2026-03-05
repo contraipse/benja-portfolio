@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Benja — Creative Director & Experience Designer</title>
+<meta name="description" content="Portfolio of Benja, a creative director and experience designer crafting large-scale immersive events, brand activations, and interactive installations for Google, Riot Games, and more." />
+<link rel="canonical" href="https://benja.art/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://benja.art/" />
+<meta property="og:title" content="Benja — Creative Director & Experience Designer" />
+<meta property="og:description" content="Large-scale immersive events, brand activations, and interactive installations for Google, Riot Games, and more." />
+<meta property="og:image" content="https://benja.art/img/gcs-14.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Benja — Creative Director & Experience Designer" />
+<meta name="twitter:description" content="Large-scale immersive events, brand activations, and interactive installations for Google, Riot Games, and more." />
+<meta name="twitter:image" content="https://benja.art/img/gcs-14.jpg" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHF065CB4Y"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BHF065CB4Y');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #0A0A0A; color: #fff; }
+  body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior-y: none; cursor: none; }
+  ::selection { background: rgba(255,77,0,0.3); color: #fff; }
+  ::-webkit-scrollbar { display: none; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  @keyframes heroReveal {
+    0% { clip-path: inset(100% 0 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    0% { opacity: 0; transform: scale(0.92); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes lineGrow {
+    0% { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+  @keyframes pulse { 0%,100%{ opacity:0.4; } 50%{ opacity:1; } }
+  @keyframes float1 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(40px,-60px) scale(1.1); } 66%{ transform: translate(-30px,40px) scale(0.9); } }
+  @keyframes float2 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(-50px,30px) scale(0.95); } 66%{ transform: translate(60px,-40px) scale(1.05); } }
+  @keyframes float3 { 0%,100%{ transform: translate(0,0) scale(1.05); } 50%{ transform: translate(30px,50px) scale(0.95); } }
+  @keyframes dotPulse { 0%,100%{ opacity: 0.03; } 50%{ opacity: 0.07; } }
+  /* bgDrift removed — static gradients avoid flicker on high-refresh monitors */
+  @keyframes hueShift { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+  @keyframes gradientDrift {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+  @keyframes magneticPulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.5); opacity: 0; }
+  }
+  @keyframes footerHaze1 {
+    0% { transform: translate(0%, 0%) rotate(0deg); }
+    33% { transform: translate(5%, -3%) rotate(2deg); }
+    66% { transform: translate(-3%, 4%) rotate(-1deg); }
+    100% { transform: translate(4%, -2%) rotate(1.5deg); }
+  }
+  @keyframes footerHaze2 {
+    0% { transform: translate(0%, 0%) rotate(0deg); }
+    50% { transform: translate(-4%, 3%) rotate(-2deg); }
+    100% { transform: translate(3%, -4%) rotate(1deg); }
+  }
+  @keyframes letterReveal {
+    0% { opacity: 0; transform: translateY(100%) rotateX(-80deg); }
+    100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+  }
+  @keyframes lifeWave {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes footerOrb1 { 0%,100%{ transform: translate(0,0) scale(1); } 25%{ transform: translate(80px,-40px) scale(1.2); } 50%{ transform: translate(-30px,60px) scale(0.8); } 75%{ transform: translate(50px,20px) scale(1.1); } }
+  @keyframes footerOrb2 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(-60px,-80px) scale(1.15); } 66%{ transform: translate(70px,30px) scale(0.85); } }
+  @keyframes footerOrb3 { 0%,100%{ transform: translate(0,0); } 50%{ transform: translate(40px,-50px); } }
+  @keyframes dividerPulse {
+    0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+    50% { opacity: 0.7; transform: scaleX(1); }
+  }
+  @keyframes drawLine { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+  @keyframes archiveSlideIn { 0% { transform: translateX(-20px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+  @keyframes clipRevealLeft {
+    0% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes clipRevealRight {
+    0% { clip-path: inset(0 0 0 100%); }
+    100% { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes aboutLineGrow {
+    0% { transform: scaleY(0); }
+    100% { transform: scaleY(1); }
+  }
+  @keyframes aboutTagIn {
+    0% { opacity: 0; transform: translateY(12px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes splitReveal {
+    0% { transform: translateY(110%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes accentWipe {
+    0% { width: 0; }
+    100% { width: 80px; }
+  }
+  @keyframes scrollDot {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  @keyframes kineticWave {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-3px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(2px); }
+    100% { transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+// ─── DESIGN TOKENS ───
+const T = {
+  bg: "#0A0A0A",
+  bgLight: "#111111",
+  surface: "#1A1A1A",
+  text: "#FFFFFF",
+  textMuted: "rgba(255,255,255,0.5)",
+  textFaint: "rgba(255,255,255,0.25)",
+  accent: "#FF4D00",
+  accentGlow: "rgba(255,77,0,0.15)",
+  border: "rgba(255,255,255,0.08)",
+  borderLight: "rgba(255,255,255,0.15)",
+  serif: "'Fraunces', Georgia, serif",
+  sans: "'Space Grotesk', 'Inter', system-ui, sans-serif",
+};
+
+// ─── PROJECT DATA ───
+// All images now served locally from img/ folder
+
+// 6 curated hero activations — ordered for visual rhythm (alternating aspect ratios)
+const featured = [
+  { title: "Google Cloud Next '25", category: "Executive Production", year: "2025", client: "Google",
+    desc: "Led creative for Google's flagship conference: a 35,000 sq ft AI-generated city with 40+ interactive activations for 36,000 attendees. From wayfinding to workshop zones, every touchpoint was designed to be intuitive, future-forward, and human.",
+    stats: [{ stat: "36,000+", label: "Attendees" }, { stat: "40+", label: "Activations" }, { stat: "35K sq ft", label: "Footprint" }],
+    image: "img/hero-next.jpg",
+    gallery: ["img/gcn25-01.jpg", "img/gcn25-02.jpg", "img/gcn25-03.jpg", "img/gcn25-04.jpg", "img/gcn25-05.jpg", "img/gcn25-06.jpg", "img/gcn25-07.jpg", "img/gcn25-08.jpg"],
+    video: "pZ7T4e8oqas" },
+  { title: "Apple WWDC '22", category: "Creative Leadership", year: "2022", client: "Apple",
+    desc: "Led the design team behind Apple's 360 event identity, orchestrating content strategy across motion graphics, film, print, social, and wearables. Every element reflected Apple's signature precision while keeping the experience warm and creatively inspiring.",
+    stats: [{ stat: "6", label: "Content Verticals" }, { stat: "Global", label: "Reach" }],
+    image: "img/wwdc22-01.jpg", cropHint: "center 65%",
+    gallery: ["img/wwdc22-01.jpg", "img/wwdc22-02.jpg", "img/wwdc22-03.jpg", "img/wwdc22-04.jpg", "img/wwdc22-05.jpg", "img/wwdc22-06.jpg", "img/wwdc22-07.jpg", "img/wwdc22-08.jpg", "img/wwdc22-09.jpg", "img/wwdc22-10.jpg", "img/wwdc22-11.jpg", "img/wwdc22-12.jpg"],
+    video: null },
+  { title: "Google Cloud Space", category: "Executive Production", year: "2019", client: "Google",
+    desc: "Led design and launch of a 26,000 sq ft executive briefing center with 14 immersive exhibits, a team of 25+, and 6 agency partners. Generated $7.3M average deal size per engagement and nearly $1B in total pipeline.",
+    stats: [{ stat: "$1B", label: "Pipeline" }, { stat: "14", label: "Exhibits" }, { stat: "26K sq ft", label: "Footprint" }],
+    image: "img/gcs-14.jpg", cropHint: "center 35%",
+    gallery: ["img/gcs-01.jpg", "img/gcs-02.jpg", "img/gcs-03.jpg", "img/gcs-04.jpg", "img/gcs-05.jpg", "img/gcs-06.jpg", "img/gcs-07.jpg", "img/gcs-08.jpg", "img/gcs-09.jpg", "img/gcs-10.jpg", "img/gcs-11.jpg", "img/gcs-12.jpg", "img/gcs-13.jpg", "img/gcs-14.jpg", "img/gcs-15.jpg", "img/gcs-16.jpg", "img/gcs-17.jpg", "img/gcs-18.jpg", "img/gcs-19.jpg", "img/gcs-20.jpg", "img/gcs-21.jpg", "img/gcs-22.jpg", "img/gcs-23.jpg", "img/gcs-24.jpg", "img/gcs-25.jpg", "img/gcs-26.jpg", "img/gcs-27.jpg"],
+    video: "YuPz9RTzxGs" },
+  { title: "Doodles Premiere", category: "Creative Leadership", year: "2024", client: "Doodles",
+    desc: "Led creative vision and production for the Doodles animated series premiere at TIFF, featuring projection mapping, a Pharrell-curated sonic identity, and an immersive gallery bridging digital art with physical space for the Web3 community.",
+    stats: [{ stat: "TIFF", label: "Festival Premiere" }, { stat: "3", label: "Immersive Zones" }],
+    image: "img/doodles-01.jpeg", cropHint: "center 20%",
+    gallery: ["img/doodles-01.jpeg", "img/doodles-02.jpeg", "img/doodles-03.jpg", "img/doodles-04.jpeg", "img/doodles-05.jpeg", "img/doodles-06.jpeg", "img/doodles-07.jpeg", "img/doodles-08.jpg", "img/doodles-09.jpeg", "img/doodles-10.jpeg", "img/doodles-11.jpeg", "img/doodles-12.jpeg", "img/doodles-13.jpg", "img/doodles-14.jpeg", "img/doodles-15.jpg", "img/doodles-16.jpg"],
+    video: null },
+  { title: "Riot Games Valorant Rave", category: "Creative Leadership", year: "2026", client: "Riot Games",
+    desc: "Led creative for Riot Games' Valorant 2026 season launch rave, bringing Viper's world to life with a larger-than-life Cypher Wall, an Arsenal wall, a playable mini-map, and immersive photo moments for superfans.",
+    stats: [{ stat: "1,500+", label: "Attendees" }, { stat: "8", label: "Custom Activations" }],
+    image: "img/1768594587623.jpeg", cropHint: "center 50%",
+    gallery: ["img/1768594587623.jpeg","img/1768594580898.jpeg","img/1768594586816.jpeg","img/1768594586548.jpeg","img/1768594586973.jpeg","img/1768594586090.jpeg","img/1768594584860.jpeg","img/1768594584992.jpeg","img/1768594580673.jpeg"],
+    video: null },
+  { title: "Doritos Blaze The Beat", category: "Creative Direction", year: "2018", client: "Doritos",
+    desc: "Directed an immersive launch event for Doritos' Blaze flavor headlined by Wiz Khalifa, using thermal image tracking, pyrotechnics, and live performances as the opening party for Life is Beautiful Festival.",
+    stats: [{ stat: "2,000+", label: "Attendees" }, { stat: "200%", label: "Social Lift" }],
+    image: "img/doritos-02.jpg", cropHint: "center 30%",
+    gallery: ["img/doritos-01.jpg","img/doritos-02.jpg","img/doritos-03.jpg","img/doritos-04.jpg","img/doritos-05.jpg","img/doritos-06.jpg","img/doritos-07.jpg","img/doritos-08.jpg","img/doritos-09.jpg","img/doritos-10.jpg","img/doritos-11.jpg"],
+    video: null },
+];
+
+const selectedWork = [
+  { title: "Google Cloud Next '25", category: "Executive Production", year: "2025", client: "Google", image: "img/gcn25-01.jpg",
+    desc: "Led creative for Google's flagship conference: a 35,000 sq ft AI-generated city with 40+ interactive activations for 36,000 attendees. From wayfinding to workshop zones, every touchpoint was designed to be intuitive, future-forward, and human.",
+    stats: [{ stat: "36,000+", label: "Attendees" }, { stat: "40+", label: "Activations" }, { stat: "35K sq ft", label: "Expo Floor" }],
+    gallery: ["img/gcn25-01.jpg","img/gcn25-02.jpg","img/gcn25-03.jpg","img/gcn25-04.jpg","img/gcn25-05.jpg","img/gcn25-06.jpg","img/gcn25-07.jpg","img/gcn25-08.jpg"],
+    video: "pZ7T4e8oqas" },
+  { title: "Riot Games Valorant Rave", category: "Creative Leadership", year: "2026", client: "Riot Games", image: "img/1768594580898.jpeg", cropHint: "center 50%",
+    desc: "Led creative for Riot Games' Valorant 2026 season launch rave, bringing Viper's world to life with a larger-than-life Cypher Wall, an Arsenal wall, a playable mini-map, and immersive photo moments for superfans.",
+    stats: [{ stat: "1,500+", label: "Attendees" }, { stat: "8", label: "Custom Activations" }],
+    gallery: ["img/1768594587623.jpeg","img/1768594580898.jpeg","img/1768594586816.jpeg","img/1768594586548.jpeg","img/1768594586973.jpeg","img/1768594586090.jpeg","img/1768594584860.jpeg","img/1768594584992.jpeg","img/1768594580673.jpeg"],
+    video: null },
+  { title: "Google Cloud Space", category: "Executive Production", year: "2019", client: "Google", image: "img/gcs-14.jpg", cropHint: "center 35%",
+    desc: "Led design and launch of a 26,000 sq ft executive briefing center with 14 immersive exhibits, a team of 25+, and 6 agency partners. Generated $7.3M average deal size per engagement and nearly $1B in total pipeline.",
+    stats: [{ stat: "$1B", label: "Pipeline Generated" }, { stat: "$30M", label: "Budget Managed" }, { stat: "14", label: "Immersive Exhibits" }],
+    gallery: ["img/gcs-01.jpg","img/gcs-02.jpg","img/gcs-03.jpg","img/gcs-04.jpg","img/gcs-05.jpg","img/gcs-06.jpg","img/gcs-07.jpg","img/gcs-08.jpg","img/gcs-09.jpg","img/gcs-10.jpg","img/gcs-11.jpg","img/gcs-12.jpg","img/gcs-13.jpg","img/gcs-14.jpg","img/gcs-15.jpg","img/gcs-16.jpg","img/gcs-17.jpg","img/gcs-18.jpg","img/gcs-19.jpg","img/gcs-20.jpg","img/gcs-21.jpg","img/gcs-22.jpg","img/gcs-23.jpg","img/gcs-24.jpg","img/gcs-25.jpg","img/gcs-26.jpg","img/gcs-27.jpg"],
+    video: "YuPz9RTzxGs" },
+  { title: "Apple WWDC '22", category: "Creative Leadership", year: "2022", client: "Apple", image: "img/wwdc22-01.jpg", cropHint: "center 65%",
+    desc: "Led the design team behind Apple's 360 event identity, orchestrating content strategy across motion graphics, film, print, social, and wearables. Designed the hybrid WWDC format that drove 40% engagement growth while preserving the emotional impact across digital and in-person audiences.",
+    stats: [{ stat: "6", label: "Content Verticals" }, { stat: "40%", label: "Engagement Growth" }, { stat: "Global", label: "Reach" }],
+    gallery: ["img/wwdc22-01.jpg","img/wwdc22-02.jpg","img/wwdc22-03.jpg","img/wwdc22-04.jpg","img/wwdc22-05.jpg","img/wwdc22-06.jpg","img/wwdc22-07.jpg","img/wwdc22-08.jpg","img/wwdc22-09.jpg","img/wwdc22-10.jpg","img/wwdc22-11.jpg","img/wwdc22-12.jpg"],
+    video: null },
+  { title: "Doodles Premiere", category: "Creative Leadership", year: "2024", client: "Doodles", image: "img/doodles-02.jpeg", cropHint: "center 20%",
+    desc: "Premiered the first Doodles animated film at TIFF with a star-studded event featuring Pharrell, Coi Leray, and Trippie Redd. Transformed Toronto's historic Stock Exchange into a 360-degree projection-mapped Doodleverse with live performances and exclusive merch collabs.",
+    stats: [{ stat: "360\u00b0", label: "Projection Mapping" }, { stat: "TIFF", label: "Festival Premiere" }],
+    gallery: ["img/doodles-01.jpeg","img/doodles-02.jpeg","img/doodles-03.jpg","img/doodles-04.jpeg","img/doodles-05.jpeg","img/doodles-06.jpeg","img/doodles-07.jpeg","img/doodles-08.jpg","img/doodles-09.jpeg","img/doodles-10.jpeg","img/doodles-11.jpeg","img/doodles-12.jpeg","img/doodles-13.jpg","img/doodles-14.jpeg","img/doodles-15.jpg","img/doodles-16.jpg"],
+    video: null },
+  { title: "BAYC @ ComplexCon", category: "Executive Production", year: "2025", client: "Yuga Labs", image: "img/bayc-dsc04327.jpg",
+    desc: "Executive produced the Bored Ape Yacht Club booth at ComplexCon, creating a giant gachapon machine that distributed 2,000+ prizes and onboarded attendees to ApeChain. Longest consistent line at the event, 3+ hour waits for 2 days straight.",
+    stats: [{ stat: "2,000+", label: "Prizes Distributed" }, { stat: "3+ hrs", label: "Avg Wait Time" }],
+    gallery: ["img/bayc-dsc06079.jpg","img/bayc-dsc06915.jpg","img/bayc-dsc03492.jpg","img/bayc-dsc03514.jpg","img/bayc-dsc03989.jpg","img/bayc-dsc04016.jpg","img/bayc-dsc04237.jpg","img/bayc-dsc04781.jpg","img/bayc-dsc05226.jpg","img/bayc--06064.jpg","img/bayc--06547.jpg","img/bayc--06817.jpg","img/bayc-dsc03509.jpg","img/bayc-dsc03591.jpg","img/bayc-dsc04327.jpg","img/bayc-dsc04687.jpg","img/bayc-dsc05696.jpg"],
+    video: "qFBbX3saST4" },
+  { title: "GreenBiz VERGE", category: "Experiential Direction", year: "2023", client: "GreenBiz", image: "img/verge-11.jpg",
+    desc: "Directed experiential marketing for GreenBiz's flagship sustainability conference, owning 60+ activations across 100,000+ sq ft. Built the event program from scratch, establishing creative standards and measurement frameworks that doubled sponsorship revenue and increased attendee NPS by 20%.",
+    stats: [{ stat: "60+", label: "Activations" }, { stat: "100K+ sq ft", label: "Expo Floor" }, { stat: "20%", label: "NPS Increase" }],
+    gallery: ["img/verge-01.jpg","img/verge-02.jpg","img/verge-03.jpg","img/verge-04.jpg","img/verge-05.jpg","img/verge-06.jpg","img/verge-07.jpg","img/verge-08.jpg","img/verge-09.jpg","img/verge-10.jpg","img/verge-11.jpg","img/verge-12.jpg"],
+    video: null },
+  { title: "Google Experience Studio", category: "Strategy", year: "2019", client: "Google", image: "img/google-experience-studio.jpg",
+    desc: "Led agency partners and technologist teams to produce 11 large-scale immersive exhibits across 4 global Customer Experience Centers, blending theatrical interactive elements with Google technology to immerse guests in the product story.",
+    stats: [{ stat: "11", label: "Exhibits" }, { stat: "4", label: "Global Centers" }, { stat: "40%", label: "Revenue Lift" }],
+    gallery: [],
+    video: "60GspL5ssXI" },
+  { title: "Doritos Blaze The Beat", category: "Creative Direction", year: "2018", client: "Doritos", image: "img/doritos-11.jpg", cropHint: "center 65%",
+    desc: "Directed an immersive launch event for Doritos' Blaze flavor headlined by Wiz Khalifa, using thermal image tracking, pyrotechnics, and live performances as the opening party for Life is Beautiful Festival.",
+    stats: [{ stat: "2,000+", label: "Attendees" }, { stat: "200%", label: "Social Engagement Lift" }],
+    gallery: ["img/doritos-01.jpg","img/doritos-02.jpg","img/doritos-03.jpg","img/doritos-04.jpg","img/doritos-05.jpg","img/doritos-06.jpg","img/doritos-07.jpg","img/doritos-08.jpg","img/doritos-09.jpg","img/doritos-10.jpg","img/doritos-11.jpg"],
+    video: null },
+  { title: "USC Next Level Sports", category: "Executive Production", year: "2024", client: "USC", image: "img/uscnls-03.jpeg",
+    desc: "Produced USC's premier sports, media, and business conference at Intuit Dome featuring 30+ speakers including NBA Commissioner Adam Silver, Maverick Carter, and ESPN's Jimmy Pitaro.",
+    stats: [{ stat: "30+", label: "Speakers" }, { stat: "Intuit Dome", label: "Venue" }],
+    gallery: ["img/uscnls-01.jpeg","img/uscnls-02.jpeg","img/uscnls-03.jpeg","img/uscnls-04.jpeg","img/uscnls-05.jpeg","img/uscnls-06.jpeg","img/uscnls-07.jpeg","img/uscnls-08.jpeg","img/uscnls-09.jpg","img/uscnls-10.jpeg","img/uscnls-11.jpeg"],
+    video: null },
+  { title: "Boutique Sensorium", category: "Executive Production", year: "2016", client: "PepsiCo", image: "img/sensorium-05.jpg",
+    desc: "Produced a groundbreaking dining experience at Milan Design Week that positioned PepsiCo as a thought leader in the future of food, featuring VR/AR dining, interactive smart tables, and 3D-printed food in a galactic estate setting.",
+    stats: [{ stat: "50%", label: "Social Lift" }, { stat: "#1", label: "Most Tweeted at MDW" }],
+    gallery: ["img/sensorium-01.jpg","img/sensorium-02.jpg","img/sensorium-03.jpg","img/sensorium-04.jpg","img/sensorium-05.jpg","img/sensorium-06.jpg","img/sensorium-07.jpg","img/sensorium-08.jpg","img/sensorium-09.jpg","img/sensorium-10.jpg","img/sensorium-11.jpg"],
+    video: null },
+  { title: "Culdesac Brand Refresh", category: "Strategy", year: "2024", client: "Culdesac", image: "img/culdesac-01.png",
+    desc: "Led brand strategy for America's first car-free neighborhood. Traveled the country studying intentional communities, ran workshops with the founding team, and delivered the Culdesac Codex, a cultural blueprint informing everything from wayfinding to resident experience.",
+    gallery: ["img/culdesac-01.png","img/culdesac-02.png","img/culdesac-03.png","img/culdesac-04.png","img/culdesac-05.png","img/culdesac-06.png","img/culdesac-07.png","img/culdesac-08.png","img/culdesac-09.png","img/culdesac-10.png","img/culdesac-11.png","img/culdesac-12.png"],
+    video: null },
+  { title: "TwitchQuest", category: "Creative Leadership", year: "2016", client: "Twitch", image: "img/twitchquest-01.jpg",
+    desc: "Created a multi-day alternate reality game at TwitchCon that combined immersive puzzles, character-driven games, and social media interaction to drive sponsor traffic and keep attendees engaged across the full convention floor.",
+    stats: [{ stat: "10,000", label: "Participants" }, { stat: "30%", label: "Social Share Rate" }, { stat: "28%", label: "Sponsor Lift" }],
+    gallery: ["img/twitchquest-01.jpg","img/twitchquest-02.jpg","img/twitchquest-03.jpg","img/twitchquest-04.jpg","img/twitchquest-05.jpg","img/twitchquest-06.jpg","img/twitchquest-07.jpg","img/twitchquest-08.jpg","img/twitchquest-09.jpg","img/twitchquest-10.jpg","img/twitchquest-11.jpg","img/twitchquest-12.jpg","img/twitchquest-13.jpg","img/twitchquest-14.jpg"],
+    video: null },
+  { title: "LA Gives Back", category: "Strategy", year: "2025", client: "Nonprofit", image: "img/lagb-01.jpg",
+    desc: "Co-founded a fire relief initiative that mobilized 500+ volunteers across Los Angeles, coordinating donation drives, community meals, and rebuilding support for families displaced by the 2025 wildfires.",
+    stats: [{ stat: "$67,400", label: "Raised" }, { stat: "500+", label: "Volunteers" }, { stat: "12", label: "Partner Orgs" }],
+    gallery: ["img/lagb-01.jpg","img/lagb-02.jpg","img/lagb-03.jpg","img/lagb-04.jpeg","img/lagb-05.jpg","img/lagb-06.jpg","img/lagb-07.jpeg","img/lagb-08.jpeg","img/lagb-09.jpeg","img/lagb-10.jpeg","img/lagb-11.jpeg","img/lagb-12.jpeg","img/lagb-13.jpeg","img/lagb-14.jpeg","img/lagb-15.jpeg"],
+    video: null },
+  { title: "Together Fund", category: "Strategy", year: "2021", client: "Social Media Startup", image: "img/togfund-03.jpeg", cropHint: "center 30%",
+    desc: "Developed brand identity and creative strategy for a $5M grant and mentorship program empowering experience creators to host gatherings, backed by a social media unicorn startup.",
+    stats: [{ stat: "$5M", label: "Program Fund" }],
+    gallery: ["img/togfund-01.jpeg","img/togfund-02.jpeg","img/togfund-03.jpeg","img/togfund-04.jpeg","img/togfund-05.jpeg","img/togfund-06.jpeg","img/togfund-07.jpeg","img/togfund-08.jpeg","img/togfund-09.jpeg","img/togfund-10.jpeg","img/togfund-11.jpeg","img/togfund-12.png","img/togfund-13.png","img/togfund-14.jpeg","img/togfund-15.jpeg","img/togfund-16.jpg"],
+    video: null },
+  { title: "Stripe Convergence", category: "Creative Production", year: "2016", client: "Stripe", image: "img/stripe-01.jpg", cropHint: "center 65%",
+    desc: "Led creative production for Stripe's internal all-hands conference, shaping the event narrative, stage design, and attendee experience for thousands of employees across global offices.",
+    gallery: ["img/stripe-01.jpg","img/stripe-02.jpg","img/stripe-03.jpg","img/stripe-04.jpg","img/stripe-05.jpg","img/stripe-06.jpg","img/stripe-07.jpg","img/stripe-08.jpg","img/stripe-09.jpg","img/stripe-10.jpg","img/stripe-11.jpg","img/stripe-12.jpg"],
+    video: null },
+  { title: "Red Bull Hack The Hits", category: "Creative Leadership", year: "2017", client: "Red Bull", image: "img/rbhack-08.jpg",
+    desc: "Transformed SF's TechShop into a futuristic DIY workshop for a 48-hour hackathon where college students competed to invent a new musical instrument powered by Red Bull.",
+    gallery: ["img/rbhack-01.jpg","img/rbhack-02.jpg","img/rbhack-03.jpg","img/rbhack-04.jpg","img/rbhack-05.jpg","img/rbhack-06.jpg","img/rbhack-07.jpg","img/rbhack-08.jpg","img/rbhack-09.jpg","img/rbhack-10.jpg","img/rbhack-11.jpg","img/rbhack-12.jpg"],
+    video: null },
+  { title: "Megabots The Wreckoning", category: "Executive Production", year: "2018", client: "Megabots", image: "img/megabots-01.jpg",
+    desc: "Executive produced a live giant robot combat event, managing logistics, safety, broadcast production, and crowd experience for a one-of-a-kind spectacle.",
+    gallery: ["img/megabots-01.jpg","img/megabots-02.jpg","img/megabots-03.jpg","img/megabots-04.jpg","img/megabots-05.jpg","img/megabots-06.jpg","img/megabots-07.jpg","img/megabots-08.jpg","img/megabots-09.jpg","img/megabots-10.jpg","img/megabots-11.jpg","img/megabots-12.jpg","img/megabots-13.jpg","img/megabots-14.jpg"],
+    video: null },
+  { title: "Save The Sasquatch", category: "Creative Direction", year: "2015", client: "Original Work", image: "img/sasquatch-04.jpg",
+    desc: "An original immersive art festival blending large-scale installations, community engagement, and environmental storytelling into a tongue-in-cheek conservation effort.",
+    stats: [{ stat: "30+", label: "Installations" }],
+    gallery: ["img/sasquatch-01.jpg","img/sasquatch-02.jpg","img/sasquatch-03.jpg","img/sasquatch-04.jpg","img/sasquatch-05.jpg","img/sasquatch-06.jpg","img/sasquatch-07.jpg","img/sasquatch-08.jpg","img/sasquatch-09.jpg","img/sasquatch-10.jpg","img/sasquatch-11.jpg","img/sasquatch-12.jpg","img/sasquatch-13.jpg","img/sasquatch-14.jpg","img/sasquatch-15.jpg","img/sasquatch-16.jpg","img/sasquatch-17.jpg","img/sasquatch-18.jpg","img/sasquatch-19.jpg","img/sasquatch-20.jpg","img/sasquatch-21.jpg","img/sasquatch-22.jpg","img/sasquatch-23.jpg","img/sasquatch-24.jpg","img/sasquatch-25.jpg","img/sasquatch-26.jpg"],
+    video: null },
+  { title: "Newkind Festival", category: "Creative Leadership", year: "2017", client: "Newkind", image: "img/newkind-09.jpg",
+    desc: "Co-created a grassroots culture festival celebrating art, music, and community in the East Bay, blending live performances with interactive installations and local vendor markets.",
+    gallery: ["img/newkind-01.jpg","img/newkind-02.jpg","img/newkind-03.jpg","img/newkind-04.jpg","img/newkind-05.jpg","img/newkind-06.jpg","img/newkind-07.jpg","img/newkind-08.jpg","img/newkind-09.jpg","img/newkind-10.jpg","img/newkind-11.jpg","img/newkind-12.jpg"],
+    video: null },
+  { title: "Desert Daze Festival", category: "Production", year: "2015", client: "Desert Daze", image: "img/ddaze-06.jpg",
+    desc: "Produced immersive art installations and stage environments for a boutique music festival in Joshua Tree, blending psychedelic visual art with the desert landscape.",
+    gallery: ["img/ddaze-01.jpg","img/ddaze-02.jpg","img/ddaze-03.jpg","img/ddaze-04.jpg","img/ddaze-05.jpg","img/ddaze-06.jpg","img/ddaze-07.png"],
+    video: "amO8V5OEJSo" },
+  { title: "The Town Festival", category: "Executive Production", year: "2017", client: "The Town", image: "img/thetown-03.jpg",
+    desc: "Produced a multi-day community festival in Oakland celebrating local music, food, and art, coordinating 20+ vendors, multiple stages, and neighborhood activations.",
+    gallery: ["img/thetown-01.jpg","img/thetown-02.jpg","img/thetown-03.jpg","img/thetown-04.jpg","img/thetown-05.jpg","img/thetown-06.jpg","img/thetown-07.jpg","img/thetown-08.jpg","img/thetown-09.jpg","img/thetown-10.jpg","img/thetown-11.jpg","img/thetown-12.jpg","img/thetown-13.jpg","img/thetown-14.jpg","img/thetown-15.jpg","img/thetown-16.jpg","img/thetown-17.jpg","img/thetown-18.jpg","img/thetown-19.jpg","img/thetown-20.jpg","img/thetown-21.jpg","img/thetown-22.jpg","img/thetown-23.jpg","img/thetown-24.jpg"],
+    video: null },
+  { title: "Ethereal Path", category: "Creative Leadership", year: "2014", client: "Original Work", image: "img/ethereal-01.jpg",
+    desc: "An original immersive art installation exploring light, sound, and movement through a walk-through sensory environment.",
+    gallery: ["img/ethereal-01.jpg","img/ethereal-02.jpg","img/ethereal-03.jpg","img/ethereal-04.jpg","img/ethereal-05.jpg"],
+    video: null },
+  { title: "The Birding Club", category: "Creative Leadership", year: "2013", client: "Original Work", image: "img/birding-03.jpg", cropHint: "center 65%",
+    desc: "A community-driven creative project bringing people together through guided birding experiences and nature-inspired storytelling.",
+    gallery: ["img/birding-01.jpg","img/birding-02.jpg","img/birding-03.jpg"],
+    video: null },
+];
+
+const clients = ["Google", "Riot Games", "Nike", "Red Bull", "GoPro", "Apple", "PepsiCo", "Yuga Labs", "Twitch", "Stripe", "Doritos", "USC"];
+const disciplines = ["Experiential Strategy", "Creative Leadership", "Brand Experience", "Audience Engagement", "Immersive Design", "Large-Scale Production"];
+
+// ─── HOOKS ───
+function useInView(opts = {}) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: opts.threshold || 0.15 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, visible];
+}
+
+function useScrollProgress(ref) {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    let rafId = null;
+    const onScroll = () => {
+      if (rafId) return; // throttle to one update per animation frame
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const rect = el.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        const raw = (windowH - rect.top) / (windowH + rect.height);
+        setProgress(Math.max(0, Math.min(1, raw)));
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => { window.removeEventListener("scroll", onScroll); if (rafId) cancelAnimationFrame(rafId); };
+  }, []);
+  return progress;
+}
+
+// ─── RESPONSIVE HOOK ───
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
+// ─── CUSTOM CURSOR (FIX #3: Faster + new hover style) ───
+// Changed: smoothing 0.15 → 0.45, hover is now a crosshair/ring with no fill
+function CustomCursor() {
+  const isMobile = useIsMobile();
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [label, setLabel] = useState("");
+  const smoothPos = useRef({ x: -100, y: -100 });
+  const frameRef = useRef(null);
+
+  useEffect(() => {
+    const move = (e) => { setPos({ x: e.clientX, y: e.clientY }); };
+    window.addEventListener("mousemove", move, { passive: true });
+    const over = (e) => {
+      const el = e.target.closest("a, button, [data-cursor]");
+      if (el) { setIsHovering(true); setLabel(el.dataset.cursor || ""); }
+    };
+    const out = (e) => {
+      const el = e.target.closest("a, button, [data-cursor]");
+      if (el) { setIsHovering(false); setLabel(""); }
+    };
+    document.addEventListener("mouseover", over);
+    document.addEventListener("mouseout", out);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      document.removeEventListener("mouseover", over);
+      document.removeEventListener("mouseout", out);
+    };
+  }, []);
+
+  // Smooth follow — FASTER lerp factor (was 0.15, now 0.45)
+  useEffect(() => {
+    const animate = () => {
+      smoothPos.current.x += (pos.x - smoothPos.current.x) * 0.45;
+      smoothPos.current.y += (pos.y - smoothPos.current.y) * 0.45;
+      const el = document.getElementById("custom-cursor");
+      const ring = document.getElementById("cursor-ring");
+      if (el) {
+        el.style.transform = `translate(${smoothPos.current.x}px, ${smoothPos.current.y}px) translate(-50%, -50%)`;
+      }
+      if (ring) {
+        // Ring follows slightly slower for nice trailing effect
+        const ringEl = ring;
+        const rx = parseFloat(ringEl.dataset.x || smoothPos.current.x);
+        const ry = parseFloat(ringEl.dataset.y || smoothPos.current.y);
+        const nx = rx + (pos.x - rx) * 0.2;
+        const ny = ry + (pos.y - ry) * 0.2;
+        ringEl.dataset.x = nx;
+        ringEl.dataset.y = ny;
+        ringEl.style.transform = `translate(${nx}px, ${ny}px) translate(-50%, -50%) scale(${isHovering ? 1 : 0.5})`;
+      }
+      frameRef.current = requestAnimationFrame(animate);
+    };
+    frameRef.current = requestAnimationFrame(animate);
+    return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
+  }, [pos, isHovering]);
+
+  // Hide custom cursor on touch/mobile — restore default cursor
+  useEffect(() => {
+    document.body.style.cursor = isMobile ? "auto" : "none";
+    return () => { document.body.style.cursor = "auto"; };
+  }, [isMobile]);
+
+  if (isMobile) return null;
+
+  return (
+    <React.Fragment>
+      {/* Inner dot */}
+      <div id="custom-cursor" style={{
+        position: "fixed", top: 0, left: 0, width: 8, height: 8, borderRadius: "50%",
+        background: T.accent,
+        pointerEvents: "none", zIndex: 9999, mixBlendMode: "difference",
+      }} />
+      {/* Outer ring — expands on hover, follows slightly behind */}
+      <div id="cursor-ring" data-x="-100" data-y="-100" style={{
+        position: "fixed", top: 0, left: 0, width: 48, height: 48, borderRadius: "50%",
+        border: `1.5px solid ${isHovering ? T.accent : "rgba(255,255,255,0.2)"}`,
+        background: "transparent",
+        pointerEvents: "none", zIndex: 9998,
+        opacity: isHovering ? 1 : 0.4,
+        transition: "border 0.3s, opacity 0.3s, width 0.3s, height 0.3s",
+        display: "flex", alignItems: "center", justifyContent: "center",
+      }}>
+        {label && <span style={{
+          fontFamily: T.sans, fontSize: 9, fontWeight: 600, color: T.accent,
+          letterSpacing: "1px", textTransform: "uppercase", whiteSpace: "nowrap",
+          opacity: isHovering ? 1 : 0, transition: "opacity 0.2s",
+        }}>{label}</span>}
+      </div>
+    </React.Fragment>
+  );
+}
+
+// ─── ETHEREAL BACKGROUND — Intentional ambient layer ───
+function EtherealBackground() {
+  // Single-element approach: all gradients layered as backgrounds on one full-screen div.
+  // No child divs with edges = no subpixel flicker on high-refresh monitors.
+  // Animation via CSS background-position shifts on the container.
+  return (
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
+      <div style={{
+        position: "absolute", inset: 0,
+        background: [
+          "radial-gradient(ellipse 60% 60% at 25% 20%, rgba(255,77,0,0.12) 0%, rgba(255,77,0,0.06) 25%, rgba(255,77,0,0.02) 45%, transparent 70%)",
+          "radial-gradient(ellipse 55% 50% at 70% 45%, rgba(255,120,60,0.10) 0%, rgba(255,100,40,0.04) 30%, transparent 65%)",
+          "radial-gradient(ellipse 65% 45% at 40% 75%, rgba(255,50,0,0.08) 0%, rgba(255,60,10,0.03) 30%, transparent 65%)",
+          "radial-gradient(ellipse 45% 45% at 55% 50%, rgba(160,140,255,0.04) 0%, rgba(160,140,255,0.015) 35%, transparent 60%)",
+        ].join(", "),
+      }} />
+      {/* Film grain */}
+      <div style={{
+        position: "absolute", inset: 0, opacity: 0.35,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")`,
+        backgroundSize: "200px 200px",
+      }} />
+    </div>
+  );
+}
+
+// ─── NAV ───
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+  useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", h, { passive: true });
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+  // Close menu on scroll
+  useEffect(() => { if (menuOpen) setMenuOpen(false); }, [scrolled]);
+
+  const navLinks = ["Work", "About", "Contact"];
+
+  return (
+    <React.Fragment>
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+      display: "flex", justifyContent: "space-between", alignItems: "center",
+      padding: isMobile ? "0 20px" : "0 clamp(24px, 5vw, 64px)", height: isMobile ? 60 : 72,
+      background: scrolled || menuOpen ? "rgba(10,10,10,0.92)" : "transparent",
+      backdropFilter: scrolled || menuOpen ? "blur(20px) saturate(1.4)" : "none",
+      borderBottom: scrolled ? `1px solid ${T.border}` : "1px solid transparent",
+      transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+    }}>
+      <a href="#" style={{ textDecoration: "none" }}>
+        <span style={{ fontFamily: T.serif, fontSize: isMobile ? 22 : 26, fontWeight: 400, color: T.text }}>Benja</span>
+      </a>
+
+      {/* Desktop nav pills */}
+      {!isMobile && (
+        <div style={{
+          display: "flex", gap: 0, alignItems: "center",
+          background: scrolled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.03)",
+          borderRadius: 24, padding: "6px 4px",
+          border: `1px solid ${scrolled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.04)"}`,
+          transition: "all 0.5s ease",
+        }}>
+          {navLinks.map((item) => (
+            <a key={item} href={item === "Contact" ? "mailto:benjajuster@gmail.com" : `#${item.toLowerCase()}`}
+              style={{
+                fontFamily: T.sans, fontSize: 11, fontWeight: 500, letterSpacing: "1.5px",
+                color: T.textMuted, textDecoration: "none", textTransform: "uppercase",
+                transition: "color 0.3s, background 0.3s",
+                padding: "8px 18px", borderRadius: 20,
+              }}
+              onMouseEnter={(e) => { e.target.style.color = T.text; e.target.style.background = "rgba(255,255,255,0.06)"; }}
+              onMouseLeave={(e) => { e.target.style.color = T.textMuted; e.target.style.background = "transparent"; }}
+            >{item}</a>
+          ))}
+        </div>
+      )}
+
+      {/* Mobile hamburger */}
+      {isMobile && (
+        <button onClick={() => setMenuOpen(!menuOpen)} style={{
+          background: "none", border: "none", cursor: "pointer", padding: 8,
+          display: "flex", flexDirection: "column", gap: menuOpen ? 0 : 5, alignItems: "center", justifyContent: "center",
+          width: 36, height: 36, position: "relative",
+        }}>
+          <span style={{
+            display: "block", width: 22, height: 1.5, background: T.text, borderRadius: 1,
+            transform: menuOpen ? "rotate(45deg) translateY(0)" : "rotate(0) translateY(0)",
+            position: menuOpen ? "absolute" : "relative",
+            transition: "all 0.3s ease",
+          }} />
+          {!menuOpen && <span style={{ display: "block", width: 22, height: 1.5, background: T.text, borderRadius: 1 }} />}
+          <span style={{
+            display: "block", width: 22, height: 1.5, background: T.text, borderRadius: 1,
+            transform: menuOpen ? "rotate(-45deg) translateY(0)" : "rotate(0) translateY(0)",
+            position: menuOpen ? "absolute" : "relative",
+            transition: "all 0.3s ease",
+          }} />
+        </button>
+      )}
+    </nav>
+
+    {/* Mobile menu overlay */}
+    {isMobile && (
+      <div style={{
+        position: "fixed", top: 60, left: 0, right: 0, bottom: 0, zIndex: 99,
+        background: "rgba(10,10,10,0.96)", backdropFilter: "blur(24px)",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32,
+        opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "auto" : "none",
+        transition: "opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+      }}>
+        {navLinks.map((item, i) => (
+          <a key={item}
+            href={item === "Contact" ? "mailto:benjajuster@gmail.com" : `#${item.toLowerCase()}`}
+            onClick={() => setMenuOpen(false)}
+            style={{
+              fontFamily: T.serif, fontSize: 36, fontWeight: 300, color: T.text,
+              textDecoration: "none",
+              opacity: menuOpen ? 1 : 0, transform: menuOpen ? "translateY(0)" : "translateY(20px)",
+              transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + i * 0.08}s`,
+            }}
+          >{item}</a>
+        ))}
+      </div>
+    )}
+    </React.Fragment>
+  );
+}
+
+// ─── HERO: SCROLL-EXPANSION + IMAGE CROSSFADE + ATMOSPHERIC ───
+const heroImages = [
+  "img/hero-valorant.jpg",
+  "img/hero-cloudspace.jpg",
+  "img/hero-next.jpg",
+  "img/hero-goldberg.jpg",
+  "img/hero-doodles.jpg",
+  "img/hero-doodles2.jpg",
+];
+
+function Hero() {
+  const isMobile = useIsMobile();
+  const [loaded, setLoaded] = useState(false);
+  const [activeImg, setActiveImg] = useState(0);
+  const sectionRef = useRef(null);
+  const scrollProg = useScrollProgress(sectionRef);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  useEffect(() => { setTimeout(() => setLoaded(true), 200); }, []);
+
+  // Track mouse position for kinetic "Movements" text
+  useEffect(() => {
+    const onMove = (e) => {
+      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImg(prev => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const expansionProg = Math.min(scrollProg * 6, 1);
+  const frameInset = Math.max(0, 16 * (1 - expansionProg));
+  const frameRadius = Math.max(0, 20 * (1 - expansionProg));
+  const heroOpacity = Math.max(0, 1 - Math.max(0, scrollProg - 0.3) * 3);
+  const titleY = Math.max(0, scrollProg - 0.15) * -140;
+  const bgScale = 1 + scrollProg * 0.12;
+
+  return (
+    <section ref={sectionRef} style={{
+      height: isMobile ? "100dvh" : "100vh", position: "relative", padding: frameInset, zIndex: 1,
+    }}>
+      <div style={{
+        position: "relative", width: "100%", height: "100%",
+        borderRadius: frameRadius, overflow: "hidden",
+        boxShadow: frameInset > 0 ? "0 8px 60px rgba(0,0,0,0.6)" : "none",
+        transition: loaded ? "none" : "all 1s cubic-bezier(0.16, 1, 0.3, 1)",
+      }}>
+
+        {/* ── Image crossfade layers ── */}
+        {heroImages.map((img, i) => {
+          const isActive = i === activeImg;
+          const kbX = i % 2 === 0 ? "52%" : "48%";
+          const kbY = i % 3 === 0 ? "45%" : "55%";
+          return (
+            <div key={i} style={{
+              position: "absolute", inset: "-5%",
+              backgroundImage: `url(${img})`,
+              backgroundSize: "cover",
+              backgroundPosition: `${kbX} ${kbY}`,
+              transform: `scale(${isActive ? bgScale * 1.08 : bgScale})`,
+              filter: "brightness(0.5) saturate(0.7)",
+              opacity: isActive ? 1 : 0,
+              transition: "opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.4, 0, 0.2, 1)",
+            }} />
+          );
+        })}
+
+        {/* ── Dot grid texture overlay ── */}
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 1,
+          backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)`,
+          backgroundSize: "24px 24px",
+          opacity: 0.35,
+          animation: "dotPulse 8s ease infinite",
+          pointerEvents: "none",
+        }} />
+
+        {/* ── Ethereal glow orbs ── */}
+        <div style={{
+          position: "absolute", top: "15%", left: "10%", width: "40vw", height: "40vw",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(255,77,0,0.08) 0%, transparent 70%)",
+          filter: "blur(80px)", animation: "float1 20s ease-in-out infinite",
+          pointerEvents: "none", zIndex: 1,
+        }} />
+        <div style={{
+          position: "absolute", top: "50%", right: "5%", width: "35vw", height: "35vw",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(255,120,50,0.05) 0%, transparent 70%)",
+          filter: "blur(100px)", animation: "float2 25s ease-in-out infinite",
+          pointerEvents: "none", zIndex: 1,
+        }} />
+        <div style={{
+          position: "absolute", bottom: "10%", left: "40%", width: "30vw", height: "30vw",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(255,200,150,0.04) 0%, transparent 70%)",
+          filter: "blur(60px)", animation: "float3 18s ease-in-out infinite",
+          pointerEvents: "none", zIndex: 1,
+        }} />
+
+        {/* ── Gradient overlays ── */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 25%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.2) 75%, rgba(10,10,10,0.3) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse at 30% 80%, rgba(255,77,0,0.05) 0%, transparent 60%)" }} />
+
+        {/* ── Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ── */}
+        <div style={{
+          position: "absolute", bottom: 28, left: 28, zIndex: 5,
+          display: "flex", gap: 6, alignItems: "center",
+          opacity: loaded ? 0.6 : 0, transition: "opacity 0.8s ease 1s",
+        }}>
+          {heroImages.map((_, i) => (
+            <div key={i} style={{
+              width: i === activeImg ? 20 : 6, height: 3,
+              borderRadius: 2,
+              background: i === activeImg ? T.accent : "rgba(255,255,255,0.25)",
+              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+            }} />
+          ))}
+        </div>
+
+        {/* ── Main hero content ── */}
+        <div style={{
+          position: "absolute", inset: 0, zIndex: 3,
+          display: "flex", flexDirection: "column", justifyContent: "flex-end",
+          padding: isMobile ? "0 20px 24px" : "0 clamp(24px, 5vw, 64px) clamp(60px, 8vh, 100px)",
+          opacity: heroOpacity,
+          transform: `translateY(${titleY}px)`,
+        }}>
+          {/* Overline */}
+          <div style={{
+            opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s",
+            marginBottom: isMobile ? 12 : 16,
+          }}>
+            <span style={{
+              fontFamily: T.sans, fontSize: isMobile ? 12 : 16, fontWeight: 700, letterSpacing: isMobile ? "4px" : "10.5px",
+              textTransform: "uppercase", color: "#FF8044",
+              textShadow: "0 0 10px rgba(255,100,40,0.6), 0 0 30px rgba(255,77,0,0.3), 0 2px 8px rgba(0,0,0,0.8)",
+            }}>
+              Experiential Creative Leader
+            </span>
+          </div>
+
+          {/* Massive title */}
+          <h1 style={{
+            fontFamily: T.serif, fontSize: isMobile ? "clamp(30px, 9vw, 46px)" : "clamp(56px, 8vw, 128px)",
+            fontWeight: isMobile ? 400 : 600, lineHeight: isMobile ? 1.0 : 0.9, color: "#FFFFFF", margin: 0,
+            textShadow: isMobile ? "0 0 30px rgba(255,255,255,0.2), 0 2px 20px rgba(0,0,0,0.6)" : "0 0 40px rgba(255,255,255,0.2), 0 0 80px rgba(255,255,255,0.1), 0 2px 20px rgba(0,0,0,0.8), 0 8px 60px rgba(0,0,0,0.5)",
+            opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(60px)",
+            transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s",
+          }}>
+            Turning<br />Moments Into{" "}
+            <span style={{ fontStyle: "italic" }}>
+              {isMobile ? (
+                <span style={{ color: T.accent }}>Movements</span>
+              ) : (
+                "Movements".split("").map((ch, i) => {
+                  const letterCenter = (i / 8);
+                  const dx = mousePos.x - letterCenter;
+                  const dy = mousePos.y - 0.5;
+                  const dist = Math.sqrt(dx * dx + dy * dy);
+                  const influence = Math.max(0, 1 - dist * 1.8);
+                  const yOff = influence * dy * -50;
+                  const xOff = influence * dx * -20;
+                  const rotate = influence * dx * 18;
+                  const scale = 1 + influence * 0.15;
+                  const strokeWidth = 1.5 + influence * 1.5;
+                  return (
+                    <span key={i} style={{
+                      display: "inline-block",
+                      color: influence > 0.3 ? `rgba(255,77,0,${influence * 0.4})` : "transparent",
+                      WebkitTextStroke: `${strokeWidth}px ${T.accent}`,
+                      transform: loaded ? `translate(${xOff}px, ${yOff}px) rotate(${rotate}deg) scale(${scale})` : "none",
+                      transition: "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, -webkit-text-stroke 0.2s ease",
+                      transformOrigin: "center bottom",
+                    }}>{ch}</span>
+                  );
+                })
+              )}
+            </span>
+          </h1>
+
+          {/* Hero subline */}
+          <p style={{
+            fontFamily: T.sans, fontSize: isMobile ? 14 : "clamp(16px, 1.4vw, 20px)",
+            fontWeight: 400, color: "rgba(255,255,255,0.75)", lineHeight: 1.5,
+            maxWidth: isMobile ? "90%" : 520, margin: 0, marginTop: isMobile ? 12 : 20,
+            opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s",
+            textShadow: "0 2px 12px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5)",
+          }}>
+            Leading teams and creative vision behind immersive experiences for the world's most ambitious brands.
+          </p>
+
+          {/* Stats row */}
+          <div style={{
+            display: "flex", gap: isMobile ? 20 : "clamp(32px, 5vw, 80px)", marginTop: isMobile ? 16 : "clamp(24px, 3vh, 40px)",
+            opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s",
+          }}>
+            {[{ num: "15+", label: "Years" }, { num: "100+", label: "Projects" }, { num: "25+", label: "Brands" }].map((s) => (
+              <div key={s.label} style={{ display: "flex", alignItems: "baseline", gap: isMobile ? 4 : 8 }}>
+                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 22 : "clamp(28px, 3vw, 48px)", fontWeight: 700, color: "#FFFFFF" }}>{s.num}</span>
+                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 9 : 11, fontWeight: 500, color: "rgba(255,255,255,0.8)", letterSpacing: "1.5px", textTransform: "uppercase" }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Corner frame marks ── */}
+        {[{ top: 20, left: 20 }, { top: 20, right: 20 }, { bottom: 20, left: 20 }, { bottom: 20, right: 20 }].map((pos, i) => (
+          <div key={i} style={{
+            position: "absolute", ...pos, width: 24, height: 24, zIndex: 4,
+            borderColor: T.borderLight, borderStyle: "solid", borderWidth: 0,
+            opacity: loaded ? (1 - expansionProg * 0.5) : 0,
+            transition: loaded ? "none" : `opacity 0.6s ease ${1 + i * 0.1}s`,
+            ...(i === 0 ? { borderTopWidth: 1, borderLeftWidth: 1 } : {}),
+            ...(i === 1 ? { borderTopWidth: 1, borderRightWidth: 1 } : {}),
+            ...(i === 2 ? { borderBottomWidth: 1, borderLeftWidth: 1 } : {}),
+            ...(i === 3 ? { borderBottomWidth: 1, borderRightWidth: 1 } : {}),
+          }} />
+        ))}
+      </div>
+
+      {/* ── Scroll indicator — large bouncing chevron ── */}
+      <div style={{
+        position: "absolute", bottom: 24, left: "50%", zIndex: 10,
+        display: isMobile ? "none" : "flex", flexDirection: "column", alignItems: "center", gap: 8,
+        opacity: loaded ? Math.max(0, 1 - scrollProg * 3) : 0,
+        transition: loaded ? "none" : "opacity 1s ease 1.4s",
+        animation: "scrollDot 2s ease-in-out infinite",
+      }}>
+        <span style={{
+          fontFamily: T.sans, fontSize: 11, fontWeight: 600,
+          letterSpacing: "2px", textTransform: "uppercase",
+          color: T.accent,
+        }}>Scroll</span>
+        <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
+          <path d="M2 2L14 13L26 2" stroke={T.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </section>
+  );
+}
+
+// ─── IMMERSIVE TEXT MOMENT (replaces showreel) ───
+// ─── STATEMENT SECTION — simple fade-in, no sticky scroll ───
+function StatementSection() {
+  const sectionRef = useRef(null);
+  const progress = useScrollProgress(sectionRef);
+  const words = ["Vision.", "Strategy.", "Production.", "Experience."];
+  // progress 0 = section enters bottom of viewport, 1 = leaves top
+  // We want reveals to happen in the 0.15–0.55 range (early-to-mid scroll)
+  const labelOpacity = Math.max(0, Math.min(1, (progress - 0.1) * 6));
+  const pOpacity = Math.max(0, Math.min(1, (progress - 0.35) * 5));
+  const pY = Math.max(0, 20 * (1 - pOpacity));
+  const lineWidth = Math.max(0, Math.min(80, (progress - 0.4) * 400));
+
+  return (
+    <section ref={sectionRef} style={{
+      padding: "clamp(80px, 12vw, 160px) clamp(24px, 5vw, 64px)",
+      textAlign: "center", position: "relative", zIndex: 1,
+    }}>
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(ellipse at 50% 50%, rgba(255,77,0,0.04) 0%, transparent 60%)",
+      }} />
+      <div style={{ opacity: labelOpacity, transform: `translateY(${(1 - labelOpacity) * 15}px)`, marginBottom: 24 }}>
+        <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>What I Lead</span>
+      </div>
+      <h2 style={{ fontFamily: T.serif, fontSize: "clamp(36px, 8vw, 120px)", fontWeight: 300, lineHeight: 1.15, color: T.text, margin: 0 }}>
+        {words.map((word, i) => {
+          const wordStart = 0.12 + i * 0.07;
+          const wordOpacity = Math.max(0, Math.min(1, (progress - wordStart) * 6));
+          const wordY = Math.max(0, 35 * (1 - wordOpacity));
+          return (
+            <span key={i} style={{
+              display: "inline-block", margin: "0 0.15em",
+              opacity: wordOpacity, transform: `translateY(${wordY}px)`,
+              color: i === words.length - 1 ? T.accent : T.text,
+              fontStyle: i === words.length - 1 ? "italic" : "normal",
+            }}>{word}</span>
+          );
+        })}
+      </h2>
+      <div style={{
+        width: lineWidth, height: 2, background: T.accent,
+        margin: "32px auto 0", borderRadius: 1,
+      }} />
+    </section>
+  );
+}
+
+// ─── MARQUEE ───
+function Marquee() {
+  const doubled = [...disciplines, ...disciplines, ...disciplines, ...disciplines];
+  return (
+    <div style={{
+      overflow: "hidden", padding: "28px 0",
+      borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`,
+      margin: "0 0 clamp(60px, 8vw, 100px)", position: "relative", zIndex: 1,
+    }}>
+      <div style={{ display: "flex", gap: 56, animation: "marquee 40s linear infinite", width: "max-content" }}>
+        {doubled.map((item, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 56 }}>
+            <span style={{
+              fontFamily: T.sans, fontSize: "clamp(12px, 1vw, 14px)", fontWeight: 500,
+              color: T.textFaint, whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: "3px",
+            }}>{item}</span>
+            <div style={{ width: 4, height: 4, borderRadius: "50%", background: T.accent, opacity: 0.5, flexShrink: 0 }} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── FEATURED PROJECTS — BENTO LAYOUT ───
+function FeaturedShowcase() {
+  const isMobile = useIsMobile();
+  const gap = isMobile ? 12 : "clamp(10px, 1.2vw, 16px)";
+  const pad = isMobile ? "0 16px" : "0 clamp(24px, 5vw, 64px)";
+  return (
+    <section id="work" style={{ position: "relative", zIndex: 1 }}>
+      <div style={{
+        padding: pad, marginBottom: isMobile ? 28 : "clamp(40px, 5vh, 60px)",
+        display: "flex", justifyContent: "space-between", alignItems: "flex-end",
+      }}>
+        <div>
+          <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent, letterSpacing: "3px", textTransform: "uppercase" }}>Featured</span>
+          <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? 32 : "clamp(40px, 5vw, 72px)", fontWeight: 300, color: T.text, margin: "8px 0 0", lineHeight: 1 }}>
+            Selected Work
+          </h2>
+        </div>
+      </div>
+      <div style={{ padding: pad, display: "flex", flexDirection: "column", gap }}>
+        <ProjectCard project={featured[0]} index={0} variant={isMobile ? "square" : "hero"} />
+        {isMobile ? (
+          /* Mobile: single column, all cards same ratio */
+          featured.slice(1).map((p, i) => (
+            <ProjectCard key={p.title} project={p} index={i + 1} variant="square" />
+          ))
+        ) : (
+          <React.Fragment>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap }}>
+              <ProjectCard project={featured[1]} index={1} variant="square" />
+              <ProjectCard project={featured[2]} index={2} variant="square" />
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap }}>
+              <ProjectCard project={featured[3]} index={3} variant="tall" />
+              <ProjectCard project={featured[4]} index={4} variant="tall" />
+              <ProjectCard project={featured[5]} index={5} variant="tall" />
+            </div>
+          </React.Fragment>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({ project, index, variant = "square" }) {
+  const [hovered, setHovered] = useState(false);
+  const { setActiveProject } = React.useContext(ProjectContext);
+  const isMobile = useIsMobile();
+  const cardRef = useRef(null);
+  const progress = useScrollProgress(cardRef);
+  const ref = cardRef;
+  // Card fades/slides in based on scroll position — appears during 0.05–0.3 range
+  const enterOpacity = Math.max(0, Math.min(1, (progress - 0.05) * 4));
+  const enterY = Math.max(0, 60 * (1 - enterOpacity));
+  const parallaxY = enterOpacity >= 1 ? (progress - 0.5) * -20 : 0;
+  const aspectMap = { hero: "21/9", square: "4/3", tall: "3/4" };
+
+  return (
+    <div
+      ref={(el) => { ref.current = el; cardRef.current = el; }}
+      onClick={() => setActiveProject(project)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        opacity: enterOpacity,
+        transform: `translateY(${enterY + parallaxY}px)`,
+        cursor: "pointer",
+      }}
+    >
+      <div data-cursor="View" style={{
+        position: "relative", overflow: "hidden",
+        borderRadius: 8,
+        aspectRatio: aspectMap[variant],
+      }}>
+        <div style={{
+          position: "absolute", inset: "-8%",
+          backgroundImage: `url(${project.image})`,
+          backgroundSize: "cover", backgroundPosition: project.cropHint || "center",
+          transform: hovered ? "scale(1.05)" : "scale(1)",
+          transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: hovered
+            ? "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.15) 50%, transparent 70%)"
+            : "linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 35%)",
+          transition: "background 0.5s ease",
+        }} />
+        {!isMobile && <div style={{
+          position: "absolute", top: 16, left: 16,
+          padding: "6px 14px", borderRadius: 20,
+          background: "rgba(255,255,255,0.1)", backdropFilter: "blur(12px)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          fontFamily: T.sans, fontSize: 10, fontWeight: 600,
+          color: "rgba(255,255,255,0.8)", letterSpacing: "1.5px", textTransform: "uppercase",
+          opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(-10px)",
+          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}>
+          {project.category}
+        </div>}
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 20px 18px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <div>
+              <span style={{
+                fontFamily: T.sans, fontSize: 11, color: T.textFaint, letterSpacing: "1px",
+                display: "block", marginBottom: 6,
+                opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(8px)",
+                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s",
+              }}>{project.year}</span>
+              <h3 style={{
+                fontFamily: T.serif, fontSize: "clamp(22px, 2.5vw, 36px)",
+                fontWeight: 400, color: "#fff", margin: 0, lineHeight: 1.1,
+                transform: hovered ? "translateY(0)" : "translateY(4px)",
+                transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+              }}>
+                {project.title}
+              </h3>
+            </div>
+            <div style={{
+              width: 36, height: 36, borderRadius: "50%",
+              border: `1px solid ${hovered ? T.accent : "rgba(255,255,255,0.15)"}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              background: hovered ? T.accent : "rgba(255,255,255,0.05)",
+              transform: hovered ? "rotate(-45deg) scale(1.1)" : "rotate(0deg)",
+              transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+              flexShrink: 0,
+            }}>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── PHILOSOPHY TEXT — SCROLL REVEAL (FIX #2: More impactful entry) ───
+// Added: accent line that draws in, scale entrance, counter on side
+function PhilosophySection() {
+  const ref = useRef(null);
+  const progress = useScrollProgress(ref);
+  const [inViewRef, visible] = useInView({ threshold: 0.1 });
+  const text = "Strategic vision meets meticulous production. I blend creative direction with emerging tools like AI-driven personalization and interactive storytelling to craft experiences that are culturally resonant at global scale. The goal is always work that moves people.";
+  const words = text.split(" ");
+
+  // Entry scale: starts at 0.95, grows to 1
+  const entryScale = visible ? 1 : 0.95;
+  const entryOpacity = visible ? 1 : 0;
+
+  return (
+    <section ref={(el) => { ref.current = el; inViewRef.current = el; }} style={{
+      padding: "clamp(100px, 15vh, 180px) clamp(24px, 5vw, 64px)",
+      position: "relative", zIndex: 1,
+      transform: `scale(${entryScale})`,
+      opacity: entryOpacity,
+      transition: "transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease",
+    }}>
+      {/* Accent vertical line that grows in */}
+      <div style={{
+        position: "absolute", left: "clamp(24px, 5vw, 64px)", top: "clamp(100px, 15vh, 180px)",
+        width: 2, height: visible ? 60 : 0, background: T.accent,
+        transition: "height 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s",
+        borderRadius: 1,
+      }} />
+
+      {/* Quotation mark accent */}
+      <div style={{
+        fontFamily: T.serif, fontSize: "clamp(100px, 12vw, 200px)", fontWeight: 300,
+        color: T.accent, opacity: visible ? 0.08 : 0,
+        position: "absolute", top: "clamp(50px, 8vh, 100px)", left: "clamp(16px, 4vw, 48px)",
+        lineHeight: 1, transition: "opacity 0.8s ease 0.2s", userSelect: "none",
+      }}>"</div>
+
+      <p style={{
+        fontFamily: T.serif, fontSize: "clamp(28px, 4vw, 56px)", fontWeight: 300,
+        lineHeight: 1.35, maxWidth: 1100, color: T.text, margin: 0,
+        paddingLeft: 24,
+      }}>
+        {words.map((word, i) => {
+          const wordProgress = Math.max(0, Math.min(1, (progress * words.length * 1.2 - i) / 2));
+          return (
+            <span key={i} style={{
+              display: "inline-block", marginRight: "0.28em",
+              opacity: 0.08 + wordProgress * 0.92,
+              transform: `translateY(${(1 - wordProgress) * 8}px)`,
+              transition: "none",
+            }}>
+              {word}
+            </span>
+          );
+        })}
+      </p>
+    </section>
+  );
+}
+
+// ─── SELECTED WORK INDEX (FIX #6: Redesigned hover — sliding thumbnail + accent bar) ───
+function ArchiveList() {
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const [expanded, setExpanded] = useState(false);
+  const isMobile = useIsMobile();
+  const gridCols = isMobile ? "32px 1fr 28px" : "48px 1fr 140px 100px 36px";
+  const INITIAL_COUNT = isMobile ? 7 : 5;
+  const visibleWork = !expanded ? selectedWork.slice(0, INITIAL_COUNT) : selectedWork;
+  const hasMore = selectedWork.length > INITIAL_COUNT;
+
+  return (
+    <section style={{
+      padding: isMobile ? "60px 0" : "clamp(80px, 10vw, 140px) 0",
+      position: "relative", overflow: "hidden", zIndex: 1,
+    }}>
+      <div style={{ position: "relative", zIndex: 1, padding: isMobile ? "0 16px" : "0 clamp(24px, 5vw, 64px)" }}>
+        <div style={{ marginBottom: isMobile ? 28 : 48, display: "flex", justifyContent: isMobile ? "center" : "space-between", alignItems: "flex-end", textAlign: isMobile ? "center" : "left" }}>
+          <div>
+            <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent, letterSpacing: "3px", textTransform: "uppercase" }}>Index</span>
+            <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? 28 : "clamp(32px, 4vw, 56px)", fontWeight: 300, color: T.text, margin: "8px 0 0", lineHeight: 1 }}>
+              Selected Work
+            </h2>
+          </div>
+        </div>
+
+        {/* Header row */}
+        <div style={{
+          display: "grid", gridTemplateColumns: gridCols,
+          gap: isMobile ? 8 : 16, padding: "0 0 16px",
+          borderBottom: `1px solid ${T.border}`,
+        }}>
+          <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>No.</span>
+          <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>Project</span>
+          {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>Discipline</span>}
+          {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>Client</span>}
+          <span />
+        </div>
+
+        {visibleWork.map((project, i) => (
+          <ArchiveRow key={project.title + i} project={project} index={i}
+            isHovered={hoveredIndex === i}
+            onHover={() => setHoveredIndex(i)}
+            onLeave={() => setHoveredIndex(-1)}
+          />
+        ))}
+
+        {/* Show More / Show Less button */}
+        {hasMore || expanded ? (
+          <button onClick={() => setExpanded(!expanded)} style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            width: "100%", padding: "16px 0", marginTop: 4,
+            background: "none", border: "none", borderBottom: `1px solid ${T.border}`,
+            cursor: "pointer", fontFamily: T.sans, fontSize: 12, fontWeight: 600,
+            color: T.accent, letterSpacing: "1.5px", textTransform: "uppercase",
+          }}>
+            {expanded ? "Show Less" : `Show All (${selectedWork.length})`}
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"
+              style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
+              <path d="M3 6L8 11L13 6" stroke={T.accent} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
+  const [ref, visible] = useInView({ threshold: 0.1 });
+  const rowRef = useRef(null);
+  const [mouseX, setMouseX] = useState(0);
+  const isMobile = useIsMobile();
+  const { setActiveProject } = React.useContext(ProjectContext);
+  const gridCols = isMobile ? "32px 1fr 28px" : "48px 1fr 140px 100px 36px";
+
+  const handleMouseMove = useCallback((e) => {
+    if (!rowRef.current) return;
+    const rect = rowRef.current.getBoundingClientRect();
+    setMouseX(e.clientX - rect.left);
+  }, []);
+
+  return (
+    <div
+      ref={(el) => { ref.current = el; rowRef.current = el; }}
+      data-cursor={isMobile ? undefined : "View"}
+      onClick={() => setActiveProject(project)}
+      onMouseEnter={isMobile ? undefined : onHover}
+      onMouseLeave={isMobile ? undefined : onLeave}
+      onMouseMove={isMobile ? undefined : handleMouseMove}
+      style={{
+        display: "grid", gridTemplateColumns: gridCols,
+        gap: isMobile ? 8 : 16, padding: isMobile ? "14px 0" : "18px 0",
+        borderBottom: `1px solid ${isHovered && !isMobile ? "rgba(255,77,0,0.2)" : T.border}`,
+        alignItems: "center", cursor: "pointer",
+        position: "relative",
+        transition: "border-color 0.3s ease",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transitionProperty: "opacity, transform, border-color",
+        transitionDuration: "0.6s, 0.6s, 0.3s",
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        transitionDelay: `${(index % 8) * 0.03}s`,
+      }}
+    >
+      {/* Floating preview image — desktop only */}
+      {!isMobile && project.image && (
+        <div style={{
+          position: "absolute",
+          bottom: "100%", left: Math.min(Math.max(mouseX - 110, 0), 600),
+          width: 220, height: 150,
+          borderRadius: 8, overflow: "hidden",
+          boxShadow: "0 12px 40px rgba(0,0,0,0.6)",
+          opacity: isHovered ? 1 : 0,
+          transform: isHovered ? "translateY(-12px) scale(1)" : "translateY(0) scale(0.9)",
+          transition: "opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+          pointerEvents: "none", zIndex: 20,
+          border: `1px solid rgba(255,255,255,0.08)`,
+        }}>
+          <div style={{
+            width: "100%", height: "100%",
+            backgroundImage: `url(${project.image})`,
+            backgroundSize: "cover", backgroundPosition: project.cropHint || "center",
+            transform: isHovered ? "scale(1.05)" : "scale(1)",
+            transition: "transform 0.6s ease",
+          }} />
+          <div style={{
+            position: "absolute", bottom: 0, left: 0, right: 0, height: "40%",
+            background: "linear-gradient(to top, rgba(10,10,10,0.6), transparent)",
+          }} />
+        </div>
+      )}
+
+      {/* Hover accent bar on left — desktop only */}
+      {!isMobile && <div style={{
+        position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
+        width: 3, height: isHovered ? "60%" : 0,
+        background: T.accent, borderRadius: 2,
+        transition: "height 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+      }} />}
+
+      <span style={{
+        fontFamily: T.sans, fontSize: isMobile ? 11 : 13, color: isHovered && !isMobile ? T.accent : T.textFaint, fontWeight: 500,
+        fontVariantNumeric: "tabular-nums", transition: "color 0.3s",
+      }}>
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <span style={{
+        fontFamily: T.serif, fontSize: isMobile ? 18 : "clamp(20px, 2.2vw, 30px)", fontWeight: 400,
+        color: isHovered && !isMobile ? T.text : "rgba(255,255,255,0.75)",
+        transition: "color 0.3s ease, transform 0.3s ease",
+        whiteSpace: isMobile ? "normal" : "nowrap",
+        transform: isHovered && !isMobile ? "translateX(8px)" : "translateX(0)",
+      }}>
+        {project.title}
+      </span>
+
+      {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 13, color: T.textMuted, fontWeight: 500 }}>
+        {project.category}
+      </span>}
+      {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 12, color: isHovered ? "rgba(255,255,255,0.6)" : T.textFaint, fontWeight: 400, transition: "color 0.3s" }}>
+        {project.client}
+      </span>}
+
+      <div style={{
+        width: isMobile ? 24 : 28, height: isMobile ? 24 : 28, borderRadius: "50%",
+        border: `1px solid ${isHovered && !isMobile ? T.accent : T.border}`,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        background: isHovered && !isMobile ? T.accent : "transparent",
+        transform: isHovered && !isMobile ? "rotate(-45deg)" : "rotate(0deg)",
+        transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+      }}>
+        <svg width="11" height="11" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke={isHovered && !isMobile ? "#fff" : "rgba(255,255,255,0.25)"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// ─── CLIENT LOGOS — Inline SVG wordmarks, all white, optically balanced ───
+const CLIENT_LOGOS = {
+  "Google": { h: 20, mh: 15, svg: (fill) => React.createElement("svg", { viewBox: "0 0 272 92", fill: "none", xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { fill, d: "M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" }),
+    React.createElement("path", { fill, d: "M163.44 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.86 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" }),
+    React.createElement("path", { fill, d: "M209.39 26.49v39.87c0 16.4-9.67 23.11-21.11 23.11-10.77 0-17.24-7.2-19.69-13.09l8.48-3.53c1.51 3.61 5.22 7.87 11.21 7.87 7.34 0 11.89-4.53 11.89-13.05v-3.2h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.63h9.22zm-8.56 20.78c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" }),
+    React.createElement("path", { fill, d: "M225.29 2.83v64.66h-9.52V2.83h9.52z" }),
+    React.createElement("path", { fill, d: "M261.25 53.58l7.57 5.04c-2.44 3.61-8.32 9.83-18.5 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.12l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.93-6.15zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" }),
+    React.createElement("path", { fill, d: "M34.64 40.2V30.77h32.1c.31 1.66.48 3.63.48 5.76 0 7.15-1.96 15.99-8.26 22.29-6.13 6.38-13.95 9.77-24.31 9.77C15.86 68.59 0 53.25 0 34.46S15.86.33 34.65.33c10.36 0 17.75 4.06 23.29 9.35l-6.55 6.55C47.03 12.12 41.58 8.87 34.65 8.87c-14.11 0-25.14 11.39-25.14 25.59s11.03 25.59 25.14 25.59c9.15 0 14.36-3.69 17.68-7.01 2.69-2.69 4.46-6.55 5.17-11.82l-22.86-.02z" }),
+  )},
+  "Apple": { h: 28, mh: 20, svg: (fill) => React.createElement("svg", { viewBox: "0 0 814 1000", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { d: "M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76.5 0-103.7 40.8-165.9 40.8s-105.6-57-155.5-127C46.7 790.7 0 663 0 541.8c0-194.4 126.4-297.5 250.8-297.5 66.1 0 121.2 43.4 162.7 43.4 39.5 0 101.1-46 176.3-46 28.5 0 130.9 2.6 198.3 99.2zm-234-181.5c31.1-36.9 53.1-88.1 53.1-139.3 0-7.1-.6-14.3-1.9-20.1-50.6 1.9-110.8 33.7-147.1 75.8-28.5 32.4-55.1 83.6-55.1 135.5 0 7.8 1.3 15.6 1.9 18.1 3.2.6 8.4 1.3 13.6 1.3 45.4 0 102.5-30.4 135.5-71.3z" }),
+  )},
+  "Twitch": { h: 18, mh: 13, svg: (fill) => React.createElement("svg", { viewBox: "0 0 1140 380", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { d: "M1090,70h-50V0H930.21L879.72,70H790l-30,30V70H690V0H470V70H160.5L110,0H0V240L140,380H280V340l40,40H590V340l40,40H760V340l40,40h250l90-90V120ZM170,170H100v20h70v80H60L20,230V20h80V90h70ZM470,270H230l-40-40V90h80V190h20V90h80V190h20V90h80Zm100,0H490V90h80Zm0-200H490V20h80ZM740,170H670v20h70v80H630l-40-40V20h80V90h70Zm180,0H840v20h80v80H800l-40-40V130l40-40H920Zm200,100h-80V170h-20V270H940V20h80V90h60l40,40Z" }),
+  )},
+  "Red Bull": { h: 16, mh: 12, svg: (fill) => React.createElement("svg", { viewBox: "0 0 358 86.9", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { d: "M272.1,36.2H256l0,31.6c0,10.3,11,19.1,24.6,19.1c13.6,0,25.5-8.9,25.5-19.1V36.2H290v28.5   c0,4.7-4,8.5-8.9,8.5c-5,0-9-3.8-9-8.6L272.1,36.2z" }),
+    React.createElement("path", { d: "M16.7,18.8v65.6H0V5.3h30.1c13.1,0,23.8,10.6,23.8,23.5c0,11-7.7,20.2-18.1,22.6l23.2,33H39.1L22.4,58.5   V39.6l3.9,0c6.2,0,11.2-4.6,11.2-10.3c0-5.7-4.7-10.5-10.9-10.5H16.7z" }),
+    React.createElement("path", { d: "M170.4,84.4V1.5h-15.8l0,39.1c-4.2-4.1-9.5-6.4-15.6-6.4c-13,0-23.6,11.5-23.6,25.8   c0,14.2,10.6,25.8,23.6,25.8c6.2,0,12-2.4,15.6-6.8v5.4H170.4z M143.5,72.3c-6.4,0-11.6-5.7-11.6-12.7c0-7,5.2-12.7,11.6-12.7   c6.4,0,11.6,5.7,11.6,12.7C155,66.6,149.8,72.3,143.5,72.3" }),
+    React.createElement("path", { d: "M236.8,41.4c4.3-4,7-9.4,7-15.3c0-5.4-2.1-10.3-5.7-14.2c-3.8-4.1-10.4-6.6-19.4-6.6h-26.9v79.1h34.8   c13.3-0.2,24.1-10.3,24.1-22.7C250.6,52.7,247.4,46.3,236.8,41.4 M223.4,70.7h-15.1V19.5h10.6c4.6,0,8.5,3.5,8.5,8.2   s-3.9,8.5-8.5,8.5l-5.6,0v14.3l10.3,0c5.6,0,9.8,4.6,9.8,10.2C233.2,66.3,229.5,70.4,223.4,70.7" }),
+    React.createElement("path", { d: "M73,54.1c0-5.3,4.3-9.6,9.6-9.6c5.3,0,9.6,4.3,9.6,9.6H73z M107.8,63.1c0.1-1.1,0.2-2.2,0.2-3.3   c0.2-17.1-11-26.4-25.4-26.4c-14.4,0-26.1,11.8-26.1,26.4s11.7,26.4,26.1,26.4c11,0,19.6-5,24-12.8l-12.8-5.9c-1.6,3.5-5.4,6-9.9,6   c-5.9,0-10.8-4.5-10.8-10.4C73.5,63.1,107.8,63.1,107.8,63.1" }),
+    React.createElement("rect", { x: "313.5", y: "1.5", width: "15.8", height: "82.9", fill }),
+    React.createElement("rect", { x: "340.4", y: "1.5", width: "15.8", height: "82.9", fill }),
+  )},
+  "PepsiCo": { h: 13, mh: 10, svg: (fill) => React.createElement("svg", { viewBox: "0 0 732.80458 134.097", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("g", { transform: "matrix(2.6026385,0,0,2.6026385,-258.23096,-584.72253)" },
+      React.createElement("path", { fill, d: "m 232.56849,242.69024 c 0,13.443 -5.63456,21.87279 -16.35209,21.87279 -3.96105,0 -7.59476,-1.9146 -10.246,-5.34422 l 10e-6,16.96978 h -10.9569 c -2.72532,2.3e-4 -4.93488,-2.20877 -4.93533,-4.93409 v -16.8256 c -5.05958,5.63671 -10.45782,8.16989 -17.37494,9.42323 -13.19137,2.3902 -21.17492,-4.15529 -23.12434,-6.10609 -1.18428,-1.18512 -2.12978,-2.67799 -3.13445,-4.2642 -2.92744,-4.62194 -1.85911,-10.43621 -1.53988,-13.29717 0.80767,-7.23842 7.65546,-14.51143 18.33318,-15.39137 1.33471,-0.10999 2.65544,-0.14767 3.94603,-0.11185 9.0341,0.25065 16.59694,4.08147 17.21711,11.60691 0.80514,9.7699 -8.38431,13.00179 -15.64864,13.60043 -1.87545,0.15455 -5.91225,0.0529 -8.37428,-0.39025 0,0 1.71201,5.58187 11.59075,4.21697 3.02745,-0.41829 18.10947,-4.24987 18.10946,-17.27925 v -10.76799 h 10.37152 c 2.69476,0.002 4.99417,1.94958 5.43993,4.60722 2.52897,-3.4358 6.06905,-5.6102 10.32678,-5.61019 10.04839,0 16.35208,8.42951 16.35208,18.02495 z m -72.98719,-0.96569 c 1.5786,0.34789 3.95849,0.39663 5.85268,0.24086 4.85312,-0.40013 8.68946,-2.82571 8.36016,-7.82259 -0.37637,-4.37587 -4.92565,-5.89802 -8.76571,-5.5956 -5.15474,0.40572 -5.44713,3.16733 -5.44713,3.16733 z m 58.41447,-0.22 c 0,-5.516 -2.35547,-9.63118 -5.64875,-9.63118 -3.29328,0 -5.52339,4.11518 -5.52339,9.63118 0,5.51643 2.23011,9.63111 5.52339,9.63111 3.29328,0 5.64875,-4.11468 5.64875,-9.63111 z" }),
+      React.createElement("path", { fill, d: "m 358.80639,224.87285 c 12.13622,0 21.9747,8.22996 21.9747,19.83702 0,10.95587 -9.42396,19.7786 -21.91505,19.7786 -9.21655,0 -16.62952,-4.51633 -19.88549,-11.7113 -3.97093,5.4733 -10.16901,9.88955 -16.71127,11.07497 -13.19138,2.3902 -21.17493,-4.15529 -23.12434,-6.10609 -1.18428,-1.18512 -2.12979,-2.67799 -3.13445,-4.26419 -2.92744,-4.62194 -1.85911,-10.43622 -1.53988,-13.29718 0.80768,-7.23842 7.06386,-14.1858 17.74158,-15.06574 1.31309,-0.0942 3.22074,-0.15831 4.53762,-0.11186 9.0341,0.25065 15.64988,4.3717 15.64988,11.28129 0,2.79281 -3.01645,5.3927 -5.1665,5.3927 h -4.78867 c -0.90801,0 -1.02038,-0.56526 -1.02038,-0.93462 0,-3.46397 -2.02456,-6.16948 -4.68427,-6.16948 -4.29448,0 -6.6141,3.77817 -6.82321,7.73297 -0.35763,6.76385 2.28247,12.56167 12.16122,11.19677 2.83303,-0.39143 11.40834,-3.2342 15.76297,-14.31009 0.21709,-0.79921 0.49131,-1.57078 0.80909,-2.3179 0.008,-0.0266 0.0167,-0.0516 0.0249,-0.0783 0,0 0.005,0.007 0.005,0.007 3.12377,-7.2572 10.84647,-11.93502 20.1266,-11.93502 z m -5.45718,19.81961 c 0,5.63517 2.06374,9.49408 5.55427,9.49408 3.49052,0 5.46478,-3.85891 5.46478,-9.49408 0,-6.29547 -1.97425,-9.62085 -5.46478,-9.62085 -3.49052,0 -5.55427,3.70254 -5.55427,9.62085 z" }),
+      React.createElement("path", { fill, d: "m 141.70922,242.69024 c 0,13.443 -5.63456,21.8728 -16.35208,21.8728 -3.96105,0 -7.59476,-1.91461 -10.246,-5.34423 v 16.96978 h -10.9569 c -2.72532,2.4e-4 -4.93488,-2.20877 -4.93533,-4.93408 v -45.58624 h 10.37152 c 2.69476,0.002 4.99416,1.94959 5.43992,4.60722 2.52897,-3.4358 6.06905,-5.6102 10.32678,-5.6102 10.04838,0 16.35208,8.42951 16.35208,18.02495 z m -27.05307,1.74992 c 0,5.51643 2.35547,9.63111 5.64875,9.63111 3.29328,0 5.52339,-4.11468 5.52339,-9.63111 0,-6.16281 -2.23004,-9.7994 -5.52332,-9.7994 -3.29328,0 -5.64882,4.0058 -5.64882,9.7994 z" }),
+      React.createElement("path", { fill, d: "m 285.36662,225.66826 c 3.04908,-1.7e-4 5.52089,2.47164 5.52071,5.52071 v 32.11549 h -10.9569 c -2.72532,2.4e-4 -4.93488,-2.20877 -4.93533,-4.93408 v -32.70213 z" }),
+      React.createElement("path", { fill, d: "m 253.6174,254.60935 c 1.99675,-0.3609 2.82606,-3.20917 -0.43913,-4.08407 -9.13798,-2.3232 -18.25638,-4.81273 -18.25638,-13.21715 0,-13.49354 21.72182,-14.19642 28.72598,-11.09039 2.98639,1.34362 4.71237,2.23466 5.78612,4.58188 1.30849,2.86036 -0.39005,6.94736 -2.90046,8.46395 -4.36194,-4.1536 -11.78632,-4.73115 -13.74808,-4.23815 -1.8262,0.52563 -2.6382,1.91912 -1.18841,3.00237 3.18393,2.26892 10.2378,1.07321 16.14387,6.06407 4.10066,3.64722 4.82654,9.18701 1.09329,14.40962 -3.51069,4.91126 -21.2667,10.2937 -35.83536,0.73844 l 4.68165,-8.89821 c 5.98535,4.29966 10.56663,5.20761 15.9369,4.26765 z" }),
+    )
+  )},
+  "Stripe": { h: 24, mh: 17, svg: (fill) => React.createElement("svg", { viewBox: "0 0 468 222.5", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M414 113.4c0-25.6-12.4-45.8-36.1-45.8-23.8 0-38.2 20.2-38.2 45.6 0 30.1 17 45.3 41.4 45.3 11.9 0 20.9-2.7 27.7-6.5v-20c-6.8 3.4-14.6 5.5-24.5 5.5-9.7 0-18.3-3.4-19.4-15.2h48.9c0-1.3.2-6.5.2-8.9zm-49.4-9.5c0-11.3 6.9-16 13.2-16 6.1 0 12.6 4.7 12.6 16h-25.8zM301.1 67.6c-9.8 0-16.1 4.6-19.6 7.8l-1.3-6.2h-22v116.6l25-5.3.1-28.3c3.6 2.6 8.9 6.3 17.7 6.3 17.9 0 34.2-14.4 34.2-46.1-.1-29-16.6-44.8-34.1-44.8zm-6 68.9c-5.9 0-9.4-2.1-11.8-4.7l-.1-37.1c2.6-2.9 6.2-4.9 11.9-4.9 9.1 0 15.4 10.2 15.4 23.3 0 13.4-6.2 23.4-15.4 23.4zM223.8 61.7l25.1-5.4V36l-25.1 5.3zM223.8 69.3h25.1v87.5h-25.1zM196.9 76.7l-1.6-7.4h-21.6v87.5h25V97.5c5.9-7.7 15.9-6.3 19-5.2v-23c-3.2-1.2-14.9-3.4-20.8 7.4zM146.9 47.6l-24.4 5.2-.1 80.1c0 14.8 11.1 25.7 25.9 25.7 8.2 0 14.2-1.5 17.5-3.3V135c-3.2 1.3-19 5.9-19-8.9V90.6h19V69.3h-19l.1-21.7zM79.3 94.7c0-3.9 3.2-5.4 8.5-5.4 7.6 0 17.2 2.3 24.8 6.4V72.2c-8.3-3.3-16.5-4.6-24.8-4.6C67.5 67.6 52 78.8 52 97.4c0 28.8 39.7 24.2 39.7 36.6 0 4.6-4 6.1-9.6 6.1-8.3 0-18.9-3.4-27.3-8v23.8c9.3 4 18.7 5.7 27.3 5.7 20.8 0 35.1-10.3 35.1-28.2-.1-31.1-39.9-25.6-39.9-37.7z" }),
+  )},
+      "Doritos": { h: 32, mh: 22, svg: (fill) => React.createElement("svg", { viewBox: "0 0 641.4 461.54", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+      React.createElement("g", { transform: "scale(2.0018741)" },
+        React.createElement("path", { fill, d: "m 201.733,361.832 c 0,0 -25.638,-0.026 -29.1,-0.026 l -0.015,75.881 h 29.21 c 16.923,0 33.924,-12.892 33.924,-30.194 v -14.757 c 0,-15.154 -13.652,-30.904 -34.019,-30.904 z m 19.576,43.339 c 0,10.366 -9.464,17.356 -18.027,17.356 h -15.521 v -45.51 l 5.847,0.026 c 1.837,0 9.622,0.027 9.622,0.027 8.689,0 18.079,6.206 18.079,18.6 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 490.061,429.217 c 2.241,-3.3 3.123,-9.157 2.931,-12.382 a 17.755,17.755 0 0 0 -2.457,-8.085 16.539,16.539 0 0 0 -5.849,-5.592 c -2.319,-1.463 -7.981,-4.149 -10.432,-5.587 a 32.833,32.833 0 0 1 -6.194,-4.394 c -0.85,-1 -1.172,-2.163 1.256,-2.163 2.428,0 16.359,-0.014 16.359,-0.014 l 6.6,-15.018 c 0,0 -19.907,-0.026 -24.956,-0.026 -5.049,0 -8.78,3.446 -9.931,4.667 a 19.225,19.225 0 0 0 -4.814,9.733 c -0.8,5.459 1.062,8.67 2.3,11.052 1.238,2.382 4.925,5.588 8.106,7.77 a 48.787,48.787 0 0 0 8.616,4.311 16.8,16.8 0 0 1 5.082,3.355 2.971,2.971 0 0 1 0.811,3.526 c -0.576,1.305 -3.1,1.4 -5.122,1.4 -2.1,0 -15.8,0.021 -15.8,0.021 l -6.086,15.083 c 0,0 16.925,-0.028 21.505,-0.028 a 30.417,30.417 0 0 0 9.518,-1.294 15.6,15.6 0 0 0 8.557,-6.335 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 362.639,390.689 v 31.978 a 14.227,14.227 0 0 0 0.394,2.765 11.4,11.4 0 0 0 3.072,5.313 c 2.3,2.42 2.7,2.323 2.7,2.323 0,0 11.768,-8.718 14.034,-10.3 a 7.414,7.414 0 0 1 -2.929,-1.689 4.4,4.4 0 0 1 -2.051,-4.145 v -26.267 h 9.7 v -13.432 h -9.71 v -5.894 l -15.19,-6.079 v 11.953 h -5.58 v 13.458 c 0,0 5.56,-0.051 5.56,0.016 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 337.374,363.752 v 12.593 l 15.678,-6.118 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 352.9,433.706 0.005,-57 -15.145,5.434 -0.038,51.6 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 303.4,397.134 v 36.654 h 15.127 v -38.766 a 3.964,3.964 0 0 1 4.111,-4.181 c 2.961,0 11.06,-0.017 11.06,-0.017 v -13.477 h -11.222 a 19.261,19.261 0 0 0 -13.254,5.237 20.842,20.842 0 0 0 -5.822,14.55 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 263.371,424.061 c -4.276,0 -9.026,-4.106 -9.026,-8.378 v -15.857 c 0,-4.271 4.75,-8.383 9.026,-8.383 h 9.036 c 4.271,0 9.028,4.112 9.028,8.383 v 15.857 a 5.945,5.945 0 0 1 -2.281,4.949 14.2,14.2 0 0 1 -4.643,1.7 l 5.928,12.3 5.762,-2.342 c 0,0 8.753,-4.337 8.753,-17.946 v -17.951 c 0,-6.014 -7.535,-18.514 -23.257,-18.514 h -7.613 c -9.582,0 -23.258,5.822 -23.258,22.22 v 14.246 c 0,15.729 15.761,23.259 21.769,23.259 l 7.914,0.364 c 0.074,0.148 -3.261,-13.784 -3.261,-13.784 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 423.431,377.879 h -7.612 c -15.724,0 -23.257,15.114 -23.257,21.128 v 15.338 c 0,0.593 0.032,1.165 0.072,1.736 l 13.444,-9.15 v -7.105 c 0,-4.271 4.759,-8.383 9.031,-8.383 h 9.039 a 9.87,9.87 0 0 1 7.379,3.984 l 13.908,4.113 -12.264,10.374 v 5.769 c 0,4.272 -4.75,8.378 -9.023,8.378 l -10.592,-0.016 -10.043,9.286 3.263,2.122 a 18.873,18.873 0 0 0 7.56,2.151 h 13.807 c 6.012,0 18.549,-7.53 18.549,-23.259 v -15.338 c 0,-6.014 -7.529,-21.128 -23.261,-21.128 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 237.978,313.607 108.432,41.664 -132.069,-70.04 38.939,88.09 z", transform: "translate(-172.618,-285.231)" }),
+        React.createElement("path", { fill, d: "m 420.664,394.176 -5.262,0.156 c 0,0 -1.244,0.319 -1.952,0.6 a 1.257,1.257 0 0 0 -0.294,0.164 l 7.686,5.259 -120.397,86.245 -37.42,-85.94 31.786,115.126 143.069,-115.281 z", transform: "translate(-172.618,-285.231)" })
+      )
+    )},
+    "USC": { h: 22, mh: 16, svg: (fill) => React.createElement("svg", { viewBox: "0 0 526 212", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("g", { transform: "translate(0,212) scale(0.1,-0.1)", fill, stroke: "none" },
+    React.createElement("path", { d: "M2513 2109 c-198 -33 -380 -184 -444 -370 -16 -49 -22 -88 -22 -164 0 -123 15 -199 59 -291 64 -136 222 -247 523 -368 268 -108 354 -190 382 -367 28 -179 -38 -311 -190 -383 -61 -29 -74 -31 -176 -31 -103 0 -114 2 -177 32 -156 74 -271 246 -295 444 -8 64 -8 64 -46 73 -23 6 -41 6 -46 0 -12 -11 -63 -557 -55 -578 12 -30 52 -19 82 24 15 21 35 39 45 40 10 0 44 -17 75 -39 31 -21 76 -48 100 -60 107 -55 331 -84 471 -62 348 54 556 385 486 775 -20 114 -64 197 -149 281 -86 85 -175 134 -366 200 -244 85 -354 152 -405 245 -25 47 -30 69 -33 146 -5 113 12 173 69 238 22 25 65 57 97 73 51 25 67 28 158 28 93 -1 105 -3 167 -33 112 -55 228 -206 285 -371 11 -31 14 -33 44 -27 18 3 37 11 42 16 8 8 -25 437 -40 508 -6 29 -35 29 -65 -1 -46 -45 -55 -46 -148 -16 -142 45 -300 59 -428 38z" }),
+    React.createElement("path", { d: "M4222 2110 c-143 -20 -319 -86 -429 -161 -217 -147 -368 -382 -428 -669 -66 -309 18 -688 203 -918 123 -153 309 -273 498 -321 364 -93 701 -26 965 193 69 58 195 196 220 243 12 21 10 26 -21 52 l-34 28 -96 -97 c-109 -112 -191 -164 -328 -210 -235 -79 -468 -62 -631 46 -117 78 -224 200 -289 329 -215 431 -148 1005 146 1249 186 154 499 166 726 29 137 -84 270 -245 345 -418 l39 -90 36 1 c20 1 40 4 43 8 6 5 -13 182 -64 619 -6 47 -6 47 -43 47 -36 0 -38 -2 -50 -46 -7 -25 -19 -48 -27 -51 -8 -3 -49 10 -91 30 -160 73 -308 107 -497 112 -71 2 -158 0 -193 -5z" }),
+    React.createElement("path", { d: "M4 2091 c-2 -2 -4 -25 -4 -51 l0 -47 93 -6 c50 -2 100 -8 109 -12 45 -18 46 -35 51 -680 5 -644 10 -724 55 -855 105 -302 330 -436 732 -434 138 1 165 4 243 28 108 32 163 60 244 120 113 85 198 221 239 383 32 127 42 296 50 868 5 358 10 488 19 512 20 48 54 64 145 70 l81 6 -3 50 -3 50 -338 1 c-337 1 -338 1 -343 -20 -3 -12 -4 -35 -2 -50 3 -29 4 -29 80 -35 124 -10 152 -41 168 -182 35 -307 39 -1085 6 -1227 -24 -101 -75 -206 -131 -268 -83 -92 -238 -152 -395 -152 -144 0 -243 36 -336 122 -54 50 -86 104 -113 191 -36 119 -42 249 -39 854 3 562 3 572 24 600 31 41 63 53 166 61 l93 7 0 49 0 49 -443 1 c-244 1 -446 -1 -448 -3z" }),
+  ))},
+    "Nike": { h: 20, mh: 14, svg: (fill) => React.createElement("svg", { viewBox: "135.5 361.38 1000 356.39", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { d: "M245.8075 717.62406c-29.79588-1.1837-54.1734-9.3368-73.23459-24.4796-3.63775-2.8928-12.30611-11.5663-15.21427-15.2245-7.72958-9.7193-12.98467-19.1785-16.48977-29.6734-10.7857-32.3061-5.23469-74.6989 15.87753-121.2243 18.0765-39.8316 45.96932-79.3366 94.63252-134.0508 7.16836-8.0511 28.51526-31.5969 28.65302-31.5969.051 0-1.11225 2.0153-2.57652 4.4694-12.65304 21.1938-23.47957 46.158-29.37751 67.7703-9.47448 34.6785-8.33163 64.4387 3.34693 87.5151 8.05611 15.898 21.86731 29.6684 37.3979 37.2806 27.18874 13.3214 66.9948 14.4235 115.60699 3.2245 3.34694-.7755 169.19363-44.801 368.55048-97.8366 199.35686-53.0408 362.49439-96.4029 362.51989-96.3672.056.046-463.16259 198.2599-703.62654 301.0914-38.08158 16.2806-48.26521 20.3928-66.16827 26.6785-45.76525 16.0714-86.76008 23.7398-119.89779 22.4235z" }),
+  )},
+    "Riot Games": { h: 20, mh: 14, svg: (fill) => React.createElement("svg", { viewBox: "661 453 590 175", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { fill, d: "M 765.1875 458.066406 L 666.417969 503.804688 L 691.027344 597.457031 L 709.757812 595.160156 L 704.609375 536.273438 L 710.761719 533.535156 L 721.375 593.730469 L 753.390625 589.800781 L 747.703125 524.804688 L 753.789062 522.09375 L 765.464844 588.320312 L 797.847656 584.34375 L 791.617188 513.09375 L 797.777344 510.351562 L 810.546875 582.78125 L 842.558594 578.851562 L 842.558594 477.441406 Z M 765.1875 458.066406" }),
+    React.createElement("path", { fill, d: "M 767.507812 600.113281 L 769.136719 609.332031 L 842.5625 621.574219 L 842.5625 590.898438 L 767.542969 600.109375 Z M 767.507812 600.113281" }),
+    React.createElement("path", { fill, d: "M 912.679688 492.292969 C 910.738281 493.082031 908.320312 493.472656 905.421875 493.472656 L 895.476562 493.472656 L 895.476562 472.613281 L 905.386719 472.613281 C 908.285156 472.613281 910.703125 473.027344 912.640625 473.847656 C 914.582031 474.671875 916.050781 475.90625 917.042969 477.546875 C 918.039062 479.195312 918.535156 480.785156 918.535156 483.191406 C 918.535156 485.597656 918.042969 487.15625 917.0625 488.738281 C 916.082031 490.324219 914.617188 491.507812 912.679688 492.292969 M 912.996094 507.902344 L 921.753906 534.199219 L 940.46875 534.199219 L 930.730469 505.871094 L 917.496094 505.871094 L 916.707031 503.429688 C 919.234375 502.941406 923.539062 502.179688 927.355469 499.582031 C 932.28125 496.234375 936.101562 490.261719 936.105469 483.195312 L 936.105469 483.191406 C 936.105469 478.132812 935.019531 474.171875 932.84375 470.4375 C 930.671875 466.707031 927.554688 463.828125 923.488281 461.804688 C 919.425781 459.777344 914.546875 458.765625 908.847656 458.765625 L 878.425781 458.765625 L 878.425781 534.199219 L 895.476562 534.199219 L 895.476562 507.902344 Z M 912.996094 507.902344" }),
+    React.createElement("path", { fill, d: "M 948.824219 534.199219 L 965.878906 534.199219 L 965.878906 458.765625 L 948.824219 458.765625 Z M 948.824219 534.199219" }),
+    React.createElement("path", { fill, d: "M 1029.5 496.480469 C 1029.5 491.351562 1028.757812 487.023438 1027.273438 483.5 C 1025.785156 479.976562 1023.675781 477.296875 1020.9375 475.46875 C 1018.199219 473.640625 1014.953125 472.722656 1011.195312 472.722656 C 1007.460938 472.722656 1004.226562 473.640625 1001.492188 475.46875 C 998.75 477.296875 996.632812 479.976562 995.136719 483.5 C 993.636719 487.023438 992.890625 491.351562 992.890625 496.480469 C 992.890625 501.613281 993.636719 505.941406 995.136719 509.464844 C 996.632812 512.988281 998.75 515.667969 1001.492188 517.496094 C 1004.226562 519.324219 1007.460938 520.238281 1011.195312 520.238281 C 1014.953125 520.238281 1018.199219 519.324219 1020.9375 517.496094 C 1023.675781 515.667969 1025.785156 512.988281 1027.273438 509.464844 C 1028.757812 505.941406 1029.5 501.613281 1029.5 496.480469 M 1046.851562 496.480469 C 1046.851562 504.757812 1045.277344 511.773438 1042.136719 517.53125 C 1038.992188 523.289062 1034.734375 527.679688 1029.355469 530.699219 C 1023.976562 533.71875 1017.921875 535.230469 1011.195312 535.230469 C 1004.46875 535.230469 998.414062 533.714844 993.035156 530.679688 C 987.660156 527.648438 983.398438 523.25 980.253906 517.476562 C 977.113281 511.707031 975.539062 504.707031 975.539062 496.480469 C 975.539062 488.207031 977.113281 481.191406 980.253906 475.433594 C 983.398438 469.671875 987.660156 465.285156 993.035156 462.265625 C 998.414062 459.242188 1004.46875 457.734375 1011.195312 457.734375 C 1017.921875 457.734375 1023.976562 459.242188 1029.355469 462.265625 C 1034.734375 465.285156 1038.992188 469.671875 1042.136719 475.433594 C 1045.277344 481.191406 1046.851562 488.207031 1046.851562 496.480469" }),
+    React.createElement("path", { fill, d: "M 1048.464844 458.765625 L 1048.464844 472.71875 L 1068.125 472.71875 L 1068.125 472.722656 L 1077.761719 472.722656 L 1078.554688 475.164062 C 1076.078125 475.644531 1071.890625 476.390625 1068.125 478.867188 L 1068.125 534.175781 L 1084.957031 534.175781 L 1084.957031 472.71875 L 1104.582031 472.71875 L 1104.582031 458.765625 Z M 1048.464844 458.765625" }),
+    React.createElement("path", { fill, d: "M 912.011719 580.890625 L 912.011719 593.523438 L 927.578125 593.523438 C 927.515625 596.308594 926.882812 598.746094 925.65625 600.832031 C 924.371094 603.03125 922.503906 604.734375 920.058594 605.9375 C 917.617188 607.140625 914.648438 607.742188 911.164062 607.742188 C 907.285156 607.742188 903.949219 606.808594 901.164062 604.941406 C 898.375 603.078125 896.226562 600.363281 894.71875 596.800781 C 893.207031 593.242188 892.453125 588.933594 892.453125 583.871094 C 892.453125 578.839844 893.226562 574.566406 894.773438 571.054688 C 896.320312 567.542969 898.488281 564.859375 901.273438 563.007812 C 904.0625 561.152344 907.332031 560.226562 911.089844 560.226562 C 913.03125 560.226562 914.816406 560.464844 916.449219 560.945312 C 918.082031 561.421875 919.523438 562.117188 920.777344 563.027344 C 922.03125 563.933594 923.09375 565.035156 923.964844 566.320312 C 924.835938 567.613281 925.515625 569.089844 926.007812 570.761719 L 943.28125 570.761719 C 942.792969 567.027344 941.636719 563.601562 939.820312 560.484375 C 938.003906 557.367188 935.652344 554.664062 932.765625 552.378906 C 929.882812 550.097656 926.578125 548.335938 922.859375 547.09375 C 919.140625 545.855469 915.117188 545.234375 910.796875 545.234375 C 905.785156 545.234375 901.121094 546.097656 896.800781 547.832031 C 892.476562 549.5625 888.691406 552.097656 885.4375 555.4375 C 882.179688 558.777344 879.648438 562.847656 877.828125 567.648438 C 876.011719 572.449219 875.105469 577.929688 875.105469 584.09375 C 875.105469 592.050781 876.613281 598.914062 879.636719 604.683594 C 882.652344 610.453125 886.867188 614.90625 892.269531 618.035156 C 897.667969 621.167969 903.933594 622.730469 911.054688 622.730469 C 917.460938 622.730469 923.148438 621.449219 928.109375 618.882812 C 933.066406 616.316406 936.957031 612.640625 939.785156 607.851562 C 942.605469 603.0625 944.019531 597.332031 944.019531 590.652344 L 944.019531 580.890625 Z M 912.011719 580.890625" }),
+    React.createElement("path", { fill, d: "M 971.777344 592.011719 L 980.019531 564.351562 L 983.117188 564.351562 L 991.359375 592.011719 Z M 1000.207031 621.699219 L 1018.476562 621.699219 L 993.148438 546.265625 L 969.992188 546.265625 L 944.625 621.699219 L 962.933594 621.699219 L 967.859375 605.160156 L 995.277344 605.160156 Z M 1000.207031 621.699219" }),
+    React.createElement("path", { fill, d: "M 1114.867188 621.699219 L 1097.996094 621.699219 L 1097.996094 564.351562 L 1096.265625 564.328125 L 1079.226562 621.699219 L 1062.371094 621.699219 L 1045.789062 564.328125 L 1043.640625 564.351562 L 1043.640625 621.699219 L 1026.765625 621.699219 L 1026.765625 546.265625 L 1055.441406 546.265625 L 1069.921875 596.816406 L 1071.675781 596.816406 L 1086.152344 546.265625 L 1114.867188 546.265625 Z M 1114.867188 621.699219" }),
+    React.createElement("path", { fill, d: "M 1127.023438 621.699219 L 1127.023438 546.265625 L 1178.703125 546.265625 L 1178.703125 560.226562 L 1144.078125 560.226562 L 1144.078125 576.984375 L 1172.066406 576.984375 L 1172.066406 590.945312 L 1144.078125 590.945312 L 1144.078125 607.742188 L 1178.773438 607.742188 L 1178.773438 621.699219 Z M 1127.023438 621.699219" }),
+    React.createElement("path", { fill, d: "M 1228.855469 568.402344 C 1228.585938 565.554688 1227.40625 563.339844 1225.320312 561.753906 C 1223.234375 560.171875 1220.335938 559.378906 1216.628906 559.378906 C 1214.148438 559.378906 1212.0625 559.722656 1210.367188 560.410156 C 1208.671875 561.097656 1207.394531 562.023438 1206.535156 563.191406 C 1205.675781 564.359375 1205.234375 565.691406 1205.210938 567.1875 C 1205.1875 568.441406 1205.449219 569.539062 1206.003906 570.484375 C 1206.554688 571.429688 1207.351562 572.246094 1208.394531 572.933594 C 1209.4375 573.621094 1210.671875 574.21875 1212.097656 574.71875 C 1213.519531 575.222656 1215.070312 575.660156 1216.738281 576.027344 L 1223.367188 577.574219 C 1226.855469 578.335938 1230.003906 579.359375 1232.816406 580.648438 C 1235.628906 581.941406 1238.027344 583.5 1240.019531 585.328125 C 1242.007812 587.15625 1243.535156 589.289062 1244.605469 591.71875 C 1245.671875 594.148438 1246.207031 596.910156 1246.207031 600.007812 C 1246.207031 604.695312 1245.027344 608.734375 1242.667969 612.125 C 1240.3125 615.515625 1236.929688 618.128906 1232.519531 619.96875 C 1228.113281 621.8125 1222.804688 622.734375 1216.589844 622.734375 C 1210.402344 622.734375 1205.011719 621.792969 1200.421875 619.914062 C 1195.832031 618.035156 1192.257812 615.214844 1189.703125 611.441406 C 1187.148438 607.671875 1185.8125 602.964844 1185.6875 597.316406 L 1202.113281 597.316406 C 1202.261719 599.796875 1202.953125 601.867188 1204.179688 603.523438 C 1205.40625 605.179688 1207.070312 606.425781 1209.167969 607.261719 C 1211.269531 608.097656 1213.683594 608.515625 1216.40625 608.515625 C 1218.984375 608.515625 1221.207031 608.152344 1223.074219 607.429688 C 1224.941406 606.703125 1226.382812 605.695312 1227.402344 604.40625 C 1228.421875 603.117188 1228.941406 601.625 1228.96875 599.933594 C 1228.941406 598.386719 1228.46875 597.066406 1227.550781 595.972656 C 1226.628906 594.882812 1225.25 593.941406 1223.40625 593.15625 C 1221.5625 592.367188 1219.269531 591.65625 1216.519531 591.019531 L 1208.453125 589.066406 C 1202.019531 587.542969 1196.941406 585.125 1193.222656 581.8125 C 1189.5 578.496094 1187.652344 574.015625 1187.675781 568.367188 C 1187.652344 563.75 1188.890625 559.710938 1191.398438 556.246094 C 1193.902344 552.785156 1197.347656 550.085938 1201.730469 548.144531 C 1206.113281 546.203125 1211.117188 545.234375 1216.738281 545.234375 C 1222.4375 545.234375 1227.40625 546.203125 1231.65625 548.144531 C 1235.902344 550.085938 1239.207031 552.796875 1241.566406 556.285156 C 1243.921875 559.769531 1245.125 563.8125 1245.175781 568.402344 Z M 1228.855469 568.402344" }),
+  )},
+    "GoPro": { h: 11, mh: 8, svg: (fill) => React.createElement("svg", { viewBox: "23.769 8.648 244.715 35", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { fill, d: "M74.538 33.602c0 3.002-1.86 5.231-5.579 6.695-2.889 1.141-6.411 1.717-10.57 1.717h-17.05c-4.471 0-8.225-.521-11.275-1.548-4.193-1.409-6.295-3.658-6.295-6.754V17.16c0-2.973 2.137-5.169 6.423-6.594 3.384-1.066 7.115-1.604 11.205-1.604h6.769c1.826 0 2.738.814 2.738 2.446 0 1.639-.912 2.463-2.738 2.463h-2.067c-.197 0-.311-.007-.335-.027-.519-.017-.982-.024-1.386-.034-.405-.011-.739-.02-.981-.02-8.075 0-12.119 1.119-12.119 3.359v16.537c0 2.242 3.385 3.363 10.154 3.363H58.4c1.617 0 3.35-.24 5.175-.731 2.298-.618 3.453-1.444 3.453-2.5V30.3h-10.55c-1.392 0-2.531-1.19-2.531-2.646 0-1.458 1.139-2.65 2.531-2.65h12.687c.641-.065 1.561-.059 2.74-.059 1.755 0 2.633.705 2.633 2.122v6.535M118.84 33.769V23.752c0-2.059-2.911-3.117-8.802-3.117H98.394c-2.149 0-4.09.224-5.823.669-2.426.67-3.604 1.615-3.604 2.894v9.571c0 1.224 1.248 2.171 3.673 2.727 1.664.389 3.604.559 5.823.559h11.575a23.45 23.45 0 0 0 5.336-.614c2.288-.612 3.466-1.503 3.466-2.672m7.208 0c0 3.006-1.802 5.175-5.476 6.513-2.563 1.058-6.03 1.614-10.327 1.614H98.394c-3.951 0-7.486-.557-10.675-1.614-3.95-1.392-5.891-3.563-5.891-6.513v-9.571c0-2.894 1.941-5.118 5.823-6.62 2.911-1.171 6.444-1.726 10.674-1.726h11.92c10.535 0 15.803 2.727 15.803 8.292v9.625zM212.441 18.521c0 1.446-1.109 2.171-3.188 2.171-.277 0-.693 0-1.247-.058h-1.317c-5.477 0-8.181 1.059-8.181 3.285v15.805c0 1.058-.553 1.725-1.522 2.004-.418.111-1.455.167-3.118.167-1.664 0-2.496-.725-2.496-2.171V23.92c0-3.451 2.149-5.732 6.517-6.956 2.635-.78 6.584-1.113 11.854-1.113 1.8 0 2.698.889 2.698 2.67M254.389 33.769V23.752c0-2.059-2.912-3.117-8.802-3.117h-11.646c-2.149 0-4.088.224-5.822.669-2.426.67-3.604 1.615-3.604 2.894v9.571c0 1.224 1.248 2.171 3.672 2.727 1.666.389 3.604.559 5.818.559h11.578c1.871 0 3.671-.224 5.335-.614 2.291-.612 3.471-1.503 3.471-2.672m7.207 0c0 3.006-1.803 5.175-5.475 6.513-2.564 1.058-6.032 1.614-10.327 1.614h-11.853c-3.951 0-7.485-.557-10.672-1.614-3.953-1.392-5.894-3.563-5.894-6.513v-9.571c0-2.894 1.938-5.118 5.819-6.62 2.914-1.171 6.447-1.726 10.676-1.726h11.92c10.533 0 15.803 2.727 15.803 8.292v9.625h.003zM177.41 20.95v-4.509c0-1.892-3.266-2.895-9.793-2.895h-26.604v11.467h26.604c6.528 0 9.793-1.392 9.793-4.063m7.501.222c0 3.284-2.082 5.677-6.181 7.183-3.195 1.056-7.019 1.557-11.529 1.557h-26.188V39.6c0 1.056-.486 1.723-1.599 2.001-.276.111-1.388.168-3.265.168-1.736 0-2.64-.724-2.64-2.17V10.765c0-1.394.902-2.117 2.64-2.117h31.396c4.237 0 7.849.501 10.834 1.393 4.377 1.334 6.529 3.338 6.529 5.956v5.175h.003z" }),
+  )},
+    "Yuga Labs": { h: 24, mh: 17, svg: (fill) => React.createElement("svg", { viewBox: "236 370 528 260", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
+    React.createElement("path", { fill, d: "M553.191,383.871c2.735,1.707,3.261,4.254,3.153,7.295c-0.18,5.078-0.034,10.168-0.055,15.253   c-0.014,3.321-1.745,5.118-5.057,5.169c-3.601,0.055-7.203-0.019-10.805,0.012c-4.067,0.035-5.47,1.451-5.485,5.485   c-0.015,3.884,0.023,7.769-0.008,11.653c-0.032,4.033-1.978,5.988-5.982,6.023c-3.531,0.031-7.062-0.019-10.593,0.023   c-3.313,0.039-4.784,1.779-4.703,5.117c0.108,4.446,0.144,8.898,0.055,13.344c-0.074,3.684-2.026,5.534-5.754,5.604   c-3.742,0.07-7.486-0.02-11.228,0.042c-3.315,0.055-4.731,1.495-4.841,4.819c-0.051,1.552-0.036,3.107-0.007,4.661   c0.072,3.919,1.493,5.344,5.41,5.348c15.325,0.015,30.65,0.008,45.975,0.013c5.351,0.002,7,1.633,7.003,6.918   c0.003,4.944,0.017,9.887-0.008,14.831c-0.021,4.2-1.76,5.93-5.927,5.931c-17.514,0.005-35.028,0.005-52.543-0.001   c-4.061-0.002-5.833-1.634-5.947-5.725c-0.114-4.093-0.03-8.191-0.046-12.287c-0.017-4.112-1.228-5.338-5.272-5.347   c-3.602-0.008-7.204,0.028-10.805-0.014c-3.481-0.041-5.444-1.864-5.503-5.341c-0.095-5.648-0.089-11.3-0.005-16.948   c0.053-3.555,2.051-5.384,5.662-5.411c3.672-0.027,7.345,0.024,11.017-0.015c3.5-0.037,4.864-1.424,4.902-4.891   c0.019-1.695,0.025-3.39-0.004-5.085c-0.056-3.266-1.422-4.658-4.643-4.686c-3.46-0.03-6.921,0.009-10.381-0.013   c-4.236-0.026-5.9-1.698-5.907-5.9c-0.007-4.167,0.026-8.334-0.013-12.5c-0.043-4.653-1.505-6.089-6.101-6.097   c-3.319-0.006-6.639,0.027-9.958-0.012c-3.197-0.037-4.848-1.508-5.113-4.697c-0.473-5.708-0.187-11.43-0.166-17.147   c0.008-2.173,0.865-3.964,2.453-5.424c7.77,0,15.54,0,23.311,0c2.098,2.511,2.237,5.482,2.15,8.567   c-0.102,3.595-0.052,7.196-0.009,10.794c0.038,3.163,1.523,4.631,4.701,4.667c3.457,0.038,6.914,0.002,10.371,0.017   c4.119,0.018,5.816,1.695,5.828,5.754c0.012,4.163-0.039,8.326,0.023,12.488c0.049,3.306,1.547,4.738,4.828,4.791   c1.763,0.029,3.527,0.018,5.291,0.049c2.921,0.052,4.286-1.137,4.565-4.062c0.457-4.788,0.17-9.588,0.205-14.383   c0.027-3.701,1.716-5.454,5.413-5.479c3.669-0.025,7.338,0.026,11.006-0.018c3.415-0.042,4.914-1.546,4.946-4.903   c0.029-3.104,0.137-6.215-0.021-9.311c-0.175-3.432,0.111-6.611,3.006-8.969C538.78,383.871,545.986,383.871,553.191,383.871z" }),
+    React.createElement("path", { fill, d: "M631.599,616.129c-1.986-1.242-2.69-3.008-2.679-5.362c0.069-15.535,0.03-31.071,0.039-46.606   c0.002-3.933,1.419-5.345,5.376-5.349c10.522-0.011,21.044-0.094,31.565,0.034c6.069,0.074,11.763,1.44,16.193,6.081   c4.265,4.469,5.214,11.409,2.177,16.869c-1.301,2.338-1.332,4.504,0.363,6.682c7.156,9.195,3.744,21.456-7.114,25.752   c-2.247,0.889-4.604,1.314-6.925,1.898C657.594,616.129,644.597,616.129,631.599,616.129z M657.319,604.965   c2.818,0,5.637,0.05,8.453-0.011c5.527-0.12,8.002-3.433,6.678-8.856c-0.62-2.538-2.339-4.048-4.944-4.07   c-6.551-0.054-13.103-0.045-19.654-0.009c-2.264,0.012-3.214,0.906-3.357,3.179c-0.12,1.895-0.076,3.803-0.046,5.704   c0.044,2.803,1.176,3.982,3.995,4.044C651.4,605.013,654.36,604.962,657.319,604.965z M656.799,580.836   c1.412,0,2.824,0.001,4.236,0c1.483-0.001,2.967,0.036,4.448-0.016c3.121-0.111,4.836-1.804,4.999-4.871   c0.19-3.562-1.769-5.766-5.425-5.842c-4.588-0.095-9.178-0.037-13.768-0.039c-6.622-0.003-7.313,0.742-6.84,7.346   c0.005,0.07,0.004,0.141,0.011,0.211c0.212,2.125,1.271,3.159,3.442,3.193C650.868,580.864,653.834,580.83,656.799,580.836z" }),
+    React.createElement("path", { fill, d: "M565.058,616.129c-1.737-1.113-2.105-2.656-1.592-4.593c3.341-12.61,6.516-25.266,10.018-37.831   c2.33-8.36,8.703-12.309,16.755-13.993c2.969-0.621,5.996-0.896,9.037-0.9c6.845-0.009,13.69-0.013,20.534-0.003   c3.455,0.005,5.009,1.423,5.017,4.81c0.034,15.948,0.005,31.895,0.029,47.843c0.003,2.256-1.054,3.722-3.004,4.666   c-3.249,0-6.499,0-9.748,0c-2.231-1.001-2.964-2.855-2.953-5.147c0.008-1.761,0.036-3.525-0.024-5.284   c-0.075-2.2-0.904-3.094-3.127-3.109c-7.257-0.051-14.515-0.018-21.773-0.021c-1.724-0.001-2.768,0.857-3.205,2.498   c-0.526,1.973-1.108,3.934-1.56,5.924c-0.556,2.448-1.857,4.221-4.233,5.14C571.839,616.129,568.448,616.129,565.058,616.129z    M597.36,590.618c0,0.003,0,0.006,0,0.009c2.752,0,5.504,0.031,8.256-0.009c2.557-0.038,3.487-0.913,3.516-3.431   c0.051-4.374,0.052-8.75-0.002-13.124c-0.03-2.464-0.868-3.249-3.383-3.285c-2.751-0.04-5.505-0.062-8.255,0.016   c-4.265,0.121-7.285,2.314-8.774,6.189c-1.207,3.143-1.991,6.467-2.747,9.76c-0.56,2.44,0.63,3.8,3.133,3.859   C591.855,590.668,594.608,590.618,597.36,590.618z" }),
+    React.createElement("path", { fill, d: "M441.723,616.129c-1.486-1.037-2.128-2.404-1.65-4.211c3.377-12.757,6.665-25.539,10.165-38.262   c1.905-6.925,6.849-10.971,13.521-13.127c3.872-1.251,7.869-1.666,11.899-1.704c6.99-0.066,13.981-0.034,20.972-0.016   c3.472,0.009,4.903,1.421,4.907,4.9c0.017,15.747-0.013,31.494,0.03,47.241c0.006,2.25-0.7,3.985-2.627,5.179   c-3.391,0-6.781,0-10.172,0c-2.058-1.035-2.89-2.784-2.907-5.003c-0.014-1.763,0.009-3.526-0.043-5.288   c-0.07-2.371-0.855-3.237-3.2-3.252c-7.192-0.046-14.385-0.002-21.578-0.021c-1.836-0.005-2.891,0.896-3.353,2.607   c-0.477,1.769-1.074,3.517-1.397,5.314c-0.457,2.541-1.687,4.438-3.972,5.644C448.787,616.129,445.255,616.129,441.723,616.129z    M474.101,590.625c0-0.002,0-0.005,0-0.007c2.891,0,5.783,0.032,8.673-0.011c1.889-0.028,3.301-1.022,3.2-2.921   c-0.242-4.517,0.042-9.017,0.034-13.524c-0.004-2.354-1.103-3.335-3.411-3.377c-2.82-0.051-5.643-0.073-8.461,0.012   c-3.974,0.12-6.864,2.089-8.47,5.666c-1.475,3.285-2.243,6.828-3.006,10.333c-0.536,2.46,0.662,3.762,3.191,3.814   C468.6,590.669,471.351,590.625,474.101,590.625z" }),
+    React.createElement("path", { fill, d: "M396.797,616.129c-1.76-0.511-3.555-0.922-5.272-1.549c-7.38-2.695-12.094-7.944-14.109-15.469   c-2.008-7.498-2.074-15.092-0.113-22.626c2.434-9.353,8.664-14.899,17.949-16.852c8.71-1.831,17.55-1.828,26.314-0.322   c4.504,0.774,8.601,2.76,12.05,5.861c2.47,2.221,3.993,4.94,3.914,8.355c-0.06,2.599-1.58,4.288-4.157,4.487   c-1.824,0.141-3.675,0.111-5.503-0.009c-2.166-0.143-3.708-1.481-4.664-3.275c-1.38-2.592-3.634-3.862-6.303-4.089   c-5.203-0.442-10.467-0.661-15.64,0.1c-6.056,0.891-8.289,3.473-9.309,10.051c-0.829,5.347-0.664,10.677,0.514,15.985   c0.967,4.356,3.449,7.18,7.949,7.573c5.479,0.479,10.999,0.65,16.469-0.18c2.566-0.389,4.612-1.74,5.721-4.216   c1.043-2.331,0.095-3.972-2.468-4.027c-4.165-0.089-8.334-0.023-12.501-0.043c-3.583-0.018-4.962-1.494-4.987-5.285   c-0.028-4.158,1.314-5.84,4.898-5.858c8.829-0.044,17.658-0.042,26.486,0.001c3.193,0.016,4.75,1.673,4.805,4.895   c0.053,3.108,0.094,6.222-0.52,9.288c-1.649,8.243-6.542,13.571-14.558,16.033c-1.481,0.455-2.999,0.785-4.501,1.173   C411.773,616.129,404.285,616.129,396.797,616.129z" }),
+    React.createElement("path", { fill, d: "M707.465,616.129c-3.353-0.852-6.696-1.717-9.708-3.524c-3.841-2.304-6.831-5.224-7.545-9.911   c-0.536-3.517,1.179-5.743,4.746-6.071c4.404-0.405,8.298,0.113,10.472,4.803c0.845,1.824,2.807,2.511,4.782,2.73   c6.194,0.687,12.412,0.41,18.621,0.383c0.816-0.004,1.686-0.281,2.437-0.632c2.619-1.224,2.927-4.275,0.61-5.992   c-1.856-1.375-4.065-1.929-6.264-2.46c-7.334-1.769-14.86-2.772-21.957-5.491c-2.707-1.037-5.305-2.225-7.698-3.938   c-8.019-5.742-6.56-19.63,2.135-24.221c4.646-2.453,9.697-3.029,14.767-3.24c6.2-0.258,12.436-0.158,18.585,0.727   c4.924,0.709,9.287,2.913,12.83,6.484c2.18,2.197,3.296,4.875,3.159,8.036c-0.107,2.47-1.045,3.977-3.486,4.344   c-6.111,0.919-9.226,0.214-11.456-4.254c-1.375-2.753-4.211-3.241-6.913-3.344c-4.796-0.181-9.602-0.094-14.404-0.117   c-0.933-0.004-1.826,0.214-2.67,0.592c-2.737,1.229-3.08,4.337-0.65,6.083c1.517,1.09,3.32,1.537,5.077,2.062   c6.501,1.942,13.253,2.807,19.792,4.6c3.157,0.866,6.149,2.033,8.93,3.783c3.621,2.279,6.092,5.405,7.344,9.495   c0,1.837,0,3.673,0,5.51c-1.485,6.482-5.407,10.643-11.84,12.392c-1.554,0.423-3.126,0.782-4.69,1.171   C724.135,616.129,715.8,616.129,707.465,616.129z" }),
+    React.createElement("path", { fill, d: "M332.799,616.129c-0.474-0.13-0.945-0.277-1.423-0.389c-10.99-2.57-17.035-9.73-17.257-21.017   c-0.205-10.448-0.073-20.904-0.034-31.356c0.011-2.962,1.651-4.494,4.669-4.55c2.047-0.038,4.097-0.038,6.144,0.002   c3.126,0.061,4.633,1.592,4.639,4.765c0.019,9.464-0.015,18.927,0.026,28.391c0.008,1.757,0.159,3.53,0.428,5.267   c0.685,4.409,3.353,6.993,7.797,7.273c3.376,0.213,6.784,0.207,10.163,0.019c4.618-0.257,7.548-3.266,8.019-8.048   c0.193-1.961,0.145-3.95,0.148-5.926c0.014-8.687-0.012-17.373,0.014-26.06c0.013-4.324,1.418-5.679,5.746-5.691   c1.624-0.005,3.249-0.015,4.873,0.003c3.517,0.04,5.011,1.512,5.022,5.071c0.026,8.616,0.023,17.232,0,25.848   c-0.006,2.327,0.126,4.656-0.171,6.982c-1.334,10.469-6.621,16.44-16.833,18.968c-0.546,0.135-1.085,0.299-1.627,0.449   C346.362,616.129,339.58,616.129,332.799,616.129z" }),
+    React.createElement("path", { fill, d: "M251,559.336c3.833-0.914,7.703-0.699,11.549-0.221c2.678,0.333,4.348,2.208,5.62,4.416   c3.03,5.258,6.015,10.542,9.016,15.816c0.778,1.368,1.529,2.799,3.427,2.705c1.753-0.086,2.449-1.428,3.168-2.762   c2.81-5.219,5.643-10.425,8.477-15.631c1.735-3.187,4.368-4.89,8.057-4.853c2.047,0.021,4.094-0.017,6.141,0.007   c3.264,0.039,4.18,1.664,2.446,4.503c-1.875,3.071-3.865,6.072-5.818,9.095c-4.595,7.113-9.182,14.233-13.813,21.323   c-0.884,1.353-1.325,2.736-1.301,4.364c0.063,4.234-0.063,8.472,0.053,12.704c0.064,2.346-0.634,4.136-2.692,5.327   c-3.249,0-6.499,0-9.748,0c-2.264-0.885-3.148-2.549-3.097-4.959c0.091-4.293-0.018-8.59,0.048-12.883   c0.026-1.688-0.382-3.141-1.305-4.563c-5.749-8.856-11.417-17.765-17.192-26.604c-0.903-1.382-1.471-3.073-3.035-3.97   C251,561.879,251,560.608,251,559.336z" }),
+    React.createElement("path", { fill, d: "M508.689,616.129c-2.209-1.114-2.988-2.924-2.98-5.365c0.053-15.529,0.019-31.058,0.034-46.587   c0.004-3.85,1.542-5.344,5.42-5.367c1.906-0.011,3.812-0.035,5.717,0.011c2.586,0.063,4.057,1.355,4.448,3.91   c0.127,0.831,0.109,1.688,0.11,2.534c0.008,11.576,0.001,23.152,0.011,34.728c0.003,3.549,0.683,4.25,4.185,4.257   c9.247,0.018,18.494,0.007,27.74,0.01c3.675,0.001,5.296,0.862,5.983,3.165c1.116,3.739,0.107,6.901-2.776,8.704   C540.617,616.129,524.653,616.129,508.689,616.129z" }),
+  )},
+};
+
+function ClientLogoItem({ name, visible, index, isMobile }) {
+  const logo = CLIENT_LOGOS[name];
+  if (!logo) return null;
+  const h = isMobile ? logo.mh : logo.h;
+
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", justifyContent: "center",
+      flex: isMobile ? "0 0 33.33%" : "0 0 16.66%",
+      height: isMobile ? logo.mh + 36 : logo.h + 56,
+      opacity: visible ? 0.58 : 0,
+      transform: visible ? "translateY(0)" : "translateY(8px)",
+      transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.04}s, opacity 0.3s ease`,
+      cursor: "default",
+    }}
+      onMouseEnter={e => { e.currentTarget.style.opacity = "0.9"; }}
+      onMouseLeave={e => { if (e.currentTarget.closest('section').__visible) e.currentTarget.style.opacity = "0.58"; }}
+    >
+      <div style={{ height: h, display: "flex", alignItems: "center" }}>
+        {logo.svg("rgba(255,255,255,0.95)")}
+      </div>
+    </div>
+  );
+}
+
+function ClientLogos() {
+  const [ref, visible] = useInView({ threshold: 0.15 });
+  const isMobile = useIsMobile();
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    if (sectionRef.current) sectionRef.current.__visible = visible;
+  }, [visible]);
+
+  const row1 = clients.slice(0, isMobile ? clients.length : 6);
+  const row2 = isMobile ? [] : clients.slice(6);
+
+  return (
+    <section ref={(el) => { ref.current = el; sectionRef.current = el; }} style={{
+      padding: isMobile ? "40px 20px" : "clamp(48px, 6vw, 80px) clamp(40px, 5vw, 80px)",
+      position: "relative", zIndex: 1,
+    }}>
+      <div style={{ textAlign: "center", marginBottom: isMobile ? 24 : 36 }}>
+        <span style={{
+          fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.accent,
+          letterSpacing: "3px", textTransform: "uppercase",
+          opacity: visible ? 1 : 0, transition: "opacity 0.6s ease",
+        }}>Trusted By</span>
+      </div>
+      <div style={{
+        borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`,
+        padding: isMobile ? "8px 0" : "0",
+      }}>
+        <div style={{
+          display: "flex", flexWrap: isMobile ? "wrap" : "nowrap",
+          justifyContent: "center", alignItems: "center",
+        }}>
+          {row1.map((name, i) => (
+            <ClientLogoItem key={name} name={name} visible={visible} index={i} isMobile={isMobile} />
+          ))}
+        </div>
+        {row2.length > 0 && <div style={{
+          display: "flex", justifyContent: "center", alignItems: "center",
+        }}>
+          {row2.map((name, i) => (
+            <ClientLogoItem key={name} name={name} visible={visible} index={i + 6} isMobile={isMobile} />
+          ))}
+        </div>}
+      </div>
+    </section>
+  );
+}
+
+// ─── ABOUT SECTION — Dramatic entrance ───
+function AboutSection() {
+  const sectionRef = useRef(null);
+  const progress = useScrollProgress(sectionRef);
+  const [ref, visible] = useInView({ threshold: 0.08 });
+  const isMobile = useIsMobile();
+  const imageY = isMobile ? 0 : (progress - 0.5) * -30;
+  const textY = isMobile ? 0 : (progress - 0.5) * 15;
+
+  // Split headline into words for staggered reveal
+  const headlineWords1 = ["I", "build", "experiences"];
+  const headlineWords2 = ["people"];
+
+  return (
+    <section id="about" ref={(el) => { ref.current = el; sectionRef.current = el; }} style={{
+      padding: isMobile ? "60px 20px" : "clamp(80px, 12vw, 160px) clamp(24px, 5vw, 64px)",
+      position: "relative", overflow: "hidden", zIndex: 1,
+      minHeight: isMobile ? "auto" : "100vh", display: "flex", alignItems: "center",
+    }}>
+      {/* Large decorative accent number in background */}
+      {!isMobile && <div style={{
+        position: "absolute", top: "10%", right: "5%", fontFamily: T.serif,
+        fontSize: "clamp(200px, 25vw, 400px)", fontWeight: 300, color: "transparent",
+        WebkitTextStroke: `1px rgba(255,77,0,${visible ? 0.06 : 0})`,
+        lineHeight: 0.85, userSelect: "none", pointerEvents: "none",
+        transition: "all 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+      }}>15+</div>}
+
+      {/* Animated vertical divider line — desktop only */}
+      {!isMobile && <div style={{
+        position: "absolute", left: "50%", top: "15%", bottom: "15%", width: 1,
+        background: `linear-gradient(to bottom, transparent, ${T.accent}, transparent)`,
+        transformOrigin: "top center",
+        animation: visible ? "aboutLineGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both" : "none",
+        opacity: visible ? 0.3 : 0,
+      }} />}
+
+      <div style={{
+        display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+        gap: isMobile ? 32 : "clamp(40px, 6vw, 100px)", alignItems: "center",
+        width: "100%",
+      }}>
+        {/* Image side — clip-path wipe reveal */}
+        <div style={{
+          transform: `translateY(${imageY}px)`,
+          animation: visible ? "clipRevealLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both" : "none",
+          opacity: visible ? 1 : 0,
+        }}>
+          <div style={{
+            borderRadius: 8, overflow: "hidden", aspectRatio: "4/3.7",
+            position: "relative", maxHeight: "70vh",
+          }}>
+            <img src="img/portrait.png"
+              alt="Benja Juster"
+              style={{
+                width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 5%",
+                background: T.bg,
+              }}
+            />
+            {/* Accent bar at bottom */}
+            <div style={{
+              position: "absolute", bottom: 0, left: 0, height: 3,
+              background: T.accent,
+              animation: visible ? "accentWipe 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both" : "none",
+            }} />
+            {/* Corner frame marks */}
+            <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24,
+              borderTop: `1.5px solid ${T.accent}`, borderLeft: `1.5px solid ${T.accent}`,
+              opacity: visible ? 0.5 : 0, transition: "opacity 0.6s ease 0.6s",
+            }} />
+            <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24,
+              borderBottom: `1.5px solid ${T.accent}`, borderRight: `1.5px solid ${T.accent}`,
+              opacity: visible ? 0.5 : 0, transition: "opacity 0.6s ease 0.6s",
+            }} />
+          </div>
+        </div>
+
+        {/* Text side — staggered reveal */}
+        <div style={{ transform: `translateY(${textY}px)` }}>
+          {/* Label with animated accent line */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+            <div style={{
+              height: 1, background: T.accent,
+              animation: visible ? "accentWipe 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both" : "none",
+            }} />
+            <span style={{
+              fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent,
+              letterSpacing: "3px", textTransform: "uppercase",
+              opacity: visible ? 1 : 0, transition: "opacity 0.5s ease 0.5s",
+            }}>About</span>
+          </div>
+
+          {/* Headline with word-by-word split reveal */}
+          <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? "clamp(28px, 8vw, 40px)" : "clamp(36px, 4.5vw, 64px)", fontWeight: 300, color: T.text, lineHeight: 1.15, overflow: "hidden" }}>
+            <span style={{ display: "block", overflow: "hidden" }}>
+              {headlineWords1.map((word, i) => (
+                <span key={i} style={{
+                  display: "inline-block", marginRight: "0.25em",
+                  animation: visible ? `splitReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + i * 0.08}s both` : "none",
+                  opacity: visible ? undefined : 0,
+                }}>{word}</span>
+              ))}
+            </span>
+            <span style={{ display: "block", overflow: "hidden" }}>
+              {headlineWords2.map((word, i) => (
+                <span key={i} style={{
+                  display: "inline-block", marginRight: "0.25em",
+                  animation: visible ? `splitReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.65 + i * 0.08}s both` : "none",
+                  opacity: visible ? undefined : 0,
+                }}>{word}</span>
+              ))}
+              <span style={{
+                display: "inline-block", fontStyle: "italic", color: T.accent,
+                animation: visible ? `splitReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both` : "none",
+                opacity: visible ? undefined : 0,
+              }}>remember.</span>
+            </span>
+          </h2>
+
+          {/* Body text — fade up */}
+          <p style={{
+            fontFamily: T.sans, fontSize: "clamp(14px, 1.2vw, 16px)", color: T.textMuted,
+            lineHeight: 1.75, marginTop: 24, maxWidth: 480,
+            opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.85s",
+          }}>
+            Fifteen years leading experiential creative for the world's most ambitious brands. I've managed multidisciplinary teams of 50+ across five continents and budgets exceeding $30M, from large-scale activations to intimate immersive moments that turn complex narratives into human stories. I also serve on the Board of Directors for Take 3 Presents, a nonprofit nurturing creativity through experiential art.
+          </p>
+
+          {/* Discipline tags — cascading entrance, evenly stacked */}
+          <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: isMobile ? "repeat(2, auto)" : "repeat(3, auto)", gap: 8, justifyContent: isMobile ? "center" : "start", justifyItems: "start" }}>
+            {disciplines.map((d, i) => (
+              <span key={d} style={{
+                fontFamily: T.sans, fontSize: 11, fontWeight: 500, color: T.textMuted,
+                padding: "8px 16px", borderRadius: 20,
+                border: `1px solid ${T.border}`,
+                letterSpacing: "0.5px", textAlign: "center",
+                whiteSpace: "nowrap",
+                animation: visible ? `aboutTagIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${1.0 + i * 0.06}s both` : "none",
+                opacity: visible ? undefined : 0,
+              }}>{d}</span>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── HIGHLIGHTS + CLIENTS STRIP ───
+function HighlightsStrip() {
+  const isMobile = useIsMobile();
+  const [ref, visible] = useInView(0.2);
+
+  const highlights = [
+    { stat: "$1B", label: "Pipeline Generated", detail: "Google Cloud Space" },
+    { stat: "20%", label: "NPS Increase", detail: "GreenBiz VERGE" },
+    { stat: "36,000+", label: "Attendees", detail: "Google Cloud Next '25" },
+    { stat: "50%", label: "Social Lift", detail: "PepsiCo Sensorium" },
+  ];
+
+  const press = ["Vice", "LA Times", "East Bay Times", "SF Magazine", "Laughing Squid", "Medium"];
+
+  return (
+    <section ref={ref} style={{
+      padding: isMobile ? "60px 24px" : "80px 60px",
+      background: T.bg, position: "relative", overflow: "hidden",
+    }}>
+      {/* Highlights grid */}
+      <div style={{
+        maxWidth: 1200, margin: "0 auto",
+        display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
+        gap: isMobile ? 24 : 40,
+      }}>
+        {highlights.map((h, i) => (
+          <div key={h.label} style={{
+            textAlign: "center",
+            opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(30px)",
+            transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + i * 0.1}s`,
+          }}>
+            <div style={{ fontFamily: T.serif, fontSize: isMobile ? 32 : 44, fontWeight: 600, color: T.accent, lineHeight: 1 }}>{h.stat}</div>
+            <div style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 600, color: T.text, letterSpacing: "0.5px", marginTop: 8 }}>{h.label}</div>
+            <div style={{ fontFamily: T.sans, fontSize: 11, color: T.textMuted, marginTop: 4 }}>{h.detail}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Press mentions */}
+      <div style={{
+        maxWidth: 1200, margin: "48px auto 0", textAlign: "center",
+        opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 0.6s",
+      }}>
+        <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>Featured In</span>
+        <div style={{
+          marginTop: 12, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px 24px",
+        }}>
+          {press.map(p => (
+            <span key={p} style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 400, color: T.textFaint, fontStyle: "italic" }}>{p}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── FOOTER SHADER — Mouse-reactive WebGL aurora background ───
+function FooterShader({ containerRef }) {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof THREE === "undefined") return;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.domElement.style.cssText = "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;";
+    container.insertBefore(renderer.domElement, container.firstChild);
+    canvasRef.current = renderer.domElement;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const clock = new THREE.Clock();
+
+    const vertexShader = `void main() { gl_Position = vec4(position, 1.0); }`;
+    const fragmentShader = `
+      precision highp float;
+      uniform vec2 iResolution;
+      uniform float iTime;
+      uniform vec2 iMouse;
+
+      float random(vec2 st) {
+        return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+      }
+      float noise(vec2 p) {
+        vec2 i = floor(p), f = fract(p);
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(
+          mix(random(i), random(i + vec2(1.0, 0.0)), u.x),
+          mix(random(i + vec2(0.0, 1.0)), random(i + vec2(1.0, 1.0)), u.x),
+          u.y
+        );
+      }
+      float fbm(vec2 p) {
+        float v = 0.0, a = 0.5;
+        for (int i = 0; i < 5; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
+        return v;
+      }
+      void main() {
+        vec2 uv = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
+        vec2 mouse = (iMouse - 0.5 * iResolution.xy) / iResolution.y;
+        float t = iTime * 0.15;
+
+        // FBM curtain flowing upward
+        vec2 p = uv;
+        p.y += 0.5;
+        float f = fbm(vec2(p.x * 2.5, p.y * 1.5 + t));
+        float curtain = smoothstep(0.15, 0.55, f) * (1.0 - p.y * 0.8);
+
+        // Mouse flare — warm glow follows cursor
+        float d = length(uv - mouse);
+        float flare = smoothstep(0.35, 0.0, d);
+
+        // Warm color palette (orange/amber to match brand)
+        vec3 c1 = vec3(0.95, 0.3, 0.0);   // brand orange
+        vec3 c2 = vec3(1.0, 0.55, 0.15);   // warm amber
+        vec3 c3 = vec3(0.8, 0.15, 0.05);   // deep red
+        vec3 fc = vec3(1.0, 0.85, 0.6);    // warm white flare
+
+        vec3 color = mix(c1, c2, p.y + 0.3) * curtain * 0.35;
+        color += c3 * fbm(p * 3.0 - t) * 0.15;
+        color += fc * flare * curtain * 1.2;
+
+        // Fade to transparent at edges
+        float vignette = smoothstep(1.2, 0.3, length(uv * vec2(0.8, 1.0)));
+        color *= vignette;
+
+        // Keep it subtle — this is a background
+        color *= 0.5;
+
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
+
+    const uniforms = {
+      iTime: { value: 0 },
+      iResolution: { value: new THREE.Vector2() },
+      iMouse: { value: new THREE.Vector2(-100, -100) },
+    };
+    const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms, transparent: true });
+    scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+
+    const dpr = renderer.getPixelRatio();
+    const onResize = () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      renderer.setSize(w, h);
+      uniforms.iResolution.value.set(w * dpr, h * dpr);
+    };
+    window.addEventListener("resize", onResize);
+    onResize();
+
+    const onMouseMove = (e) => {
+      const rect = container.getBoundingClientRect();
+      uniforms.iMouse.value.set((e.clientX - rect.left) * dpr, (rect.height - (e.clientY - rect.top)) * dpr);
+    };
+    container.addEventListener("mousemove", onMouseMove);
+
+    renderer.setAnimationLoop(() => {
+      uniforms.iTime.value = clock.getElapsedTime();
+      renderer.render(scene, camera);
+    });
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      container.removeEventListener("mousemove", onMouseMove);
+      renderer.setAnimationLoop(null);
+      if (canvasRef.current && canvasRef.current.parentNode) {
+        canvasRef.current.parentNode.removeChild(canvasRef.current);
+      }
+      material.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  return null;
+}
+
+// ─── FOOTER CSS HAZE — Layered animated gradients that mimic smoke/aurora ───
+function FooterCSSHaze() {
+  return (
+    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+      {/* Slow-drifting warm cloud */}
+      <div style={{
+        position: "absolute", width: "200%", height: "200%",
+        top: "-50%", left: "-50%",
+        background: [
+          "radial-gradient(ellipse 50% 40% at 35% 60%, rgba(255,77,0,0.14) 0%, transparent 60%)",
+          "radial-gradient(ellipse 40% 50% at 70% 40%, rgba(255,120,50,0.08) 0%, transparent 55%)",
+          "radial-gradient(ellipse 45% 35% at 50% 70%, rgba(200,100,50,0.06) 0%, transparent 50%)",
+        ].join(", "),
+        animation: "footerHaze1 25s ease-in-out infinite alternate",
+        filter: "blur(40px)", willChange: "transform",
+      }} />
+      {/* Counter-drifting cool mist */}
+      <div style={{
+        position: "absolute", width: "180%", height: "180%",
+        top: "-40%", left: "-40%",
+        background: [
+          "radial-gradient(ellipse 55% 45% at 60% 50%, rgba(160,140,255,0.07) 0%, transparent 55%)",
+          "radial-gradient(ellipse 35% 50% at 30% 65%, rgba(120,100,200,0.04) 0%, transparent 50%)",
+        ].join(", "),
+        animation: "footerHaze2 30s ease-in-out infinite alternate",
+        filter: "blur(50px)", willChange: "transform",
+      }} />
+      {/* Subtle warm ember at bottom */}
+      <div style={{
+        position: "absolute", width: "100%", height: "60%",
+        bottom: 0, left: 0,
+        background: "radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255,77,0,0.08) 0%, transparent 60%)",
+        filter: "blur(30px)",
+      }} />
+    </div>
+  );
+}
+
+// ─── FOOTER DIVIDER — Bold accent seam with glow pulse ───
+function FooterDivider({ visible, isMobile }) {
+  return (
+    <div style={{
+      position: "relative", zIndex: 3,
+      marginBottom: isMobile ? 40 : 60,
+      height: 2,
+    }}>
+      {/* Solid accent line */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: T.accent,
+        opacity: visible ? 0.85 : 0,
+        transition: "opacity 0.8s ease",
+      }} />
+      {/* Tight glow right on the line */}
+      <div style={{
+        position: "absolute", left: 0, right: 0, top: "50%",
+        height: 6, transform: "translateY(-50%)",
+        background: T.accent,
+        filter: "blur(4px)",
+        opacity: visible ? 0.45 : 0,
+        transition: "opacity 1s ease 0.1s",
+      }} />
+      {/* Breathing wide glow — slow pulse */}
+      <div style={{
+        position: "absolute", left: "5%", right: "5%", top: "50%",
+        height: 24, transform: "translateY(-50%)",
+        background: `radial-gradient(ellipse 50% 100% at 50% 50%, ${T.accent} 0%, transparent 70%)`,
+        filter: "blur(12px)",
+        opacity: visible ? 1 : 0,
+        animation: visible ? "dividerPulse 4s ease-in-out infinite" : "none",
+        transition: "opacity 1s ease 0.2s",
+        pointerEvents: "none",
+      }} />
+    </div>
+  );
+}
+
+// ─── FOOTER ───
+function Footer() {
+  const [footerContainerRef, visible] = useInView({ threshold: 0.05 });
+  const [btnHover, setBtnHover] = useState(false);
+  const btnRef = useRef(null);
+  const [btnOffset, setBtnOffset] = useState({ x: 0, y: 0 });
+  const [shaderReady, setShaderReady] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Start shader only when footer comes into view
+  useEffect(() => {
+    if (visible && !shaderReady) setShaderReady(true);
+  }, [visible]);
+
+  const handleBtnMouseMove = useCallback((e) => {
+    if (!btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    setBtnOffset({ x: (e.clientX - cx) * 0.15, y: (e.clientY - cy) * 0.15 });
+  }, []);
+
+  const handleBtnMouseLeave = useCallback(() => {
+    setBtnHover(false);
+    setBtnOffset({ x: 0, y: 0 });
+  }, []);
+
+  const ctaText = "Building something bold?";
+
+  return (
+    <footer ref={footerContainerRef} style={{
+      paddingTop: 0,
+      paddingBottom: isMobile ? 32 : "clamp(32px, 4vw, 48px)",
+      paddingLeft: isMobile ? 0 : 0,
+      paddingRight: isMobile ? 0 : 0,
+      position: "relative", overflow: "hidden", zIndex: 1, marginTop: 0,
+      minHeight: isMobile ? 400 : "auto",
+    }}>
+      {/* Divider at the exact seam */}
+      <FooterDivider visible={visible} isMobile={isMobile} />
+
+      {/* Top fade — the shader canvas will show through, and this fades it to bg color at the top edge */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: "30%",
+        background: `linear-gradient(to bottom, ${T.bg} 0%, transparent 100%)`,
+        pointerEvents: "none", zIndex: 2,
+      }} />
+      {/* Background effect — WebGL shader on desktop, CSS haze on mobile */}
+      {shaderReady && (isMobile
+        ? <FooterCSSHaze />
+        : <FooterShader containerRef={footerContainerRef} />
+      )}
+
+      <div style={{ position: "relative", zIndex: 1, padding: isMobile ? "0 28px" : "0 clamp(40px, 5vw, 80px)" }}>
+        {/* Animated accent line */}
+        <div style={{
+          width: visible ? 80 : 0, height: 2, background: T.accent,
+          marginBottom: 24, borderRadius: 1,
+          transition: "width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
+        }} />
+
+        <span style={{
+          fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent,
+          letterSpacing: "3px", textTransform: "uppercase",
+          opacity: visible ? 1 : 0, transition: "opacity 0.6s ease",
+        }}>Get in touch</span>
+
+        {/* CTA text with staggered letter/word reveal */}
+        <h2 style={{
+          fontFamily: T.serif, fontSize: isMobile ? "clamp(32px, 10vw, 48px)" : "clamp(44px, 7vw, 100px)", fontWeight: 300,
+          color: T.text, margin: "16px 0 0", lineHeight: 1,
+          overflow: "hidden",
+        }}>
+          {ctaText.split("").map((char, i) => (
+            <span key={i} style={{
+              display: "inline-block",
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0) rotateX(0deg)" : "translateY(100%) rotateX(-80deg)",
+              transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.3 + i * 0.025}s`,
+              transformOrigin: "bottom",
+            }}>{char === " " ? "\u00A0" : char}</span>
+          ))}
+          <br />
+          {["Let's", "bring", "it", "to"].map((word, i) => (
+            <span key={i} style={{
+              display: "inline-block", marginRight: "0.3em",
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(40px)",
+              transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.6 + i * 0.08}s`,
+            }}>{word}</span>
+          ))}
+          {/* "life." with wave animation — each letter undulates independently */}
+          <span style={{
+            display: "inline-block",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.9)",
+            transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.95s",
+          }}>
+            {["l","i","f","e","."].map((ch, i) => (
+              <span key={i} style={{
+                color: "transparent", WebkitTextStroke: `1.5px ${T.accent}`,
+                fontStyle: "italic", display: "inline-block",
+                animation: visible ? `lifeWave 2.5s ease-in-out ${i * 0.18}s infinite` : "none",
+              }}>{ch}</span>
+            ))}
+          </span>
+        </h2>
+
+        {/* Magnetic CTA button */}
+        <div style={{
+          opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(20px)",
+          transition: "all 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.1s", marginTop: 40,
+        }}>
+          <a
+            ref={btnRef}
+            href="mailto:benjajuster@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor={isMobile ? undefined : ""}
+            onMouseEnter={isMobile ? undefined : () => setBtnHover(true)}
+            onMouseMove={isMobile ? undefined : handleBtnMouseMove}
+            onMouseLeave={isMobile ? undefined : handleBtnMouseLeave}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 12,
+              padding: isMobile ? "16px 32px" : "20px 40px", borderRadius: 40, background: T.accent,
+              color: "#fff", textDecoration: "none", fontFamily: T.sans,
+              fontSize: isMobile ? 14 : 16, fontWeight: 600, position: "relative",
+              transform: isMobile ? "none" : `translate(${btnOffset.x}px, ${btnOffset.y}px) scale(${btnHover ? 1.05 : 1})`,
+              transition: btnHover ? "transform 0.15s ease" : "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+              boxShadow: btnHover ? "0 0 60px rgba(255,77,0,0.4), 0 0 120px rgba(255,77,0,0.15)" : "0 0 30px rgba(255,77,0,0.15)",
+            }}
+          >
+            {btnHover && (
+              <div style={{
+                position: "absolute", inset: -8, borderRadius: 48,
+                border: `1px solid rgba(255,77,0,0.3)`,
+                animation: "magneticPulse 1.5s ease-in-out infinite",
+                pointerEvents: "none",
+              }} />
+            )}
+            Let's connect
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+              style={{ transform: btnHover ? "translateX(4px)" : "translateX(0)", transition: "transform 0.3s ease" }}>
+              <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* Footer bar */}
+      <div style={{
+        display: "flex", justifyContent: isMobile ? "center" : "space-between", alignItems: "center",
+        flexDirection: isMobile ? "column" : "row",
+        marginTop: isMobile ? 60 : "clamp(80px, 10vw, 140px)", paddingTop: 24,
+        padding: isMobile ? "24px 28px 0" : `24px clamp(40px, 5vw, 80px) 0`,
+        borderTop: `1px solid ${T.border}`, flexWrap: "wrap", gap: isMobile ? 12 : 16,
+        position: "relative", zIndex: 1,
+      }}>
+        <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textFaint }}>
+          © 2026 Benja Juster. Los Angeles, CA.
+        </span>
+        <div style={{ display: "flex", gap: 28 }}>
+          <a href="https://www.linkedin.com/in/benjajuster/" target="_blank" rel="noopener noreferrer" style={{
+              fontFamily: T.sans, fontSize: 12, color: T.textFaint,
+              textDecoration: "none", transition: "color 0.3s",
+            }}
+              onMouseEnter={(e) => e.target.style.color = T.text}
+              onMouseLeave={(e) => e.target.style.color = T.textFaint}
+            >LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ─── SCROLL PROGRESS BAR ───
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(h > 0 ? window.scrollY / h : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 2, zIndex: 200, background: "transparent" }}>
+      <div style={{ height: "100%", width: `${progress * 100}%`, background: T.accent, transition: "width 0.1s linear" }} />
+    </div>
+  );
+}
+
+// ─── PROJECT DETAIL OVERLAY ───
+const ProjectContext = React.createContext();
+
+function ProjectDetailOverlay() {
+  const { activeProject, setActiveProject } = React.useContext(ProjectContext);
+  const [show, setShow] = useState(false);
+  const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
+  const [heroHover, setHeroHover] = useState(false);
+  const [imgOrientation, setImgOrientation] = useState(null);
+  const [heroOpacity, setHeroOpacity] = useState(0);
+  const prevOrientationRef = React.useRef(null);
+  const overlayRef = React.useRef(null);
+  const isMobile = useIsMobile();
+  const project = activeProject;
+  const allProjects = [...featured, ...selectedWork.filter(sw => !featured.some(f => f.title === sw.title))];
+  const currentIdx = project ? allProjects.findIndex(p => p.title === project.title) : -1;
+
+  useEffect(() => {
+    if (project) {
+      setActiveGalleryIdx(0);
+      setHeroOpacity(0);
+      setImgOrientation(null);
+      prevOrientationRef.current = null;
+      if (overlayRef.current) overlayRef.current.scrollTop = 0;
+      requestAnimationFrame(() => {
+        if (overlayRef.current) overlayRef.current.scrollTop = 0;
+        setShow(true);
+      });
+      document.body.style.overflow = "hidden";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [project]);
+
+  const handleClose = () => {
+    setShow(false);
+    setTimeout(() => setActiveProject(null), 500);
+  };
+
+  const goToProject = (dir) => {
+    const next = (currentIdx + dir + allProjects.length) % allProjects.length;
+    setShow(false);
+    setTimeout(() => {
+      setActiveProject(allProjects[next]);
+      if (overlayRef.current) overlayRef.current.scrollTop = 0;
+      requestAnimationFrame(() => setShow(true));
+    }, 300);
+  };
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") handleClose();
+      if (e.key === "ArrowRight") goToProject(1);
+      if (e.key === "ArrowLeft") goToProject(-1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [project, currentIdx]);
+
+  // Detect portrait vs landscape for current gallery image
+  useEffect(() => {
+    if (!project) return;
+    const gallery = (project.gallery && project.gallery.length > 0) ? project.gallery : [project.image];
+    const src = gallery[activeGalleryIdx];
+    if (!src) return;
+    const img = new Image();
+    img.onload = () => {
+      const newOrientation = img.naturalHeight > img.naturalWidth ? "portrait" : "landscape";
+      if (prevOrientationRef.current !== null && newOrientation !== prevOrientationRef.current) {
+        setHeroOpacity(0);
+        setTimeout(() => {
+          setImgOrientation(newOrientation);
+          prevOrientationRef.current = newOrientation;
+          setTimeout(() => setHeroOpacity(1), 50);
+        }, 200);
+      } else {
+        setImgOrientation(newOrientation);
+        prevOrientationRef.current = newOrientation;
+        setHeroOpacity(1);
+      }
+    };
+    img.src = src;
+  }, [activeGalleryIdx, project]);
+
+  if (!project) return null;
+
+  const allMedia = [...((project.gallery && project.gallery.length > 0) ? project.gallery : [project.image])];
+  const hasVideo = !!project.video;
+
+  const NavArrow = ({ dir, onClick }) => (
+    <button onClick={(e) => { e.stopPropagation(); onClick(); }} style={{
+      position: "fixed", top: "50%", [dir === -1 ? "left" : "right"]: 20,
+      transform: "translateY(-50%)", zIndex: 10000,
+      width: 48, height: 48, borderRadius: "50%",
+      background: "rgba(255,255,255,0.06)", border: `1px solid ${T.border}`,
+      display: "flex", alignItems: "center", justifyContent: "center",
+      cursor: "pointer", transition: "all 0.3s ease",
+      opacity: show ? 1 : 0,
+    }}
+    onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; e.currentTarget.style.borderColor = T.accent; }}
+    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; e.currentTarget.style.borderColor = T.border; }}
+    >
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+        <path d={dir === -1 ? "M10 3L5 8L10 13" : "M6 3L11 8L6 13"} stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+
+  return (
+    <div ref={overlayRef} onClick={handleClose} style={{
+      position: "fixed", inset: 0, zIndex: 9999,
+      background: show ? "rgba(0,0,0,0.94)" : "rgba(0,0,0,0)",
+      backdropFilter: show ? "blur(24px)" : "blur(0px)",
+      transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+      display: "flex", flexDirection: isMobile ? "column" : "row",
+      alignItems: isMobile ? "stretch" : "flex-start", justifyContent: "center",
+      overflowY: isMobile ? "hidden" : "auto", cursor: "pointer",
+    }}>
+      {/* Mobile: fixed top bar OUTSIDE scroll container — never scrolls away */}
+      {isMobile && (
+        <div onClick={(e) => e.stopPropagation()} style={{
+          flexShrink: 0, display: "flex", justifyContent: "space-between", alignItems: "center",
+          padding: "12px 16px", background: "rgba(0,0,0,0.95)", zIndex: 10,
+          cursor: "default",
+        }}>
+          <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textFaint, letterSpacing: "1px" }}>
+            {String(currentIdx + 1).padStart(2, "0")} / {String(allProjects.length).padStart(2, "0")}
+          </span>
+          <button onClick={handleClose} style={{
+            background: "rgba(255,255,255,0.1)", border: `1px solid ${T.border}`,
+            borderRadius: "50%", width: 40, height: 40,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", transition: "all 0.3s ease",
+          }}>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M3 3L13 13M13 3L3 13" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Prev / Next arrows — desktop only */}
+      {!isMobile && <NavArrow dir={-1} onClick={() => goToProject(-1)} />}
+      {!isMobile && <NavArrow dir={1} onClick={() => goToProject(1)} />}
+
+      <div onClick={(e) => e.stopPropagation()} style={{
+        width: isMobile ? "100%" : "min(940px, 90vw)",
+        padding: isMobile ? "0 16px 60px" : "60px 0 80px",
+        opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(40px)",
+        transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s",
+        cursor: "default",
+        ...(isMobile ? { flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" } : {}),
+      }}>
+        {/* Top bar — counter + close (desktop only; mobile version is above scroll container) */}
+        {!isMobile && (
+          <div style={{
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            marginBottom: 28,
+          }}>
+            <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textFaint, letterSpacing: "1px" }}>
+              {String(currentIdx + 1).padStart(2, "0")} / {String(allProjects.length).padStart(2, "0")}
+            </span>
+            <button onClick={handleClose} style={{
+              background: "rgba(255,255,255,0.1)", border: `1px solid ${T.border}`,
+              borderRadius: "50%", width: 40, height: 40,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 3L13 13M13 3L3 13" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {/* Hero image / gallery — click to advance, hover arrows */}
+        {(() => {
+          const goPrev = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx - 1 + allMedia.length) % allMedia.length); };
+          const goNext = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx + 1) % allMedia.length); };
+          const HeroArrow = ({ dir, onClick }) => (
+            <button onClick={onClick} style={{
+              position: "absolute", top: "50%", [dir === -1 ? "left" : "right"]: isMobile ? 8 : 16,
+              transform: "translateY(-50%)", zIndex: 3,
+              width: isMobile ? 32 : 40, height: isMobile ? 32 : 40, borderRadius: "50%",
+              background: "rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.2)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", backdropFilter: "blur(8px)",
+              opacity: isMobile ? 0.7 : (heroHover ? 1 : 0), transition: "opacity 0.3s ease, background 0.2s ease",
+              pointerEvents: isMobile ? "auto" : (heroHover ? "auto" : "none"),
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = T.accent; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.5)"; }}
+            >
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d={dir === -1 ? "M10 3L5 8L10 13" : "M6 3L11 8L6 13"} stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          );
+          return (
+            <div
+              onMouseEnter={() => setHeroHover(true)}
+              onMouseLeave={() => setHeroHover(false)}
+              style={{ position: "relative", width: "100%", height: isMobile ? "40vh" : "60vh", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}
+            >
+              <div
+                onClick={goNext}
+                style={{
+                  height: "100%", aspectRatio: imgOrientation === "portrait" ? "3/4" : "16/9", maxWidth: "100%",
+                  borderRadius: 10, overflow: "hidden", background: "#0F0F0F",
+                  position: "relative", cursor: allMedia.length > 1 ? "pointer" : "default",
+                  opacity: heroOpacity, transition: "opacity 0.2s ease",
+                }}
+              >
+                <div style={{
+                  width: "100%", height: "100%",
+                  backgroundImage: `url(${allMedia[activeGalleryIdx]})`,
+                  backgroundSize: "contain",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }} />
+                {/* Image counter pill */}
+                {allMedia.length > 1 && (
+                  <div style={{
+                    position: "absolute", bottom: 12, right: 14, zIndex: 3,
+                    fontFamily: T.sans, fontSize: 11, letterSpacing: "0.5px",
+                    color: "rgba(255,255,255,0.8)", background: "rgba(0,0,0,0.5)",
+                    padding: "4px 10px", borderRadius: 20, backdropFilter: "blur(8px)",
+                  }}>{activeGalleryIdx + 1} / {allMedia.length}</div>
+                )}
+              </div>
+              {allMedia.length > 1 && <HeroArrow dir={-1} onClick={goPrev} />}
+              {allMedia.length > 1 && <HeroArrow dir={1} onClick={goNext} />}
+            </div>
+          );
+        })()}
+
+        {/* Gallery thumbnails with scroll arrows */}
+        {allMedia.length > 1 && (() => {
+          const stripRef = React.createRef();
+          const scrollStrip = (dir) => {
+            if (stripRef.current) stripRef.current.scrollBy({ left: dir * 320, behavior: "smooth" });
+          };
+          const ThumbArrow = ({ dir }) => (
+            <button onClick={() => scrollStrip(dir)} style={{
+              position: "absolute", top: "50%", [dir === -1 ? "left" : "right"]: -4,
+              transform: "translateY(-50%)", zIndex: 2,
+              width: 28, height: 28, borderRadius: "50%",
+              background: "rgba(0,0,0,0.7)", border: `1px solid ${T.border}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "pointer", color: "#fff", fontSize: 14, lineHeight: 1,
+              backdropFilter: "blur(8px)",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = T.accent; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.7)"; }}
+            >
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                <path d={dir === -1 ? "M10 3L5 8L10 13" : "M6 3L11 8L6 13"} stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          );
+          return (
+            <div style={{ position: "relative", marginBottom: 32 }}>
+              {allMedia.length > 8 && <ThumbArrow dir={-1} />}
+              <div ref={stripRef} style={{
+                display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4,
+                scrollbarWidth: "none", msOverflowStyle: "none",
+                WebkitOverflowScrolling: "touch",
+                maskImage: allMedia.length > 8 ? "linear-gradient(to right, transparent 0px, black 32px, black calc(100% - 32px), transparent 100%)" : "none",
+                WebkitMaskImage: allMedia.length > 8 ? "linear-gradient(to right, transparent 0px, black 32px, black calc(100% - 32px), transparent 100%)" : "none",
+              }}>
+                {allMedia.map((img, i) => (
+                  <div key={i} onClick={() => setActiveGalleryIdx(i)} style={{
+                    width: 72, height: 48, borderRadius: 6, overflow: "hidden", cursor: "pointer", flexShrink: 0,
+                    border: i === activeGalleryIdx ? `2px solid ${T.accent}` : `2px solid transparent`,
+                    opacity: i === activeGalleryIdx ? 1 : 0.5,
+                    transition: "all 0.3s ease",
+                  }}>
+                    <div style={{ width: "100%", height: "100%", backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                  </div>
+                ))}
+              </div>
+              {allMedia.length > 8 && <ThumbArrow dir={1} />}
+            </div>
+          );
+        })()}
+
+        {/* YouTube video embed — works on benja.art (domain-restricted on localhost) */}
+        {hasVideo && (
+          <div style={{
+            width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden",
+            marginBottom: 32, background: T.surface,
+          }}>
+            <iframe
+              src={`https://www.youtube.com/embed/${project.video}?rel=0&modestbranding=1`}
+              style={{ width: "100%", height: "100%", border: "none" }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
+
+        {/* Meta row */}
+        <div style={{ display: "flex", gap: 32, marginBottom: 20, flexWrap: "wrap" }}>
+          {[
+            { label: "Client", value: project.client },
+            { label: "Role", value: project.category },
+            { label: "Year", value: project.year },
+          ].map((m) => (
+            <div key={m.label}>
+              <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: T.accent, display: "block", marginBottom: 4 }}>{m.label}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 14, color: T.text }}>{m.value}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Title */}
+        <h2 style={{
+          fontFamily: T.serif, fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 300,
+          color: T.text, margin: "0 0 20px", lineHeight: 1.1,
+        }}>{project.title}</h2>
+
+        {/* Description */}
+        <p style={{
+          fontFamily: T.sans, fontSize: 16, color: T.textMuted, lineHeight: 1.7,
+          maxWidth: 640, margin: 0,
+        }}>{project.desc}</p>
+
+        {/* Stats */}
+        {project.stats && project.stats.length > 0 && (
+          <div style={{
+            display: "flex", gap: 32, marginTop: 28, flexWrap: "wrap",
+          }}>
+            {project.stats.map((s, i) => (
+              <div key={i} style={{ textAlign: "left" }}>
+                <span style={{
+                  fontFamily: T.sans, fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 700,
+                  color: T.accent, display: "block", lineHeight: 1.1,
+                }}>{s.stat}</span>
+                <span style={{
+                  fontFamily: T.sans, fontSize: 10, fontWeight: 600, letterSpacing: "1.5px",
+                  textTransform: "uppercase", color: T.textMuted, marginTop: 4, display: "block",
+                }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div style={{ width: 60, height: 2, background: T.accent, margin: "40px 0", borderRadius: 1 }} />
+
+        {/* Prev/next text links */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 16 : 0 }}>
+          <button onClick={() => goToProject(-1)} style={{
+            background: "none", border: "none", cursor: "pointer", padding: 0,
+            display: "flex", alignItems: "center", gap: 8,
+          }}>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M10 3L5 8L10 13" stroke={T.textFaint} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ fontFamily: T.sans, fontSize: 13, color: T.textFaint }}>
+              {allProjects[(currentIdx - 1 + allProjects.length) % allProjects.length].title}
+            </span>
+          </button>
+          <button onClick={() => goToProject(1)} style={{
+            background: "none", border: "none", cursor: "pointer", padding: 0,
+            display: "flex", alignItems: "center", gap: 8,
+          }}>
+            <span style={{ fontFamily: T.sans, fontSize: 13, color: T.textFaint }}>
+              {allProjects[(currentIdx + 1) % allProjects.length].title}
+            </span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke={T.textFaint} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── APP ───
+function App() {
+  const [activeProject, setActiveProject] = useState(null);
+
+  return (
+    <ProjectContext.Provider value={{ activeProject, setActiveProject }}>
+      <CustomCursor />
+      <EtherealBackground />
+      <ScrollProgress />
+      <Nav />
+      <Hero />
+      <Marquee />
+      <StatementSection />
+      <ClientLogos />
+      <FeaturedShowcase />
+      <PhilosophySection />
+      <ArchiveList />
+      <AboutSection />
+      <HighlightsStrip />
+      <Footer />
+      <ProjectDetailOverlay />
+    </ProjectContext.Provider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
