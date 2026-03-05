@@ -32,7 +32,7 @@
       letter-spacing: -6px;
       line-height: 1;
       margin-bottom: 16px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.06) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -42,7 +42,7 @@
     .code:hover { letter-spacing: 8px; }
     .message {
       font-size: clamp(14px, 2vw, 18px);
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.55);
       margin-bottom: 48px;
       font-weight: 300;
       letter-spacing: 0.5px;
@@ -80,6 +80,7 @@
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .back-link:hover .arrow { transform: translateX(-6px); }
+    /* Custom cursor */
     .cursor {
       position: fixed; z-index: 100; pointer-events: none;
       width: 16px; height: 16px; border-radius: 50%;
@@ -89,6 +90,7 @@
       mix-blend-mode: difference;
     }
     .cursor.hovering { width: 40px; height: 40px; border-color: #FF4D00; }
+    /* Fade-in animation */
     .content { opacity: 0; animation: fadeIn 1s ease 0.3s forwards; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -111,7 +113,9 @@
       <span>Back to portfolio</span>
     </a>
   </div>
+
   <script>
+    // ─── PARTICLE FIELD ───
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0, my = 0, particles = [];
@@ -119,71 +123,121 @@
     const COUNT = Math.min(80, Math.floor(window.innerWidth / 15));
     const CONNECT_DIST = 140;
     const MOUSE_RADIUS = 200;
-    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
     resize();
     window.addEventListener('resize', resize);
+
     class Particle {
       constructor() {
-        this.x = Math.random() * W; this.y = Math.random() * H;
-        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
-        this.r = Math.random() * 2 + 0.5; this.isAccent = Math.random() < 0.15;
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.r = Math.random() * 2.5 + 0.8;
+        this.isAccent = Math.random() < 0.15;
       }
       update() {
-        this.x += this.vx; this.y += this.vy;
-        const dx = this.x - mx, dy = this.y - my, dist = Math.sqrt(dx*dx+dy*dy);
+        // Drift
+        this.x += this.vx;
+        this.y += this.vy;
+        // Mouse repulsion
+        const dx = this.x - mx;
+        const dy = this.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < MOUSE_RADIUS && dist > 0) {
-          const f = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.8;
-          this.vx += (dx/dist)*f; this.vy += (dy/dist)*f;
+          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.8;
+          this.vx += (dx / dist) * force;
+          this.vy += (dy / dist) * force;
         }
-        this.vx *= 0.98; this.vy *= 0.98;
-        if (this.x < -10) this.x = W+10; if (this.x > W+10) this.x = -10;
-        if (this.y < -10) this.y = H+10; if (this.y > H+10) this.y = -10;
+        // Damping
+        this.vx *= 0.98;
+        this.vy *= 0.98;
+        // Wrap
+        if (this.x < -10) this.x = W + 10;
+        if (this.x > W + 10) this.x = -10;
+        if (this.y < -10) this.y = H + 10;
+        if (this.y > H + 10) this.y = -10;
       }
       draw() {
-        ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-        ctx.fillStyle = this.isAccent ? 'rgba(255,77,0,0.6)' : 'rgba(255,255,255,0.15)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        if (this.isAccent) {
+          ctx.fillStyle = `rgba(${ACCENT.r},${ACCENT.g},${ACCENT.b},0.85)`;
+        } else {
+          ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        }
         ctx.fill();
       }
     }
+
     for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+
     function drawConnections() {
       for (let i = 0; i < particles.length; i++) {
-        for (let j = i+1; j < particles.length; j++) {
-          const dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y;
-          const d = Math.sqrt(dx*dx+dy*dy);
-          if (d < CONNECT_DIST) {
-            const a = (1-d/CONNECT_DIST)*0.08;
-            const accent = particles[i].isAccent || particles[j].isAccent;
-            ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.strokeStyle = accent ? 'rgba(255,77,0,'+(a*2)+')' : 'rgba(255,255,255,'+a+')';
-            ctx.lineWidth = 0.5; ctx.stroke();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * 0.14;
+            const isAccentLine = particles[i].isAccent || particles[j].isAccent;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = isAccentLine
+              ? `rgba(${ACCENT.r},${ACCENT.g},${ACCENT.b},${alpha * 2.5})`
+              : `rgba(255,255,255,${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
           }
         }
       }
     }
+
+    // Mouse connections
     function drawMouseConnections() {
       for (const p of particles) {
-        const dx = p.x-mx, dy = p.y-my, d = Math.sqrt(dx*dx+dy*dy);
-        if (d < MOUSE_RADIUS) {
-          ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(p.x,p.y);
-          ctx.strokeStyle = 'rgba(255,77,0,'+((1-d/MOUSE_RADIUS)*0.15)+')';
-          ctx.lineWidth = 0.5; ctx.stroke();
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS) {
+          const alpha = (1 - dist / MOUSE_RADIUS) * 0.25;
+          ctx.beginPath();
+          ctx.moveTo(mx, my);
+          ctx.lineTo(p.x, p.y);
+          ctx.strokeStyle = `rgba(${ACCENT.r},${ACCENT.g},${ACCENT.b},${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
         }
       }
     }
+
     function animate() {
-      ctx.clearRect(0,0,W,H);
+      ctx.clearRect(0, 0, W, H);
       particles.forEach(p => { p.update(); p.draw(); });
-      drawConnections(); drawMouseConnections();
+      drawConnections();
+      drawMouseConnections();
       requestAnimationFrame(animate);
     }
     animate();
+
+    // ─── MOUSE TRACKING ───
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
     });
-    [document.getElementById('backLink'), document.getElementById('code404')].forEach(el => {
+
+    // Cursor hover states
+    const backLink = document.getElementById('backLink');
+    const code404 = document.getElementById('code404');
+    [backLink, code404].forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
     });
