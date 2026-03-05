@@ -7,11 +7,11 @@
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Fraunces:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Fraunces:opsz,wght@9..144,300;9..144,400&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
       background: #0A0A0A;
       color: #FFFFFF;
       min-height: 100vh;
@@ -19,47 +19,174 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
+      overflow: hidden;
       -webkit-font-smoothing: antialiased;
+      cursor: none;
     }
+    canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .content { position: relative; z-index: 1; text-align: center; padding: 40px 20px; }
     .code {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(80px, 15vw, 160px);
-      font-weight: 400;
-      letter-spacing: -4px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(100px, 20vw, 220px);
+      font-weight: 300;
+      letter-spacing: -6px;
       line-height: 1;
-      margin-bottom: 24px;
-      color: rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      user-select: none;
+      transition: letter-spacing 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .code:hover { letter-spacing: 8px; }
     .message {
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.55);
-      margin-bottom: 40px;
-      font-weight: 400;
+      font-size: clamp(14px, 2vw, 18px);
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 48px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
     }
     .back-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       color: #FF4D00;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      transition: opacity 0.2s;
+      padding: 14px 28px;
+      border: 1px solid rgba(255, 77, 0, 0.3);
+      border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
     }
-    .back-link:hover { opacity: 0.7; }
-    .back-link .arrow { transition: transform 0.2s; }
-    .back-link:hover .arrow { transform: translateX(-4px); }
+    .back-link::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 77, 0, 0.08);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .back-link:hover::before { transform: scaleX(1); }
+    .back-link:hover { border-color: rgba(255, 77, 0, 0.6); }
+    .back-link .arrow {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .back-link:hover .arrow { transform: translateX(-6px); }
+    .cursor {
+      position: fixed; z-index: 100; pointer-events: none;
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1.5px solid rgba(255, 77, 0, 0.6);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, border-color 0.3s;
+      mix-blend-mode: difference;
+    }
+    .cursor.hovering { width: 40px; height: 40px; border-color: #FF4D00; }
+    .content { opacity: 0; animation: fadeIn 1s ease 0.3s forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="code">404</div>
-  <p class="message">This page doesn't exist.</p>
-  <a href="/" class="back-link">
-    <span class="arrow">←</span> Back to portfolio
-  </a>
+  <div class="cursor" id="cursor"></div>
+  <canvas id="bg"></canvas>
+  <div class="content">
+    <div class="code" id="code404">404</div>
+    <p class="message">This page wandered off.</p>
+    <a href="/" class="back-link" id="backLink">
+      <span class="arrow">&#8592;</span>
+      <span>Back to portfolio</span>
+    </a>
+  </div>
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let W, H, mx = 0, my = 0, particles = [];
+    const ACCENT = { r: 255, g: 77, b: 0 };
+    const COUNT = Math.min(80, Math.floor(window.innerWidth / 15));
+    const CONNECT_DIST = 140;
+    const MOUSE_RADIUS = 200;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    class Particle {
+      constructor() {
+        this.x = Math.random() * W; this.y = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+        this.r = Math.random() * 2 + 0.5; this.isAccent = Math.random() < 0.15;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        const dx = this.x - mx, dy = this.y - my, dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < MOUSE_RADIUS && dist > 0) {
+          const f = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.8;
+          this.vx += (dx/dist)*f; this.vy += (dy/dist)*f;
+        }
+        this.vx *= 0.98; this.vy *= 0.98;
+        if (this.x < -10) this.x = W+10; if (this.x > W+10) this.x = -10;
+        if (this.y < -10) this.y = H+10; if (this.y > H+10) this.y = -10;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+        ctx.fillStyle = this.isAccent ? 'rgba(255,77,0,0.6)' : 'rgba(255,255,255,0.15)';
+        ctx.fill();
+      }
+    }
+    for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+    function drawConnections() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i+1; j < particles.length; j++) {
+          const dx = particles[i].x-particles[j].x, dy = particles[i].y-particles[j].y;
+          const d = Math.sqrt(dx*dx+dy*dy);
+          if (d < CONNECT_DIST) {
+            const a = (1-d/CONNECT_DIST)*0.08;
+            const accent = particles[i].isAccent || particles[j].isAccent;
+            ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(particles[j].x,particles[j].y);
+            ctx.strokeStyle = accent ? 'rgba(255,77,0,'+(a*2)+')' : 'rgba(255,255,255,'+a+')';
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        }
+      }
+    }
+    function drawMouseConnections() {
+      for (const p of particles) {
+        const dx = p.x-mx, dy = p.y-my, d = Math.sqrt(dx*dx+dy*dy);
+        if (d < MOUSE_RADIUS) {
+          ctx.beginPath(); ctx.moveTo(mx,my); ctx.lineTo(p.x,p.y);
+          ctx.strokeStyle = 'rgba(255,77,0,'+((1-d/MOUSE_RADIUS)*0.15)+')';
+          ctx.lineWidth = 0.5; ctx.stroke();
+        }
+      }
+    }
+    function animate() {
+      ctx.clearRect(0,0,W,H);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drawConnections(); drawMouseConnections();
+      requestAnimationFrame(animate);
+    }
+    animate();
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+    });
+    [document.getElementById('backLink'), document.getElementById('code404')].forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+  </script>
 </body>
 </html>
