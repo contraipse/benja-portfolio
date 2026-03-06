@@ -21,7 +21,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
 
   return (
     <div
-      ref={(el) => { ref.current = el; rowRef.current = el; }}
+      ref={(el) => { ref(el); rowRef.current = el; }}
       data-cursor={isMobile ? undefined : "View"}
       onClick={() => setActiveProject(project)}
       onMouseEnter={isMobile ? undefined : onHover}
@@ -42,7 +42,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         transitionDelay: `${(index % 8) * 0.03}s`,
       }}
     >
-      {/* Floating preview image â desktop only */}
+      {/* Floating preview image Ã¢ÂÂ desktop only */}
       {!isMobile && project.image && (
         <div style={{
           position: "absolute",
@@ -71,7 +71,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         </div>
       )}
 
-      {/* Hover accent bar on left â desktop only */}
+      {/* Hover accent bar on left Ã¢ÂÂ desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
         width: 3, height: isHovered ? "60%" : 0,

@@ -16,7 +16,7 @@ export function PhilosophySection() {
   const entryOpacity = visible ? 1 : 0;
 
   return (
-    <section ref={(el) => { ref.current = el; inViewRef.current = el; }} style={{
+    <section ref={(el) => { ref.current = el; inViewRef(el); }} style={{
       padding: "clamp(100px, 15vh, 180px) clamp(24px, 5vw, 64px)",
       position: "relative", zIndex: 1,
       transform: `scale(${entryScale})`,

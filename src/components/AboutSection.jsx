@@ -19,7 +19,7 @@ export function AboutSection() {
   const headlineWords2 = ["people"];
 
   return (
-    <section id="about" ref={(el) => { ref.current = el; sectionRef.current = el; }} style={{
+    <section id="about" ref={(el) => { ref(el); sectionRef.current = el; }} style={{
       padding: isMobile ? "60px 20px" : "clamp(80px, 12vw, 160px) clamp(24px, 5vw, 64px)",
       position: "relative", overflow: "hidden", zIndex: 1,
       minHeight: isMobile ? "auto" : "100vh", display: "flex", alignItems: "center",
@@ -34,7 +34,7 @@ export function AboutSection() {
         transform: visible ? "translateY(0)" : "translateY(40px)",
       }}>15+</div>}
 
-      {/* Animated vertical divider line â desktop only */}
+      {/* Animated vertical divider line Ã¢ÂÂ desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: "50%", top: "15%", bottom: "15%", width: 1,
         background: `linear-gradient(to bottom, transparent, ${T.accent}, transparent)`,
@@ -48,7 +48,7 @@ export function AboutSection() {
         gap: isMobile ? 32 : "clamp(40px, 6vw, 100px)", alignItems: "center",
         width: "100%",
       }}>
-        {/* Image side â clip-path wipe reveal */}
+        {/* Image side Ã¢ÂÂ clip-path wipe reveal */}
         <div style={{
           transform: `translateY(${imageY}px)`,
           animation: visible ? "clipRevealLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both" : "none",
@@ -83,7 +83,7 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Text side â staggered reveal */}
+        {/* Text side Ã¢ÂÂ staggered reveal */}
         <div style={{ transform: `translateY(${textY}px)` }}>
           {/* Label with animated accent line */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
@@ -125,7 +125,7 @@ export function AboutSection() {
             </span>
           </h2>
 
-          {/* Body text â fade up */}
+          {/* Body text Ã¢ÂÂ fade up */}
           <p style={{
             fontFamily: T.sans, fontSize: "clamp(14px, 1.2vw, 16px)", color: T.textMuted,
             lineHeight: 1.75, marginTop: 24, maxWidth: 480,
@@ -135,7 +135,7 @@ export function AboutSection() {
             Fifteen years leading experiential creative for the world's most ambitious brands. I've managed multidisciplinary teams of 50+ across five continents and budgets exceeding $30M, from large-scale activations to intimate immersive moments that turn complex narratives into human stories. I also serve on the Board of Directors for Take 3 Presents, a nonprofit nurturing creativity through experiential art.
           </p>
 
-          {/* Discipline tags â cascading entrance, evenly stacked */}
+          {/* Discipline tags Ã¢ÂÂ cascading entrance, evenly stacked */}
           <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: isMobile ? "repeat(2, auto)" : "repeat(3, auto)", gap: 8, justifyContent: isMobile ? "center" : "start", justifyItems: "start" }}>
             {disciplines.map((d, i) => (
               <span key={d} style={{
