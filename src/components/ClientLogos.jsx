@@ -4,7 +4,7 @@ import { useIsMobile } from '../hooks/useIsMobile';
 import { useInView } from '../hooks/useInView';
 import { clients } from '../data/projects';
 
-// ─── CLIENT LOGOS — Inline SVG wordmarks, all white, optically balanced ───
+// âââ CLIENT LOGOS â Inline SVG wordmarks, all white, optically balanced âââ
 const CLIENT_LOGOS = {
   "Google": { h: 20, mh: 15, svg: (fill) => React.createElement("svg", { viewBox: "0 0 272 92", fill: "none", xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
     React.createElement("path", { fill, d: "M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" }),
@@ -54,9 +54,6 @@ const CLIENT_LOGOS = {
   )},
   "Yuga Labs": { h: 24, mh: 17, svg: (fill) => React.createElement("svg", { viewBox: "236 370 528 260", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
     React.createElement("path", { fill, d: "test" }),
-  )},
-  "Twitch": { h: 18, mh: 13, svg: (fill) => React.createElement("svg", { viewBox: "0 0 1140 380", fill, xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
-    React.createElement("path", { d: "test" }),
   )},
 };
 

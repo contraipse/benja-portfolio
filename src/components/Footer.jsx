@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { T } from '../data/tokens';
-import useInView from '../hooks/useInView';
-import useIsMobile from '../hooks/useIsMobile';
+import { useInView } from '../hooks/useInView';
+import { useIsMobile } from '../hooks/useIsMobile';
 
-// ─── FOOTER SHADER — WebGL shader with animated noise and mouse flare ───
+// âââ FOOTER SHADER â WebGL shader with animated noise and mouse flare âââ
 function FooterShader({ containerRef }) {
   const canvasRef = useRef(null);
 
@@ -56,7 +56,7 @@ function FooterShader({ containerRef }) {
         float f = fbm(vec2(p.x * 2.5, p.y * 1.5 + t));
         float curtain = smoothstep(0.15, 0.55, f) * (1.0 - p.y * 0.8);
 
-        // Mouse flare — warm glow follows cursor
+        // Mouse flare â warm glow follows cursor
         float d = length(uv - mouse);
         float flare = smoothstep(0.35, 0.0, d);
 
@@ -74,7 +74,7 @@ function FooterShader({ containerRef }) {
         float vignette = smoothstep(1.2, 0.3, length(uv * vec2(0.8, 1.0)));
         color *= vignette;
 
-        // Keep it subtle — this is a background
+        // Keep it subtle â this is a background
         color *= 0.5;
 
         gl_FragColor = vec4(color, 1.0);
@@ -125,7 +125,7 @@ function FooterShader({ containerRef }) {
   return null;
 }
 
-// ─── FOOTER CSS HAZE — Layered animated gradients that mimic smoke/aurora ───
+// âââ FOOTER CSS HAZE â Layered animated gradients that mimic smoke/aurora âââ
 function FooterCSSHaze() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -163,7 +163,7 @@ function FooterCSSHaze() {
   );
 }
 
-// ─── FOOTER DIVIDER — Bold accent seam with glow pulse ───
+// âââ FOOTER DIVIDER â Bold accent seam with glow pulse âââ
 function FooterDivider({ visible, isMobile }) {
   return (
     <div style={{
@@ -187,7 +187,7 @@ function FooterDivider({ visible, isMobile }) {
         opacity: visible ? 0.45 : 0,
         transition: "opacity 1s ease 0.1s",
       }} />
-      {/* Breathing wide glow — slow pulse */}
+      {/* Breathing wide glow â slow pulse */}
       <div style={{
         position: "absolute", left: "5%", right: "5%", top: "50%",
         height: 24, transform: "translateY(-50%)",
@@ -202,7 +202,7 @@ function FooterDivider({ visible, isMobile }) {
   );
 }
 
-// ─── FOOTER ───
+// âââ FOOTER âââ
 function Footer() {
   const [footerContainerRef, visible] = useInView({ threshold: 0.05 });
   const [btnHover, setBtnHover] = useState(false);
@@ -243,13 +243,13 @@ function Footer() {
       {/* Divider at the exact seam */}
       <FooterDivider visible={visible} isMobile={isMobile} />
 
-      {/* Top fade — the shader canvas will show through, and this fades it to bg color at the top edge */}
+      {/* Top fade â the shader canvas will show through, and this fades it to bg color at the top edge */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: "30%",
         background: `linear-gradient(to bottom, ${T.bg} 0%, transparent 100%)`,
         pointerEvents: "none", zIndex: 2,
       }} />
-      {/* Background effect — WebGL shader on desktop, CSS haze on mobile */}
+      {/* Background effect â WebGL shader on desktop, CSS haze on mobile */}
       {shaderReady && (isMobile
         ? <FooterCSSHaze />
         : <FooterShader containerRef={footerContainerRef} />
@@ -293,7 +293,7 @@ function Footer() {
               transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.6 + i * 0.08}s`,
             }}>{word}</span>
           ))}
-          {/* "life." with wave animation — each letter undulates independently */}
+          {/* "life." with wave animation â each letter undulates independently */}
           <span style={{
             display: "inline-block",
             opacity: visible ? 1 : 0,
@@ -361,7 +361,7 @@ function Footer() {
         position: "relative", zIndex: 1,
       }}>
         <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textFaint }}>
-          © 2026 Benja Juster. Los Angeles, CA.
+          Â© 2026 Benja Juster. Los Angeles, CA.
         </span>
         <div style={{ display: "flex", gap: 28 }}>
           <a href="https://www.linkedin.com/in/benjajuster/" target="_blank" rel="noopener noreferrer" style={{
