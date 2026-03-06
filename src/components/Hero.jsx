@@ -137,7 +137,7 @@ export default function Hero() {
         <div style={{
           position: "absolute", inset: 0, zIndex: 3,
           display: "flex", flexDirection: "column", justifyContent: "flex-end",
-          padding: isMobile ? "0 20px 24px" : "0 clamp(24px, 5vw, 64px) clamp(60px, 8vh, 100px)",
+          padding: isMobile ? "0 20px 52px" : "0 clamp(24px, 5vw, 64px) clamp(60px, 8vh, 100px)",
           opacity: heroOpacity,
           transform: `translateY(${titleY}px)`,
         }}>
