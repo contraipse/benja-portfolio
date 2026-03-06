@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useInView } from '../hooks/useInView';
 import { useIsMobile } from '../hooks/useIsMobile';
@@ -11,6 +11,13 @@ export function AboutSection() {
   const progress = useScrollProgress(sectionRef);
   const [ref, visible] = useInView({ threshold: 0.08 });
   const isMobile = useIsMobile();
+  const [isWinking, setIsWinking] = useState(false);
+
+  // Preload wink image to prevent flash on first hover
+  React.useEffect(() => {
+    const img = new Image();
+    img.src = "img/portrait-wink.png";
+  }, []);
   const imageY = isMobile ? 0 : (progress - 0.5) * -30;
   const textY = isMobile ? 0 : (progress - 0.5) * 15;
 
@@ -34,7 +41,7 @@ export function AboutSection() {
         transform: visible ? "translateY(0)" : "translateY(40px)",
       }}>15+</div>}
 
-      {/* Animated vertical divider line Ã¢ÂÂ desktop only */}
+      {/* Animated vertical divider line ÃÂ¢ÃÂÃÂ desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: "50%", top: "15%", bottom: "15%", width: 1,
         background: `linear-gradient(to bottom, transparent, ${T.accent}, transparent)`,
@@ -48,7 +55,7 @@ export function AboutSection() {
         gap: isMobile ? 32 : "clamp(40px, 6vw, 100px)", alignItems: "center",
         width: "100%",
       }}>
-        {/* Image side Ã¢ÂÂ clip-path wipe reveal */}
+        {/* Image side ÃÂ¢ÃÂÃÂ clip-path wipe reveal */}
         <div style={{
           transform: `translateY(${imageY}px)`,
           animation: visible ? "clipRevealLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both" : "none",
@@ -58,11 +65,15 @@ export function AboutSection() {
             borderRadius: 8, overflow: "hidden", aspectRatio: "4/3.7",
             position: "relative", maxHeight: "70vh",
           }}>
-            <img src="img/portrait.png"
+            <img
+              src={isWinking ? "img/portrait-wink.png" : "img/portrait.png"}
               alt="Portrait of Benja Juster, Creative Director and Experience Designer"
+              onMouseEnter={() => setIsWinking(true)}
+              onMouseLeave={() => setIsWinking(false)}
               style={{
                 width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 5%",
-                background: T.bg,
+                background: T.bg, cursor: "pointer",
+                transition: "opacity 0.15s ease",
               }}
             />
             {/* Accent bar at bottom */}
@@ -83,7 +94,7 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Text side Ã¢ÂÂ staggered reveal */}
+        {/* Text side ÃÂ¢ÃÂÃÂ staggered reveal */}
         <div style={{ transform: `translateY(${textY}px)` }}>
           {/* Label with animated accent line */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
@@ -125,7 +136,7 @@ export function AboutSection() {
             </span>
           </h2>
 
-          {/* Body text Ã¢ÂÂ fade up */}
+          {/* Body text ÃÂ¢ÃÂÃÂ fade up */}
           <p style={{
             fontFamily: T.sans, fontSize: "clamp(14px, 1.2vw, 16px)", color: T.textMuted,
             lineHeight: 1.75, marginTop: 24, maxWidth: 480,
@@ -135,7 +146,7 @@ export function AboutSection() {
             Fifteen years leading experiential creative for the world's most ambitious brands. I've managed multidisciplinary teams of 50+ across five continents and budgets exceeding $30M, from large-scale activations to intimate immersive moments that turn complex narratives into human stories. I also serve on the Board of Directors for Take 3 Presents, a nonprofit nurturing creativity through experiential art.
           </p>
 
-          {/* Discipline tags Ã¢ÂÂ cascading entrance, evenly stacked */}
+          {/* Discipline tags ÃÂ¢ÃÂÃÂ cascading entrance, evenly stacked */}
           <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: isMobile ? "repeat(2, auto)" : "repeat(3, auto)", gap: 8, justifyContent: isMobile ? "center" : "start", justifyItems: "start" }}>
             {disciplines.map((d, i) => (
               <span key={d} style={{
