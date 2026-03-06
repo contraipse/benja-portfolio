@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { T } from '../data/tokens';
 import { useInView } from '../hooks/useInView';
+import * as THREE from 'three';
 import { useIsMobile } from '../hooks/useIsMobile';
 
-// ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ FOOTER SHADER ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ WebGL shader with animated noise and mouse flare ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
+// ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ FOOTER SHADER ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ WebGL shader with animated noise and mouse flare ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
 function FooterShader({ containerRef }) {
   const canvasRef = useRef(null);
 
@@ -56,7 +57,7 @@ function FooterShader({ containerRef }) {
         float f = fbm(vec2(p.x * 2.5, p.y * 1.5 + t));
         float curtain = smoothstep(0.15, 0.55, f) * (1.0 - p.y * 0.8);
 
-        // Mouse flare ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ warm glow follows cursor
+        // Mouse flare ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ warm glow follows cursor
         float d = length(uv - mouse);
         float flare = smoothstep(0.35, 0.0, d);
 
@@ -74,7 +75,7 @@ function FooterShader({ containerRef }) {
         float vignette = smoothstep(1.2, 0.3, length(uv * vec2(0.8, 1.0)));
         color *= vignette;
 
-        // Keep it subtle ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ this is a background
+        // Keep it subtle ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ this is a background
         color *= 0.5;
 
         gl_FragColor = vec4(color, 1.0);
@@ -125,7 +126,7 @@ function FooterShader({ containerRef }) {
   return null;
 }
 
-// ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ FOOTER CSS HAZE ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Layered animated gradients that mimic smoke/aurora ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
+// ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ FOOTER CSS HAZE ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Layered animated gradients that mimic smoke/aurora ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
 function FooterCSSHaze() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -163,7 +164,7 @@ function FooterCSSHaze() {
   );
 }
 
-// ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ FOOTER DIVIDER ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Bold accent seam with glow pulse ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
+// ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ FOOTER DIVIDER ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Bold accent seam with glow pulse ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
 function FooterDivider({ visible, isMobile }) {
   return (
     <div style={{
@@ -187,7 +188,7 @@ function FooterDivider({ visible, isMobile }) {
         opacity: visible ? 0.45 : 0,
         transition: "opacity 1s ease 0.1s",
       }} />
-      {/* Breathing wide glow ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ slow pulse */}
+      {/* Breathing wide glow ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ slow pulse */}
       <div style={{
         position: "absolute", left: "5%", right: "5%", top: "50%",
         height: 24, transform: "translateY(-50%)",
@@ -202,7 +203,7 @@ function FooterDivider({ visible, isMobile }) {
   );
 }
 
-// ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ FOOTER ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
+// ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ FOOTER ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
 function Footer() {
   const [footerContainerRef, visible] = useInView({ threshold: 0.05 });
   const containerDomRef = useRef(null);
@@ -244,13 +245,13 @@ function Footer() {
       {/* Divider at the exact seam */}
       <FooterDivider visible={visible} isMobile={isMobile} />
 
-      {/* Top fade ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ the shader canvas will show through, and this fades it to bg color at the top edge */}
+      {/* Top fade ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ the shader canvas will show through, and this fades it to bg color at the top edge */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: "30%",
         background: `linear-gradient(to bottom, ${T.bg} 0%, transparent 100%)`,
         pointerEvents: "none", zIndex: 2,
       }} />
-      {/* Background effect ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ WebGL shader on desktop, CSS haze on mobile */}
+      {/* Background effect ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ WebGL shader on desktop, CSS haze on mobile */}
       {shaderReady && (isMobile
         ? <FooterCSSHaze />
         : <FooterShader containerRef={containerDomRef} />
@@ -294,7 +295,7 @@ function Footer() {
               transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.6 + i * 0.08}s`,
             }}>{word}</span>
           ))}
-          {/* "life." with wave animation ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ each letter undulates independently */}
+          {/* "life." with wave animation ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ each letter undulates independently */}
           <span style={{
             display: "inline-block",
             opacity: visible ? 1 : 0,
