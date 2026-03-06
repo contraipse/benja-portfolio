@@ -34,13 +34,19 @@ export function ProjectCard({ project, index, variant = "square" }) {
         borderRadius: 8,
         aspectRatio: aspectMap[variant],
       }}>
-        <div style={{
-          position: "absolute", inset: "-8%",
-          backgroundImage: `url(${project.image})`,
-          backgroundSize: "cover", backgroundPosition: project.cropHint || "center",
-          transform: hovered ? "scale(1.05)" : "scale(1)",
-          transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-        }} />
+        <img
+          src={project.image}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          style={{
+            position: "absolute", inset: "-8%",
+            width: "116%", height: "116%",
+            objectFit: "cover", objectPosition: project.cropHint || "center",
+            transform: hovered ? "scale(1.05)" : "scale(1)",
+            transition: "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        />
         <div style={{
           position: "absolute", inset: 0,
           background: hovered

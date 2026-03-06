@@ -55,14 +55,25 @@ export default function Hero() {
           return (
             <div key={i} style={{
               position: "absolute", inset: "-5%",
-              backgroundImage: `url(${img})`,
-              backgroundSize: "cover",
-              backgroundPosition: `${kbX} ${kbY}`,
+              overflow: "hidden",
               transform: `scale(${isActive ? bgScale * 1.08 : bgScale})`,
-              filter: "brightness(0.5) saturate(0.7)",
               opacity: isActive ? 1 : 0,
               transition: "opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.4, 0, 0.2, 1)",
-            }} />
+            }}>
+              <img
+                src={img}
+                alt=""
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
+                decoding={i === 0 ? "sync" : "async"}
+                style={{
+                  width: "100%", height: "100%",
+                  objectFit: "cover",
+                  objectPosition: `${kbX} ${kbY}`,
+                  filter: "brightness(0.5) saturate(0.7)",
+                }}
+              />
+            </div>
           );
         })}
 
