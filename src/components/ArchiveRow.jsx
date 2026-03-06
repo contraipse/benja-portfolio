@@ -60,10 +60,9 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
           pointerEvents: "none", zIndex: 20,
           border: `1px solid rgba(255,255,255,0.08)`,
         }}>
-          <div style={{
+          <div role="img" aria-label={project.title} style={{
             width: "100%", height: "100%",
             backgroundImage: `url(${project.image})`,
-            role: "img", "aria-label": project.title,
             backgroundSize: "cover", backgroundPosition: project.cropHint || "center",
             transform: isHovered ? "scale(1.05)" : "scale(1)",
             transition: "transform 0.6s ease",

@@ -133,7 +133,7 @@ function ClientLogoItem({ name, visible, index, isMobile }) {
       onMouseEnter={e => { e.currentTarget.style.opacity = "0.9"; }}
       onMouseLeave={e => { if (e.currentTarget.closest('section').__visible) e.currentTarget.style.opacity = "0.58"; }}
     >
-      <div style={{ height: h, display: "flex", alignItems: "center" }}>
+      <div role="img" aria-label={`${name} logo`} style={{ height: h, display: "flex", alignItems: "center" }}>
         {logo.svg("rgba(255,255,255,0.95)")}
       </div>
     </div>

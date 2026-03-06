@@ -213,10 +213,9 @@ export default function ProjectDetailOverlay() {
                   opacity: heroOpacity, transition: "opacity 0.2s ease",
                 }}
               >
-                <div style={{
+                <div role="img" aria-label={`${activeProject.title} - image ${activeGalleryIdx + 1}`} style={{
                   width: "100%", height: "100%",
                   backgroundImage: `url(${allMedia[activeGalleryIdx]})`,
-                  role: "img", "aria-label": `${activeProject.title} - image ${activeGalleryIdx + 1}`,
                   backgroundSize: "contain",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",

@@ -328,7 +328,7 @@ function Footer() {
             onMouseLeave={isMobile ? undefined : handleBtnMouseLeave}
             style={{
               display: "inline-flex", alignItems: "center", gap: 12,
-              padding: isMobile ? "16px 32px" : "20px 40px", borderRadius: 40, background: T.accent,
+              padding: isMobile ? "16px 32px" : "20px 40px", borderRadius: 40, background: "#E64400",
               color: "#fff", textDecoration: "none", fontFamily: T.sans,
               fontSize: isMobile ? 14 : 16, fontWeight: 600, position: "relative",
               transform: isMobile ? "none" : `translate(${btnOffset.x}px, ${btnOffset.y}px) scale(${btnHover ? 1.05 : 1})`,

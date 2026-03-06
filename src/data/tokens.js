@@ -4,7 +4,7 @@ export const T = {
   bgLight: "#111111",
   surface: "#1A1A1A",
   text: "#FFFFFF",
-  textMuted: "rgba(255,255,255,0.5)",
+  textMuted: "rgba(255,255,255,0.6)",
   textFaint: "rgba(255,255,255,0.5)",
   accent: "#FF4D00",
   accentGlow: "rgba(255,77,0,0.15)",

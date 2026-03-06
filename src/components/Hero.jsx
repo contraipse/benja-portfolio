@@ -65,7 +65,7 @@ export default function Hero() {
             }}>
               <img
                 src={img}
-                alt=""
+                alt={`Benja Juster portfolio – ${img.replace("img/hero-","").replace(".jpg","").replace(/\d+$/,"")}`}
                 loading={i === 0 ? "eager" : "lazy"}
                 fetchPriority={i === 0 ? "high" : "auto"}
                 decoding={i === 0 ? "sync" : "async"}
