@@ -83,13 +83,14 @@
     /* Custom cursor */
     .cursor {
       position: fixed; z-index: 100; pointer-events: none;
-      width: 16px; height: 16px; border-radius: 50%;
-      border: 1.5px solid rgba(255, 77, 0, 0.6);
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid rgba(255, 77, 0, 0.9);
+      background: rgba(255, 77, 0, 0.08);
       transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s, border-color 0.3s;
-      mix-blend-mode: difference;
+      transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+      box-shadow: 0 0 12px rgba(255, 77, 0, 0.3);
     }
-    .cursor.hovering { width: 40px; height: 40px; border-color: #FF4D00; }
+    .cursor.hovering { width: 44px; height: 44px; border-color: #FF4D00; background: rgba(255, 77, 0, 0.12); box-shadow: 0 0 20px rgba(255, 77, 0, 0.5); }
     /* Fade-in animation */
     .content { opacity: 0; animation: fadeIn 1s ease 0.3s forwards; }
     @keyframes fadeIn {

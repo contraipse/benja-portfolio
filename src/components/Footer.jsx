@@ -369,7 +369,7 @@ function Footer() {
         position: "relative", zIndex: 1,
       }}>
         <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textFaint }}>
-          {'\u00A9'} 2026 Benja Juster. Los Angeles, CA.
+          {'\u00A9'} {new Date().getFullYear()} Benja Juster. Los Angeles, CA.
         </span>
         <div style={{ display: "flex", gap: 28 }}>
           <a href="https://www.linkedin.com/in/benjajuster/" target="_blank" rel="noopener noreferrer" style={{

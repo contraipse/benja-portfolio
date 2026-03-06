@@ -114,7 +114,7 @@ export default function Hero() {
         }} />
 
         {/* ââ Gradient overlays ââ */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.73) 20%, rgba(10,10,10,0.69) 35%, rgba(10,10,10,0.52) 50%, rgba(10,10,10,0.22) 65%, rgba(10,10,10,0.04) 80%, transparent 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.78) 18%, rgba(10,10,10,0.6) 32%, rgba(10,10,10,0.25) 42%, rgba(10,10,10,0.06) 48%, transparent 54%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse at 30% 80%, rgba(255,77,0,0.05) 0%, transparent 60%)" }} />
 
         {/* ââ Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ââ */}
