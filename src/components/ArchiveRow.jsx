@@ -42,7 +42,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         transitionDelay: `${(index % 8) * 0.03}s`,
       }}
     >
-      {/* Floating preview image — desktop only */}
+      {/* Floating preview image â desktop only */}
       {!isMobile && project.image && (
         <div style={{
           position: "absolute",
@@ -59,6 +59,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
           <div style={{
             width: "100%", height: "100%",
             backgroundImage: `url(${project.image})`,
+            role: "img", "aria-label": project.title,
             backgroundSize: "cover", backgroundPosition: project.cropHint || "center",
             transform: isHovered ? "scale(1.05)" : "scale(1)",
             transition: "transform 0.6s ease",
@@ -70,7 +71,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         </div>
       )}
 
-      {/* Hover accent bar on left — desktop only */}
+      {/* Hover accent bar on left â desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
         width: 3, height: isHovered ? "60%" : 0,

@@ -118,7 +118,7 @@ export default function ProjectDetailOverlay() {
       alignItems: isMobile ? "stretch" : "flex-start", justifyContent: "center",
       overflowY: isMobile ? "hidden" : "auto", cursor: "pointer",
     }}>
-      {/* Mobile: fixed top bar OUTSIDE scroll container — never scrolls away */}
+      {/* Mobile: fixed top bar OUTSIDE scroll container â never scrolls away */}
       {isMobile && (
         <div onClick={(e) => e.stopPropagation()} style={{
           flexShrink: 0, display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -141,7 +141,7 @@ export default function ProjectDetailOverlay() {
         </div>
       )}
 
-      {/* Prev / Next arrows — desktop only */}
+      {/* Prev / Next arrows â desktop only */}
       {!isMobile && <NavArrow dir={-1} onClick={() => goToProject(-1)} />}
       {!isMobile && <NavArrow dir={1} onClick={() => goToProject(1)} />}
 
@@ -153,7 +153,7 @@ export default function ProjectDetailOverlay() {
         cursor: "default",
         ...(isMobile ? { flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" } : {}),
       }}>
-        {/* Top bar — counter + close (desktop only; mobile version is above scroll container) */}
+        {/* Top bar â counter + close (desktop only; mobile version is above scroll container) */}
         {!isMobile && (
           <div style={{
             display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -178,7 +178,7 @@ export default function ProjectDetailOverlay() {
           </div>
         )}
 
-        {/* Hero image / gallery — click to advance, hover arrows */}
+        {/* Hero image / gallery â click to advance, hover arrows */}
         {(() => {
           const goPrev = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx - 1 + allMedia.length) % allMedia.length); };
           const goNext = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx + 1) % allMedia.length); };
@@ -219,6 +219,7 @@ export default function ProjectDetailOverlay() {
                 <div style={{
                   width: "100%", height: "100%",
                   backgroundImage: `url(${allMedia[activeGalleryIdx]})`,
+                  role: "img", "aria-label": `${activeProject.title} - image ${activeGalleryIdx + 1}`,
                   backgroundSize: "contain",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -280,7 +281,7 @@ export default function ProjectDetailOverlay() {
                     opacity: i === activeGalleryIdx ? 1 : 0.5,
                     transition: "all 0.3s ease",
                   }}>
-                    <div style={{ width: "100%", height: "100%", backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                    <div role="img" aria-label={`${activeProject.title} thumbnail ${i + 1}`} style={{ width: "100%", height: "100%", backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
                   </div>
                 ))}
               </div>
@@ -289,7 +290,7 @@ export default function ProjectDetailOverlay() {
           );
         })()}
 
-        {/* YouTube video embed — works on benja.art (domain-restricted on localhost) */}
+        {/* YouTube video embed â works on benja.art (domain-restricted on localhost) */}
         {hasVideo && (
           <div style={{
             width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden",
