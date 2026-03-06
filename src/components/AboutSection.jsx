@@ -16,7 +16,7 @@ export function AboutSection() {
   // Preload wink image to prevent flash on first hover
   React.useEffect(() => {
     const img = new Image();
-    img.src = "img/portrait-wink.png";
+    img.src = "img/portrait-wink.jpg";
   }, []);
   const imageY = isMobile ? 0 : (progress - 0.5) * -30;
   const textY = isMobile ? 0 : (progress - 0.5) * 15;
@@ -66,7 +66,7 @@ export function AboutSection() {
             position: "relative", maxHeight: "70vh",
           }}>
             <img
-              src={isWinking ? "img/portrait-wink.png" : "img/portrait.png"}
+              src={isWinking ? "img/portrait-wink.jpg" : "img/portrait.jpg"}
               alt="Portrait of Benja Juster, Creative Director and Experience Designer"
               onMouseEnter={() => setIsWinking(true)}
               onMouseLeave={() => setIsWinking(false)}
