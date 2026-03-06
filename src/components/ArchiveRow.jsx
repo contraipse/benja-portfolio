@@ -22,8 +22,12 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
   return (
     <div
       ref={(el) => { ref(el); rowRef.current = el; }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${project.title}`}
       data-cursor={isMobile ? undefined : "View"}
       onClick={() => setActiveProject(project)}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveProject(project); } }}
       onMouseEnter={isMobile ? undefined : onHover}
       onMouseLeave={isMobile ? undefined : onLeave}
       onMouseMove={isMobile ? undefined : handleMouseMove}
@@ -32,7 +36,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         gap: isMobile ? 8 : 16, padding: isMobile ? "14px 0" : "18px 0",
         borderBottom: `1px solid ${isHovered && !isMobile ? "rgba(255,77,0,0.2)" : T.border}`,
         alignItems: "center", cursor: "pointer",
-        position: "relative",
+        position: "relative", outline: "none",
         transition: "border-color 0.3s ease",
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",

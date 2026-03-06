@@ -18,6 +18,13 @@ export default function Nav() {
     if (menuOpen) setMenuOpen(false);
   }, [scrolled]);
 
+  // Close menu on Escape
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape" && menuOpen) setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   const navLinks = ["Work", "About", "Contact"];
 
   return (

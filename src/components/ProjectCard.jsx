@@ -20,13 +20,18 @@ export function ProjectCard({ project, index, variant = "square" }) {
   return (
     <div
       ref={(el) => { ref.current = el; cardRef.current = el; }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${project.title}`}
       onClick={() => setActiveProject(project)}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveProject(project); } }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         opacity: enterOpacity,
         transform: `translateY(${enterY + parallaxY}px)`,
         cursor: "pointer",
+        outline: "none",
       }}
     >
       <div data-cursor="View" style={{

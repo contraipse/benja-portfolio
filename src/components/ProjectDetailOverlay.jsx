@@ -271,11 +271,14 @@ export default function ProjectDetailOverlay() {
                 WebkitMaskImage: allMedia.length > 8 ? "linear-gradient(to right, transparent 0px, black 32px, black calc(100% - 32px), transparent 100%)" : "none",
               }}>
                 {allMedia.map((img, i) => (
-                  <div key={i} onClick={() => setActiveGalleryIdx(i)} style={{
+                  <div key={i} role="button" tabIndex={0} aria-label={`View image ${i + 1}`}
+                    onClick={() => setActiveGalleryIdx(i)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveGalleryIdx(i); } }}
+                    style={{
                     width: 72, height: 48, borderRadius: 6, overflow: "hidden", cursor: "pointer", flexShrink: 0,
                     border: i === activeGalleryIdx ? `2px solid ${T.accent}` : `2px solid transparent`,
                     opacity: i === activeGalleryIdx ? 1 : 0.5,
-                    transition: "all 0.3s ease",
+                    transition: "all 0.3s ease", outline: "none",
                   }}>
                     <div role="img" aria-label={`${activeProject.title} thumbnail ${i + 1}`} style={{ width: "100%", height: "100%", backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundPosition: "center" }} />
                   </div>
