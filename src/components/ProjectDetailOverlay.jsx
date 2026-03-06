@@ -42,12 +42,8 @@ export default function ProjectDetailOverlay() {
 
   const goToProject = (dir) => {
     const next = (currentIdx + dir + allProjects.length) % allProjects.length;
-    setShow(false);
-    setTimeout(() => {
-      setActiveProject(allProjects[next]);
-      if (overlayRef.current) overlayRef.current.scrollTop = 0;
-      requestAnimationFrame(() => setShow(true));
-    }, 300);
+    setActiveProject(allProjects[next]);
+    if (overlayRef.current) overlayRef.current.scrollTop = 0;
   };
 
   useEffect(() => {
@@ -119,7 +115,7 @@ export default function ProjectDetailOverlay() {
       alignItems: isMobile ? "stretch" : "flex-start", justifyContent: "center",
       overflowY: isMobile ? "hidden" : "auto", cursor: "pointer",
     }}>
-      {/* Mobile: fixed top bar OUTSIDE scroll container Ã¢ÂÂ never scrolls away */}
+      {/* Mobile: fixed top bar OUTSIDE scroll container ÃÂ¢ÃÂÃÂ never scrolls away */}
       {isMobile && (
         <div onClick={(e) => e.stopPropagation()} style={{
           flexShrink: 0, display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -142,7 +138,7 @@ export default function ProjectDetailOverlay() {
         </div>
       )}
 
-      {/* Prev / Next arrows Ã¢ÂÂ desktop only */}
+      {/* Prev / Next arrows ÃÂ¢ÃÂÃÂ desktop only */}
       {!isMobile && <NavArrow dir={-1} onClick={() => goToProject(-1)} />}
       {!isMobile && <NavArrow dir={1} onClick={() => goToProject(1)} />}
 
@@ -154,7 +150,7 @@ export default function ProjectDetailOverlay() {
         cursor: "default",
         ...(isMobile ? { flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" } : {}),
       }}>
-        {/* Top bar Ã¢ÂÂ counter + close (desktop only; mobile version is above scroll container) */}
+        {/* Top bar ÃÂ¢ÃÂÃÂ counter + close (desktop only; mobile version is above scroll container) */}
         {!isMobile && (
           <div style={{
             display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -179,7 +175,7 @@ export default function ProjectDetailOverlay() {
           </div>
         )}
 
-        {/* Hero image / gallery Ã¢ÂÂ click to advance, hover arrows */}
+        {/* Hero image / gallery ÃÂ¢ÃÂÃÂ click to advance, hover arrows */}
         {(() => {
           const goPrev = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx - 1 + allMedia.length) % allMedia.length); };
           const goNext = (e) => { e.stopPropagation(); setActiveGalleryIdx((activeGalleryIdx + 1) % allMedia.length); };
@@ -290,7 +286,7 @@ export default function ProjectDetailOverlay() {
           );
         })()}
 
-        {/* YouTube video embed Ã¢ÂÂ works on benja.art (domain-restricted on localhost) */}
+        {/* YouTube video embed ÃÂ¢ÃÂÃÂ works on benja.art (domain-restricted on localhost) */}
         {hasVideo && (
           <div style={{
             width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden",

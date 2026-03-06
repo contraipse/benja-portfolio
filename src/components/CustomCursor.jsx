@@ -30,11 +30,11 @@ export function CustomCursor() {
     };
   }, []);
 
-  // Smooth follow — FASTER lerp factor (was 0.15, now 0.45)
+  // Smooth follow â FASTER lerp factor (was 0.15, now 0.54)
   useEffect(() => {
     const animate = () => {
-      smoothPos.current.x += (pos.x - smoothPos.current.x) * 0.45;
-      smoothPos.current.y += (pos.y - smoothPos.current.y) * 0.45;
+      smoothPos.current.x += (pos.x - smoothPos.current.x) * 0.54;
+      smoothPos.current.y += (pos.y - smoothPos.current.y) * 0.54;
       const el = document.getElementById("custom-cursor");
       const ring = document.getElementById("cursor-ring");
       if (el) {
@@ -45,8 +45,8 @@ export function CustomCursor() {
         const ringEl = ring;
         const rx = parseFloat(ringEl.dataset.x || smoothPos.current.x);
         const ry = parseFloat(ringEl.dataset.y || smoothPos.current.y);
-        const nx = rx + (pos.x - rx) * 0.2;
-        const ny = ry + (pos.y - ry) * 0.2;
+        const nx = rx + (pos.x - rx) * 0.24;
+        const ny = ry + (pos.y - ry) * 0.24;
         ringEl.dataset.x = nx;
         ringEl.dataset.y = ny;
         ringEl.style.transform = `translate(${nx}px, ${ny}px) translate(-50%, -50%) scale(${isHovering ? 1 : 0.5})`;
@@ -57,7 +57,7 @@ export function CustomCursor() {
     return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
   }, [pos, isHovering]);
 
-  // Hide custom cursor on touch/mobile — restore default cursor
+  // Hide custom cursor on touch/mobile â restore default cursor
   useEffect(() => {
     document.body.style.cursor = isMobile ? "auto" : "none";
     return () => { document.body.style.cursor = "auto"; };
@@ -73,7 +73,7 @@ export function CustomCursor() {
         background: T.accent,
         pointerEvents: "none", zIndex: 9999, mixBlendMode: "difference",
       }} />
-      {/* Outer ring — expands on hover, follows slightly behind */}
+      {/* Outer ring â expands on hover, follows slightly behind */}
       <div id="cursor-ring" data-x="-100" data-y="-100" style={{
         position: "fixed", top: 0, left: 0, width: 48, height: 48, borderRadius: "50%",
         border: `1.5px solid ${isHovering ? T.accent : "rgba(255,255,255,0.2)"}`,

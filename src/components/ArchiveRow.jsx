@@ -42,7 +42,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         transitionDelay: `${(index % 8) * 0.03}s`,
       }}
     >
-      {/* Floating preview image Ã¢ÂÂ desktop only */}
+      {/* Floating preview image ÃÂ¢ÃÂÃÂ desktop only */}
       {!isMobile && project.image && (
         <div style={{
           position: "absolute",
@@ -71,7 +71,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
         </div>
       )}
 
-      {/* Hover accent bar on left Ã¢ÂÂ desktop only */}
+      {/* Hover accent bar on left ÃÂ¢ÃÂÃÂ desktop only */}
       {!isMobile && <div style={{
         position: "absolute", left: -16, top: "50%", transform: "translateY(-50%)",
         width: 3, height: isHovered ? "60%" : 0,
@@ -99,7 +99,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
       {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 13, color: T.textMuted, fontWeight: 500 }}>
         {project.category}
       </span>}
-      {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 12, color: isHovered ? "rgba(255,255,255,0.6)" : T.textFaint, fontWeight: 400, transition: "color 0.3s" }}>
+      {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 12, color: isHovered ? "rgba(255,255,255,0.6)" : T.textFaint, fontWeight: 400, transition: "color 0.3s", whiteSpace: "nowrap" }}>
         {project.client}
       </span>}
 

@@ -47,7 +47,7 @@ export default function Hero() {
         transition: loaded ? "none" : "all 1s cubic-bezier(0.16, 1, 0.3, 1)",
       }}>
 
-        {/* ── Image crossfade layers ── */}
+        {/* ââ Image crossfade layers ââ */}
         {heroImages.map((img, i) => {
           const isActive = i === activeImg;
           const kbX = i % 2 === 0 ? "52%" : "48%";
@@ -70,14 +70,14 @@ export default function Hero() {
                   width: "100%", height: "100%",
                   objectFit: "cover",
                   objectPosition: `${kbX} ${kbY}`,
-                  filter: "brightness(0.5) saturate(0.7)",
+                  filter: "brightness(0.7) saturate(0.85)",
                 }}
               />
             </div>
           );
         })}
 
-        {/* ── Dot grid texture overlay ── */}
+        {/* ââ Dot grid texture overlay ââ */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
           backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)`,
@@ -87,34 +87,34 @@ export default function Hero() {
           pointerEvents: "none",
         }} />
 
-        {/* ── Ethereal glow orbs ── */}
+        {/* ââ Ethereal glow orbs ââ */}
         <div style={{
           position: "absolute", top: "15%", left: "10%", width: "40vw", height: "40vw",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,77,0,0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,77,0,0.12) 0%, transparent 70%)",
           filter: "blur(80px)", animation: "float1 20s ease-in-out infinite",
           pointerEvents: "none", zIndex: 1,
         }} />
         <div style={{
           position: "absolute", top: "50%", right: "5%", width: "35vw", height: "35vw",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,120,50,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,120,50,0.08) 0%, transparent 70%)",
           filter: "blur(100px)", animation: "float2 25s ease-in-out infinite",
           pointerEvents: "none", zIndex: 1,
         }} />
         <div style={{
           position: "absolute", bottom: "10%", left: "40%", width: "30vw", height: "30vw",
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(255,200,150,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,200,150,0.06) 0%, transparent 70%)",
           filter: "blur(60px)", animation: "float3 18s ease-in-out infinite",
           pointerEvents: "none", zIndex: 1,
         }} />
 
-        {/* ── Gradient overlays ── */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 25%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.2) 75%, rgba(10,10,10,0.3) 100%)" }} />
+        {/* ââ Gradient overlays ââ */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 25%, rgba(10,10,10,0.25) 50%, rgba(10,10,10,0.1) 75%, rgba(10,10,10,0.15) 100%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse at 30% 80%, rgba(255,77,0,0.05) 0%, transparent 60%)" }} />
 
-        {/* ── Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ── */}
+        {/* ââ Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ââ */}
         <div style={{
           position: "absolute", bottom: 28, left: 28, zIndex: 5,
           display: "flex", gap: 6, alignItems: "center",
@@ -130,7 +130,7 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* ── Main hero content ── */}
+        {/* ââ Main hero content ââ */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 3,
           display: "flex", flexDirection: "column", justifyContent: "flex-end",
@@ -145,7 +145,7 @@ export default function Hero() {
             marginBottom: isMobile ? 12 : 16,
           }}>
             <span style={{
-              fontFamily: T.sans, fontSize: isMobile ? 12 : 16, fontWeight: 700, letterSpacing: isMobile ? "4px" : "10.5px",
+              fontFamily: T.sans, fontSize: isMobile ? 12 : 18, fontWeight: 700, letterSpacing: isMobile ? "4px" : "8px",
               textTransform: "uppercase", color: "#FF8044",
               textShadow: "0 0 10px rgba(255,100,40,0.6), 0 0 30px rgba(255,77,0,0.3), 0 2px 8px rgba(0,0,0,0.8)",
             }}>
@@ -219,7 +219,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── Corner frame marks ── */}
+        {/* ââ Corner frame marks ââ */}
         {[{ top: 20, left: 20 }, { top: 20, right: 20 }, { bottom: 20, left: 20 }, { bottom: 20, right: 20 }].map((pos, i) => (
           <div key={i} style={{
             position: "absolute", ...pos, width: 24, height: 24, zIndex: 4,
@@ -234,7 +234,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ── Scroll indicator — large bouncing chevron ── */}
+      {/* ââ Scroll indicator â large bouncing chevron ââ */}
       <div style={{
         position: "absolute", bottom: 24, left: "50%", zIndex: 10,
         display: isMobile ? "none" : "flex", flexDirection: "column", alignItems: "center", gap: 8,
