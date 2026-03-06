@@ -4,7 +4,7 @@ import { useIsMobile } from '../hooks/useIsMobile';
 import { useInView } from '../hooks/useInView';
 import { clients } from '../data/projects';
 
-// Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂ CLIENT LOGOS Ã¢ÂÂ Inline SVG wordmarks, all white, optically balanced Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ CLIENT LOGOS ÃÂ¢ÃÂÃÂ Inline SVG wordmarks, all white, optically balanced ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const CLIENT_LOGOS = {
   "Google": { h: 20, mh: 15, svg: (fill) => React.createElement("svg", { viewBox: "0 0 272 92", fill: "none", xmlns: "http://www.w3.org/2000/svg", style: { height: "100%" } },
     React.createElement("path", { fill, d: "M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" }),
