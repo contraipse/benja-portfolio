@@ -167,7 +167,8 @@ export default function Hero() {
             Turning<br />Moments Into{" "}
             <span style={{ fontStyle: "italic" }}>
               {isMobile ? (
-                "Movements".split("").map((ch, i) => (
+                <span style={{ whiteSpace: "nowrap", display: "inline-flex" }}>
+                {"Movements".split("").map((ch, i) => (
                   <span key={i} style={{
                     display: "inline-block",
                     color: "transparent",
@@ -175,7 +176,8 @@ export default function Hero() {
                     animation: loaded ? `mobileLetterWave 3s ease-in-out ${i * 0.15}s infinite` : "none",
                     transformOrigin: "center bottom",
                   }}>{ch}</span>
-                ))
+                ))}
+                </span>
               ) : (
                 "Movements".split("").map((ch, i) => {
                   const letterCenter = (i / 8);
