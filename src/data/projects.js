@@ -48,7 +48,7 @@ export const selectedWork = [
     stats: [{ stat: "11", label: "Exhibits" }, { stat: "4", label: "Global Centers" }, { stat: "40%", label: "Revenue Lift" }],
     gallery: [],
     video: "60GspL5ssXI" },
-  { title: "Boutique Sensorium", category: "Executive Production", year: "2016", client: "PepsiCo", image: "img/sensorium-05.jpg",
+  { title: "PepsiCo Boutique Sensorium", category: "Executive Production", year: "2016", client: "PepsiCo", image: "img/sensorium-05.jpg",
     desc: "Produced a groundbreaking dining experience at Milan Design Week that positioned PepsiCo as a thought leader in the future of food, featuring VR/AR dining, interactive smart tables, and 3D-printed food in a galactic estate setting.",
     stats: [{ stat: "50%", label: "Social Lift" }, { stat: "#1", label: "Most Tweeted at MDW" }],
     gallery: ["img/sensorium-01.jpg","img/sensorium-02.jpg","img/sensorium-03.jpg","img/sensorium-04.jpg","img/sensorium-05.jpg","img/sensorium-06.jpg","img/sensorium-07.jpg","img/sensorium-08.jpg","img/sensorium-09.jpg","img/sensorium-10.jpg","img/sensorium-11.jpg"],
