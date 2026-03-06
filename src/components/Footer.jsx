@@ -277,14 +277,14 @@ function Footer() {
           color: T.text, margin: "16px 0 0", lineHeight: 1,
           overflow: "hidden",
         }}>
-          {ctaText.split("").map((char, i) => (
+          {ctaText.split(" ").map((word, i) => (
             <span key={i} style={{
-              display: "inline-block",
+              display: "inline-block", marginRight: "0.3em",
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0) rotateX(0deg)" : "translateY(100%) rotateX(-80deg)",
-              transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.3 + i * 0.025}s`,
+              transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${0.3 + i * 0.08}s`,
               transformOrigin: "bottom",
-            }}>{char === " " ? "\u00A0" : char}</span>
+            }}>{word}</span>
           ))}
           <br />
           {["Let's", "bring", "it", "to"].map((word, i) => (
