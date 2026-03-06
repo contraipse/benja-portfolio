@@ -1,3 +1,6 @@
 {
-    "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/((?!img|favicon|apple-touch-icon|robots|sitemap|dungeon).*)", "destination": "/index.html" }
+  ]
 }
