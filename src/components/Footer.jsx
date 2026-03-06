@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { T } from '../data/tokens';
 import { useInView } from '../hooks/useInView';
-import * as THREE from 'three';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 // ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ FOOTER SHADER ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ WebGL shader with animated noise and mouse flare ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ
@@ -10,7 +9,11 @@ function FooterShader({ containerRef }) {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || typeof THREE === "undefined") return;
+    if (!container) return;
+    let cleanup = null;
+
+    import('three').then((THREE) => {
+      if (!container) return;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -111,7 +114,7 @@ function FooterShader({ containerRef }) {
       renderer.render(scene, camera);
     });
 
-    return () => {
+    cleanup = () => {
       window.removeEventListener("resize", onResize);
       container.removeEventListener("mousemove", onMouseMove);
       renderer.setAnimationLoop(null);
@@ -121,6 +124,9 @@ function FooterShader({ containerRef }) {
       material.dispose();
       renderer.dispose();
     };
+    });
+
+    return () => { if (cleanup) cleanup(); };
   }, []);
 
   return null;
