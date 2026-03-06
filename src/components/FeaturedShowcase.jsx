@@ -28,7 +28,7 @@ export function FeaturedShowcase() {
             <ProjectCard key={p.title} project={p} index={i + 1} variant="square" />
           ))
         ) : (
-          <React.Fragment>
+          <>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap }}>
               <ProjectCard project={featured[1]} index={1} variant="square" />
               <ProjectCard project={featured[2]} index={2} variant="square" />
@@ -38,7 +38,7 @@ export function FeaturedShowcase() {
               <ProjectCard project={featured[4]} index={4} variant="tall" />
               <ProjectCard project={featured[5]} index={5} variant="tall" />
             </div>
-          </React.Fragment>
+          </>
         )}
       </div>
     </section>
