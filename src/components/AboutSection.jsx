@@ -70,6 +70,7 @@ export function AboutSection() {
               alt="Portrait of Benja Juster, Creative Director and Experience Designer"
               onMouseEnter={() => setIsWinking(true)}
               onMouseLeave={() => setIsWinking(false)}
+              onTouchStart={() => { setIsWinking(true); setTimeout(() => setIsWinking(false), 800); }}
               style={{
                 width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 5%",
                 background: T.bg, cursor: "pointer",
