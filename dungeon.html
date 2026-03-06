@@ -14,6 +14,7 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
+    *, *::before, *::after { cursor: none !important; }
     * {      margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -1067,9 +1068,9 @@
         desc: "This ain't your grandpappy's Bingo. A classic game re-envisioned. You never know what may happen during this innovative collage of contemporary improv and vintage bingo hall mayhem. After 3 years of slumber, it's time for all the psychonauts of Psychedelic Friendship Bingo to return under one roof, the Tortona Big Top circus tent in Alameda. A full night of entertainment featuring 5 celebrity guest stars, seriously amazing prizes, and an after-hours DJ dance party.\n\nSold out the first time ticketed event with over 800 people and no financial sponsorship.",
         imgCount: 16,
         gallery: [
-          "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265576955-6I1TI4S1FFNX3DLZ3T04/PFB+TT-157.jpg",
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265512861-6U4LSI9F4EFCJED6ZQYX/PFB+TT-5.jpg",
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265512643-KA4IASDZM86IYKA5LKH9/PFB+TT-38.jpg",
+          "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265576955-6I1TI4S1FFNX3DLZ3T04/PFB+TT-157.jpg",
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265522687-DLIHXNTLW5MJD8F0M584/PFB+TT-42.jpg",
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265522126-IQNDEF4ZCV2J8NU98ZLT/PFB+TT-44.jpg",
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1501265529399-M0M1282US5000OMG8G80/PFB+TT-53.jpg",
@@ -1141,8 +1142,6 @@
         scope: "Manage event logistics, tech, and performers. Design set and build. Perform as a producer for a three night run.",
         credits: "Photos: Theresa Desautels",
         desc: "Featuring- Questions! Answers! Really wrong answers! Celebrity guests and an all-star cast! Sudden outbursts and awkward pauses! Unexpected transmissions from space that you will now be expecting because we just mentioned it now! Long-lost loves and vagrant relatives! Singing and dancing and ill-advised makeovers! Things we haven't thought of yet!!\n\nThe whole fam damily will be there- fighting over outrageous, yet slightly vague and disturbing prizes!",
-        video: "143780236",
-        videoType: "vimeo",
         imgCount: 20,
         gallery: [
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1445991211180-JZKWTT5S5RYW5E5VP8FJ/10306090_1054492894572630_5719606873130207355_n.jpg",
@@ -1185,8 +1184,6 @@
         thumbnail: "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1699564126840-2VO8XBFLHXKNEA7GHUKI/10683276_10204637285074717_190633885_o.jpg",
         role: "Co-Creator",
         desc: "Social hacking describes the act of attempting to manipulate outcomes of social behaviour through orchestrated actions.\n\nThe Cultural Appropriation Police: An exaggerated politically correct roaming performance which took place at Burning Man 2015. We confiscated headdresses, stamped out white privilege and ticketed individuals for their ignorance.\n\nThe Resistance: At Burning Man 2016, we protested the festival's decision to charge for bottled water. It was satirical and fake, but not everyone knew that.\n\nThe Westboro Bingo Church: We stood outside clubs near Harvey Milk plaza with ridiculous picket signs, offering the alternative of Bingo to the sinful clubgoers.",
-        video: "c9DEi2PvuH4",
-        videoType: "youtube",
         imgCount: 16,
         gallery: [
           "https://images.squarespace-cdn.com/content/v1/5542be1de4b07059c2a2bf92/1452134894706-Z91RQBVW4WGCYVORVGAQ/image-asset.jpeg",
@@ -1205,8 +1202,6 @@
         role: "Co-Created and performed in a 1940's inspired detective agency.",
         client: "Confidential",
         desc: "An experiential event in an abandoned government building with 20 immersive stations. Based off the remnants of a women's life, Esther H****. 500 participants were split through the yin and yang of her reality until they all converged at the center.\n\nA 3-D detective board allowed participants to connect the dots of Esther's life, until eventually coming upon the detective who riddled them a mystery to solve.",
-        video: "pyO1IvqYNbg",
-        videoType: "youtube",
         imgCount: 0
       },
       {
@@ -1571,6 +1566,24 @@
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(React.createElement(App));
+  </script>
+  <div id="custom-cursor" style="position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:#FF4D00;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-100px,-100px)"></div>
+  <div id="cursor-ring" style="position:fixed;top:0;left:0;width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,0.45);pointer-events:none;z-index:9998;opacity:0.5;transition:border 0.3s,opacity 0.3s;transform:translate(-100px,-100px)"></div>
+  <script>
+  (function(){
+    var dot=document.getElementById('custom-cursor'),ring=document.getElementById('cursor-ring');
+    var mx=-100,my=-100,sx=-100,sy=-100,rx=-100,ry=-100,hovering=false;
+    window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY},{passive:true});
+    document.addEventListener('mouseover',function(e){if(e.target.closest('a,button,[data-cursor]')){hovering=true;ring.style.border='2px solid #FF4D00';ring.style.opacity='1';}});
+    document.addEventListener('mouseout',function(e){if(e.target.closest('a,button,[data-cursor]')){hovering=false;ring.style.border='2px solid rgba(255,255,255,0.45)';ring.style.opacity='0.5';}});
+    (function animate(){
+      sx+=(mx-sx)*0.54;sy+=(my-sy)*0.54;
+      rx+=(mx-rx)*0.24;ry+=(my-ry)*0.24;
+      dot.style.transform='translate('+sx+'px,'+sy+'px) translate(-50%,-50%)';
+      ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%) scale('+(hovering?1:0.5)+')';
+      requestAnimationFrame(animate);
+    })();
+  })();
   </script>
 </body>
 </html>

@@ -36,7 +36,7 @@ export default function Nav() {
         background: scrolled || menuOpen ? "rgba(10,10,10,0.92)" : "transparent",
         backdropFilter: scrolled || menuOpen ? "blur(20px) saturate(1.4)" : "none",
         borderBottom: scrolled ? `1px solid ${T.border}` : "1px solid transparent",
-        transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        transition: "background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease",
       }}>
         <a href="#" style={{ textDecoration: "none" }}>
           <span style={{
@@ -59,7 +59,7 @@ export default function Nav() {
             borderRadius: 24,
             padding: "6px 4px",
             border: `1px solid ${scrolled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.04)"}`,
-            transition: "all 0.5s ease",
+            transition: "background 0.2s ease, border-color 0.2s ease",
           }}>
             {navLinks.map((item) => (
               <a
@@ -73,7 +73,7 @@ export default function Nav() {
                   color: T.textMuted,
                   textDecoration: "none",
                   textTransform: "uppercase",
-                  transition: "color 0.3s, background 0.3s",
+                  transition: "color 0.15s, background 0.15s",
                   padding: "8px 18px",
                   borderRadius: 20,
                 }}

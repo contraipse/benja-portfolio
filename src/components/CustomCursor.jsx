@@ -76,10 +76,10 @@ export function CustomCursor() {
       {/* Outer ring â expands on hover, follows slightly behind */}
       <div id="cursor-ring" data-x="-100" data-y="-100" style={{
         position: "fixed", top: 0, left: 0, width: 48, height: 48, borderRadius: "50%",
-        border: `1.5px solid ${isHovering ? T.accent : "rgba(255,255,255,0.2)"}`,
+        border: `2px solid ${isHovering ? T.accent : "rgba(255,255,255,0.45)"}`,
         background: "transparent",
         pointerEvents: "none", zIndex: 9998,
-        opacity: isHovering ? 1 : 0.4,
+        opacity: isHovering ? 1 : 0.5,
         transition: "border 0.3s, opacity 0.3s, width 0.3s, height 0.3s",
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>

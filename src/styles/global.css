@@ -1,6 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { background: #0A0A0A; color: #fff; }
 body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior-y: none; cursor: none; }
+*, *::before, *::after { cursor: none !important; }
 ::selection { background: rgba(255,77,0,0.3); color: #fff; }
 ::-webkit-scrollbar { display: none; }
 

@@ -111,7 +111,7 @@ export const selectedWork = [
     stats: [{ stat: "$67,400", label: "Raised" }, { stat: "500+", label: "Volunteers" }, { stat: "12", label: "Partner Orgs" }],
     gallery: ["img/lagb-01.jpg","img/lagb-02.jpg","img/lagb-03.jpg","img/lagb-04.jpeg","img/lagb-05.jpg","img/lagb-06.jpg","img/lagb-07.jpeg","img/lagb-08.jpeg","img/lagb-09.jpeg","img/lagb-10.jpeg","img/lagb-11.jpeg","img/lagb-12.jpeg","img/lagb-13.jpeg","img/lagb-14.jpeg","img/lagb-15.jpeg"],
     video: null },
-  { title: "Together Fund", category: "Strategy", year: "2021", client: "Social Media Startup", image: "img/togfund-03.jpeg", cropHint: "center 30%",
+  { title: "Together Fund", category: "Strategy", year: "2021", client: "Unicorn Startup", image: "img/togfund-03.jpeg", cropHint: "center 30%",
     desc: "Developed brand identity and creative strategy for a $5M grant and mentorship program empowering experience creators to host gatherings, backed by a social media unicorn startup.",
     stats: [{ stat: "$5M", label: "Program Fund" }],
     gallery: ["img/togfund-01.jpeg","img/togfund-02.jpeg","img/togfund-03.jpeg","img/togfund-04.jpeg","img/togfund-05.jpeg","img/togfund-06.jpeg","img/togfund-07.jpeg","img/togfund-08.jpeg","img/togfund-09.jpeg","img/togfund-10.jpeg","img/togfund-11.jpeg","img/togfund-12.png","img/togfund-13.png","img/togfund-14.jpeg","img/togfund-15.jpeg","img/togfund-16.jpg"],

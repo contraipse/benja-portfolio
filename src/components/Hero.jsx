@@ -25,15 +25,15 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveImg(prev => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 4800);
     return () => clearInterval(interval);
   }, []);
 
   const expansionProg = Math.min(scrollProg * 6, 1);
   const frameInset = Math.max(0, 16 * (1 - expansionProg));
   const frameRadius = Math.max(0, 20 * (1 - expansionProg));
-  const heroOpacity = Math.max(0, 1 - Math.max(0, scrollProg - 0.3) * 3);
-  const titleY = Math.max(0, scrollProg - 0.15) * -140;
+  const heroOpacity = Math.max(0, 1 - Math.max(0, scrollProg - 0.55) * 4);
+  const titleY = Math.max(0, scrollProg - 0.5) * -280;
   const bgScale = 1 + scrollProg * 0.12;
 
   return (
@@ -52,13 +52,16 @@ export default function Hero() {
           const isActive = i === activeImg;
           const kbX = i % 2 === 0 ? "52%" : "48%";
           const kbY = i % 3 === 0 ? "45%" : "55%";
+          const zoomIn = i % 2 === 0;
+          const activeScale = zoomIn ? bgScale * 1.15 : bgScale * 0.94;
+          const inactiveScale = zoomIn ? bgScale * 0.96 : bgScale * 1.12;
           return (
             <div key={i} style={{
               position: "absolute", inset: "-5%",
               overflow: "hidden",
-              transform: `scale(${isActive ? bgScale * 1.08 : bgScale})`,
+              transform: `scale(${isActive ? activeScale : inactiveScale})`,
               opacity: isActive ? 1 : 0,
-              transition: "opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 5s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: "opacity 2s cubic-bezier(0.4, 0, 0.2, 1), transform 8s linear",
             }}>
               <img
                 src={img}
@@ -70,7 +73,7 @@ export default function Hero() {
                   width: "100%", height: "100%",
                   objectFit: "cover",
                   objectPosition: `${kbX} ${kbY}`,
-                  filter: "brightness(0.7) saturate(0.85)",
+                  filter: "brightness(0.7) saturate(0.9)",
                 }}
               />
             </div>
@@ -111,7 +114,7 @@ export default function Hero() {
         }} />
 
         {/* ââ Gradient overlays ââ */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.55) 25%, rgba(10,10,10,0.25) 50%, rgba(10,10,10,0.1) 75%, rgba(10,10,10,0.15) 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.73) 20%, rgba(10,10,10,0.69) 35%, rgba(10,10,10,0.52) 50%, rgba(10,10,10,0.22) 65%, rgba(10,10,10,0.04) 80%, transparent 100%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse at 30% 80%, rgba(255,77,0,0.05) 0%, transparent 60%)" }} />
 
         {/* ââ Image counter / slideshow indicator (FIX #4: Moved to bottom-left, away from nav) ââ */}
