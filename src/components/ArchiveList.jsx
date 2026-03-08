@@ -64,7 +64,7 @@ export function ArchiveList() {
         <div
           ref={listRef}
           style={{
-            maxHeight: expanded ? fullHeight || "none" : collapsedHeight || 200,
+            maxHeight: expanded ? "9999px" : collapsedHeight || 200,
             overflow: "hidden",
             transition: "max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
             position: "relative",
