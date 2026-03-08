@@ -19,7 +19,7 @@ export function HighlightsStrip() {
   return (
     <section ref={ref} style={{
       padding: isMobile ? "60px 24px" : "80px 60px",
-      background: T.bg, position: "relative", overflow: "hidden",
+      background: "transparent", position: "relative", overflow: "hidden",
     }}>
       {/* Highlights grid */}
       <div style={{
