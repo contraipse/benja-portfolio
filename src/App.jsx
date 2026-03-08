@@ -30,8 +30,8 @@ export default function App() {
       <StatementSection />
       <ClientLogos />
       <FeaturedShowcase />
-      <PhilosophySection />
       <ArchiveList />
+      <PhilosophySection />
       <AboutSection />
       <HighlightsStrip />
       <Footer />
