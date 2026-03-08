@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /dungeon.html
+Disallow: /gallery.html
 
 Sitemap: https://benja.art/sitemap.xml
