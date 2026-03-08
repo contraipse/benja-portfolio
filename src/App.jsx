@@ -32,8 +32,8 @@ export default function App() {
       <FeaturedShowcase />
       <ArchiveList />
       <PhilosophySection />
-      <AboutSection />
       <HighlightsStrip />
+      <AboutSection />
       <Footer />
       <ProjectDetailOverlay />
     </ProjectContext.Provider>
