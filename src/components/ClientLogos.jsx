@@ -154,7 +154,7 @@ export function ClientLogos() {
 
   return (
     <section ref={(el) => { ref(el); sectionRef.current = el; }} style={{
-      padding: isMobile ? "40px 20px" : "clamp(48px, 6vw, 80px) clamp(40px, 5vw, 80px)",
+      padding: isMobile ? "40px 20px" : "clamp(48px, 6vw, 80px) clamp(24px, 5vw, 64px)",
       position: "relative", zIndex: 1,
     }}>
       <div style={{ textAlign: "center", marginBottom: isMobile ? 24 : 36 }}>

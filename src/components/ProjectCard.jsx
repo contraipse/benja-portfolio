@@ -6,6 +6,7 @@ import { ProjectContext } from '../context/ProjectContext';
 
 export function ProjectCard({ project, index, variant = "square" }) {
   const [hovered, setHovered] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const { setActiveProject } = useContext(ProjectContext);
   const isMobile = useIsMobile();
   const cardRef = useRef(null);
@@ -36,14 +37,18 @@ export function ProjectCard({ project, index, variant = "square" }) {
     >
       <div data-cursor="View" style={{
         position: "relative", overflow: "hidden",
-        borderRadius: 8,
+        borderRadius: T.r.md,
         aspectRatio: aspectMap[variant],
+        background: !imgLoaded ? `linear-gradient(90deg, ${T.surface} 25%, ${T.bgLight} 50%, ${T.surface} 75%)` : T.surface,
+        backgroundSize: !imgLoaded ? "200% 100%" : "auto",
+        animation: !imgLoaded ? "shimmer 1.5s ease-in-out infinite" : "none",
       }}>
         <img
           src={project.image}
           alt={project.title}
           loading="lazy"
           decoding="async"
+          onLoad={() => setImgLoaded(true)}
           style={{
             position: "absolute", inset: "-8%",
             width: "116%", height: "116%",
@@ -61,7 +66,7 @@ export function ProjectCard({ project, index, variant = "square" }) {
         }} />
         {!isMobile && <div style={{
           position: "absolute", top: 16, left: 16,
-          padding: "6px 14px", borderRadius: 20,
+          padding: "6px 14px", borderRadius: T.r.xl,
           background: "rgba(255,255,255,0.1)", backdropFilter: "blur(12px)",
           border: "1px solid rgba(255,255,255,0.1)",
           fontFamily: T.sans, fontSize: 10, fontWeight: 600,

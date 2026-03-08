@@ -208,7 +208,7 @@ export default function ProjectDetailOverlay() {
                 onClick={goNext}
                 style={{
                   height: "100%", aspectRatio: imgOrientation === "portrait" ? "3/4" : "16/9", maxWidth: "100%",
-                  borderRadius: 10, overflow: "hidden", background: "#0F0F0F",
+                  borderRadius: T.r.md, overflow: "hidden", background: "#0F0F0F",
                   position: "relative", cursor: allMedia.length > 1 ? "pointer" : "default",
                   opacity: heroOpacity, transition: "opacity 0.2s ease",
                 }}
@@ -226,7 +226,7 @@ export default function ProjectDetailOverlay() {
                     position: "absolute", bottom: 12, right: 14, zIndex: 3,
                     fontFamily: T.sans, fontSize: 11, letterSpacing: "0.5px",
                     color: "rgba(255,255,255,0.8)", background: "rgba(0,0,0,0.5)",
-                    padding: "4px 10px", borderRadius: 20, backdropFilter: "blur(8px)",
+                    padding: "4px 10px", borderRadius: T.r.xl, backdropFilter: "blur(8px)",
                   }}>{activeGalleryIdx + 1} / {allMedia.length}</div>
                 )}
               </div>
@@ -274,7 +274,7 @@ export default function ProjectDetailOverlay() {
                     onClick={() => setActiveGalleryIdx(i)}
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveGalleryIdx(i); } }}
                     style={{
-                    width: 72, height: 48, borderRadius: 6, overflow: "hidden", cursor: "pointer", flexShrink: 0,
+                    width: 72, height: 48, borderRadius: T.r.sm, overflow: "hidden", cursor: "pointer", flexShrink: 0,
                     border: i === activeGalleryIdx ? `2px solid ${T.accent}` : `2px solid transparent`,
                     opacity: i === activeGalleryIdx ? 1 : 0.5,
                     transition: "all 0.3s ease", outline: "none",
@@ -291,7 +291,7 @@ export default function ProjectDetailOverlay() {
         {/* YouTube video embed ÃÂ¢ÃÂÃÂ works on benja.art (domain-restricted on localhost) */}
         {hasVideo && (
           <div style={{
-            width: "100%", aspectRatio: "16/9", borderRadius: 10, overflow: "hidden",
+            width: "100%", aspectRatio: "16/9", borderRadius: T.r.md, overflow: "hidden",
             marginBottom: 32, background: T.surface,
           }}>
             <iframe

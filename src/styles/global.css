@@ -1,17 +1,13 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { background: #0A0A0A; color: #fff; }
-body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior-y: none; cursor: none; }
-*, *::before, *::after { cursor: none !important; }
+body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior-y: none; }
+@media (pointer: fine) { body { cursor: none; } *, *::before, *::after { cursor: none !important; } }
 ::selection { background: rgba(255,77,0,0.3); color: #fff; }
 :focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
 button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
 ::-webkit-scrollbar { display: none; }
-
+/* ── Essential keyframes (kept) ── */
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes heroReveal {
-  0% { clip-path: inset(100% 0 0 0); }
-  100% { clip-path: inset(0 0 0 0); }
-}
 @keyframes fadeUp {
   0% { opacity: 0; transform: translateY(40px); }
   100% { opacity: 1; transform: translateY(0); }
@@ -20,26 +16,15 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
   0% { opacity: 0; transform: scale(0.92); }
   100% { opacity: 1; transform: scale(1); }
 }
-@keyframes lineGrow {
-  0% { transform: scaleX(0); }
-  100% { transform: scaleX(1); }
-}
-@keyframes pulse { 0%,100%{ opacity:0.4; } 50%{ opacity:1; } }
-@keyframes float1 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(40px,-60px) scale(1.1); } 66%{ transform: translate(-30px,40px) scale(0.9); } }
-@keyframes float2 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(-50px,30px) scale(0.95); } 66%{ transform: translate(60px,-40px) scale(1.05); } }
-@keyframes float3 { 0%,100%{ transform: translate(0,0) scale(1.05); } 50%{ transform: translate(30px,50px) scale(0.95); } }
-@keyframes dotPulse { 0%,100%{ opacity: 0.03; } 50%{ opacity: 0.07; } }
 @keyframes mobileLetterWave { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-4px); } }
-@keyframes hueShift { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
-@keyframes gradientDrift {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 0%; }
+@keyframes scrollDot {
+  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-@keyframes magneticPulse {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.5); opacity: 0; }
-}
+@keyframes archiveSlideIn { 0% { transform: translateX(-20px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+
+/* ── Footer haze (CSS-only background) ── */
 @keyframes footerHaze1 {
   0% { transform: translate(0%, 0%) rotate(0deg); }
   33% { transform: translate(5%, -3%) rotate(2deg); }
@@ -51,56 +36,22 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
   50% { transform: translate(-4%, 3%) rotate(-2deg); }
   100% { transform: translate(3%, -4%) rotate(1deg); }
 }
-@keyframes letterReveal {
-  0% { opacity: 0; transform: translateY(100%) rotateX(-80deg); }
-  100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
-}
-@keyframes lifeWave {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-}
-@keyframes footerOrb1 { 0%,100%{ transform: translate(0,0) scale(1); } 25%{ transform: translate(80px,-40px) scale(1.2); } 50%{ transform: translate(-30px,60px) scale(0.8); } 75%{ transform: translate(50px,20px) scale(1.1); } }
-@keyframes footerOrb2 { 0%,100%{ transform: translate(0,0) scale(1); } 33%{ transform: translate(-60px,-80px) scale(1.15); } 66%{ transform: translate(70px,30px) scale(0.85); } }
-@keyframes footerOrb3 { 0%,100%{ transform: translate(0,0); } 50%{ transform: translate(40px,-50px); } }
-@keyframes dividerPulse {
-  0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
-  50% { opacity: 0.7; transform: scaleX(1); }
-}
-@keyframes drawLine { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
-@keyframes archiveSlideIn { 0% { transform: translateX(-20px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-@keyframes clipRevealLeft {
-  0% { clip-path: inset(0 100% 0 0); }
-  100% { clip-path: inset(0 0 0 0); }
-}
-@keyframes clipRevealRight {
-  0% { clip-path: inset(0 0 0 100%); }
-  100% { clip-path: inset(0 0 0 0); }
-}
-@keyframes aboutLineGrow {
-  0% { transform: scaleY(0); }
-  100% { transform: scaleY(1); }
-}
+
+/* ── About section reveals ── */
+@keyframes aboutLineGrow { 0% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
 @keyframes aboutTagIn {
   0% { opacity: 0; transform: translateY(12px) scale(0.9); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
-@keyframes splitReveal {
-  0% { transform: translateY(110%); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+
+/* ── Footer "life." wave ── */
+@keyframes lifeWave {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
 }
-@keyframes accentWipe {
-  0% { width: 0; }
-  100% { width: 80px; }
-}
-@keyframes scrollDot {
-  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
-  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-@keyframes kineticWave {
-  0% { transform: translateY(0); }
-  25% { transform: translateY(-3px); }
-  50% { transform: translateY(0); }
-  75% { transform: translateY(2px); }
-  100% { transform: translateY(0); }
+
+/* ── Shimmer for loading skeletons ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }

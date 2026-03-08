@@ -29,6 +29,16 @@ export default function Nav() {
 
   return (
     <>
+      <a href="#work" style={{
+        position: "fixed", top: -100, left: 16, zIndex: 9999,
+        padding: "12px 24px", background: T.accent, color: "#fff",
+        fontFamily: T.sans, fontSize: 14, fontWeight: 600,
+        borderRadius: T.r.md, textDecoration: "none",
+        transition: "top 0.2s ease",
+      }} onFocus={(e) => { e.target.style.top = "12px"; }}
+         onBlur={(e) => { e.target.style.top = "-100px"; }}>
+        Skip to content
+      </a>
       <nav style={{
         position: "fixed",
         top: 0,
@@ -63,7 +73,7 @@ export default function Nav() {
             gap: 0,
             alignItems: "center",
             background: scrolled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.03)",
-            borderRadius: 24,
+            borderRadius: T.r.xl,
             padding: "6px 4px",
             border: `1px solid ${scrolled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.04)"}`,
             transition: "background 0.2s ease, border-color 0.2s ease",
@@ -82,7 +92,7 @@ export default function Nav() {
                   textTransform: "uppercase",
                   transition: "color 0.15s, background 0.15s",
                   padding: "8px 18px",
-                  borderRadius: 20,
+                  borderRadius: T.r.xl,
                 }}
                 onMouseEnter={(e) => {
                   e.target.style.color = T.text;

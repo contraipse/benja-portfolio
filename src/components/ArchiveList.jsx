@@ -37,7 +37,7 @@ export function ArchiveList() {
       padding: isMobile ? "60px 0" : "clamp(80px, 10vw, 140px) 0",
       position: "relative", overflow: "hidden", zIndex: 1,
     }}>
-      <div style={{ position: "relative", zIndex: 1, padding: isMobile ? "0 16px" : "0 clamp(24px, 5vw, 64px)" }}>
+      <div style={{ position: "relative", zIndex: 1, padding: isMobile ? `0 ${T.mobilePadX}px` : `0 ${T.padX}` }}>
         <div style={{ marginBottom: isMobile ? 28 : 48, display: "flex", justifyContent: isMobile ? "center" : "space-between", alignItems: "flex-end", textAlign: isMobile ? "center" : "left" }}>
           <div>
             <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent, letterSpacing: "3px", textTransform: "uppercase" }}>Index</span>
@@ -96,7 +96,7 @@ export function ArchiveList() {
             padding: "12px 28px",
             background: expanded ? "transparent" : T.accent,
             border: `1px solid ${T.accent}`,
-            borderRadius: 32,
+            borderRadius: T.r.xl,
             cursor: "pointer", fontFamily: T.sans, fontSize: 13, fontWeight: 600,
             color: expanded ? T.accent : "#fff",
             letterSpacing: "0.5px",

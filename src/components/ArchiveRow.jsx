@@ -52,7 +52,7 @@ export function ArchiveRow({ project, index, isHovered, onHover, onLeave }) {
           position: "absolute",
           bottom: "100%", left: Math.min(Math.max(mouseX - 110, 0), 600),
           width: 220, height: 150,
-          borderRadius: 8, overflow: "hidden",
+          borderRadius: T.r.md, overflow: "hidden",
           boxShadow: "0 12px 40px rgba(0,0,0,0.6)",
           opacity: isHovered ? 1 : 0,
           transform: isHovered ? "translateY(-12px) scale(1)" : "translateY(0) scale(0.9)",

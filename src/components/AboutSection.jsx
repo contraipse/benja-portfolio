@@ -62,7 +62,7 @@ export function AboutSection() {
           opacity: visible ? 1 : 0,
         }}>
           <div style={{
-            borderRadius: 8, overflow: "hidden", aspectRatio: "4/3.7",
+            borderRadius: T.r.md, overflow: "hidden", aspectRatio: "4/3.7",
             position: "relative", maxHeight: "70vh",
           }}>
             <img
@@ -152,7 +152,7 @@ export function AboutSection() {
             {disciplines.map((d, i) => (
               <span key={d} style={{
                 fontFamily: T.sans, fontSize: 11, fontWeight: 500, color: T.textMuted,
-                padding: "8px 16px", borderRadius: 20,
+                padding: "8px 16px", borderRadius: T.r.xl,
                 border: `1px solid ${T.border}`,
                 letterSpacing: "0.5px", textAlign: "center",
                 whiteSpace: "nowrap",
