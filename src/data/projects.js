@@ -162,10 +162,10 @@ export const clients = ["Google", "Riot Games", "Nike", "Red Bull", "GoPro", "Ap
 export const disciplines = ["Experiential Strategy", "Creative Leadership", "Brand Experience", "Audience Engagement", "Immersive Design", "Large-Scale Production"];
 
 export const heroImages = [
-  "img/hero-valorant.jpg",
-  "img/hero-cloudspace.jpg",
-  "img/hero-next.jpg",
-  "img/hero-goldberg.jpg",
-  "img/hero-doodles.jpg",
-  "img/hero-doodles2.jpg",
+  { src: "img/hero-doritos.jpg", alt: "Doritos Blaze The Beat launch event with stage lighting and crowd" },
+  { src: "img/hero-wwdc.jpg", alt: "Apple WWDC 2022 hands-on area with MacBook lineup" },
+  { src: "img/hero-next.jpg", alt: "Google Cloud Next 2025 conference activation space" },
+  { src: "img/hero-goldberg.jpg", alt: "Rube Goldberg machine installation at live event" },
+  { src: "img/hero-doodles.jpg", alt: "Doodles animated series premiere at TIFF with projection mapping" },
+  { src: "img/hero-doodles2.jpg", alt: "Doodles premiere immersive gallery space" },
 ];

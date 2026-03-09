@@ -64,8 +64,8 @@ export default function Hero() {
               transition: "opacity 2s cubic-bezier(0.4, 0, 0.2, 1), transform 8s linear",
             }}>
               <img
-                src={img}
-                alt={`Benja Juster portfolio – ${img.replace("img/hero-","").replace(".jpg","").replace(/\d+$/,"")}`}
+                src={img.src}
+                alt={img.alt}
                 loading={i === 0 ? "eager" : "lazy"}
                 fetchPriority={i === 0 ? "high" : "auto"}
                 decoding={i === 0 ? "sync" : "async"}
