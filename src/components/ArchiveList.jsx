@@ -35,7 +35,7 @@ export function ArchiveList() {
   return (
     <section style={{
       padding: isMobile ? "60px 0" : "clamp(80px, 10vw, 140px) 0",
-      position: "relative", overflow: "hidden", zIndex: 1,
+      position: "relative", zIndex: 1,
     }}>
       <div style={{ position: "relative", zIndex: 1, padding: isMobile ? `0 ${T.mobilePadX}px` : `0 ${T.padX}` }}>
         <div style={{ marginBottom: isMobile ? 28 : 48, display: "flex", justifyContent: isMobile ? "center" : "space-between", alignItems: "flex-end", textAlign: isMobile ? "center" : "left" }}>
@@ -64,7 +64,9 @@ export function ArchiveList() {
         <div
           ref={listRef}
           style={{
-            maxHeight: expanded ? "9999px" : collapsedHeight || 200,
+            maxHeight: expanded ? "9999px" : (collapsedHeight || 200) + 200,
+            paddingTop: 200,
+            marginTop: -200,
             overflow: "hidden",
             transition: "max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
             position: "relative",
