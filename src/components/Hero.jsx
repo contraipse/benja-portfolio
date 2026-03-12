@@ -41,47 +41,27 @@ export default function Hero() {
         transition: loaded ? "none" : "all 1s cubic-bezier(0.16, 1, 0.3, 1)",
       }}>
 
-        {/* Video background – desktop gets autoplay video, mobile gets poster image */}
-        {isMobile ? (
-          <div style={{
-            position: "absolute", inset: "-5%",
-            transform: `scale(${bgScale})`,
-          }}>
-            <img
-              src={heroImages[0].src}
-              alt={heroImages[0].alt}
-              loading="eager"
-              fetchPriority="high"
-              decoding="sync"
-              style={{
-                width: "100%", height: "100%",
-                objectFit: "cover", objectPosition: "center",
-                filter: "brightness(0.7) saturate(0.9)",
-              }}
-            />
-          </div>
-        ) : (
-          <div style={{
-            position: "absolute", inset: "-5%",
-            transform: `scale(${bgScale})`,
-          }}>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster="img/hero-poster.jpg"
-              style={{
-                width: "100%", height: "100%",
-                objectFit: "cover", objectPosition: "center",
-                filter: "brightness(0.7) saturate(0.9)",
-              }}
-            >
-              <source src="img/hero-reel.webm" type="video/webm" />
-              <source src="img/hero-reel.mp4" type="video/mp4" />
-            </video>
-          </div>
-        )}
+        {/* Video background */}
+        <div style={{
+          position: "absolute", inset: "-5%",
+          transform: `scale(${bgScale})`,
+        }}>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="img/hero-poster.jpg"
+            style={{
+              width: "100%", height: "100%",
+              objectFit: "cover", objectPosition: "center",
+              filter: "brightness(0.7) saturate(0.9)",
+            }}
+          >
+            <source src="img/hero-reel.webm" type="video/webm" />
+            <source src="img/hero-reel.mp4" type="video/mp4" />
+          </video>
+        </div>
 
         {/* Static dot grid texture */}
         <div style={{
