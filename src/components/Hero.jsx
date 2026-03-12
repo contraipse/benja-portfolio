@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { T } from '../data/tokens';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useScrollProgress } from '../hooks/useScrollProgress';
-import { heroImages } from '../data/projects';
 import { SnakeGame } from './SnakeGame';
 
 export default function Hero() {
