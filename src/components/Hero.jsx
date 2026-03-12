@@ -50,6 +50,8 @@ export default function Hero() {
             loop
             muted
             playsInline
+            preload="auto"
+            aria-hidden="true"
             poster="img/hero-poster.jpg"
             style={{
               width: "100%", height: "100%",
