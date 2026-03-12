@@ -8,12 +8,12 @@ import { SnakeGame } from './SnakeGame';
 export default function Hero() {
   const isMobile = useIsMobile();
   const [loaded, setLoaded] = useState(false);
-  const [activeImg, setActiveImg] = useState(0);
   const sectionRef = useRef(null);
   const scrollProg = useScrollProgress(sectionRef);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [showSnake, setShowSnake] = useState(false);
   useEffect(() => { setTimeout(() => setLoaded(true), 200); }, []);
+
   // Track mouse position for kinetic "Movements" text
   useEffect(() => {
     const onMove = (e) => {
@@ -23,19 +23,13 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveImg(prev => (prev + 1) % heroImages.length);
-    }, 4800);
-    return () => clearInterval(interval);
-  }, []);
-
   const expansionProg = Math.min(scrollProg * 6, 1);
   const frameInset = Math.max(0, 16 * (1 - expansionProg));
   const frameRadius = Math.max(0, T.r.xl * (1 - expansionProg));
   const heroOpacity = Math.max(0, 1 - Math.max(0, scrollProg - 0.55) * 4);
   const titleY = Math.max(0, scrollProg - 0.5) * -280;
   const bgScale = 1 + scrollProg * 0.12;
+
   return (
     <section ref={sectionRef} style={{
       height: isMobile ? "100dvh" : "100vh", position: "relative", padding: frameInset, zIndex: 1,
@@ -47,39 +41,49 @@ export default function Hero() {
         transition: loaded ? "none" : "all 1s cubic-bezier(0.16, 1, 0.3, 1)",
       }}>
 
-        {/* Image crossfade layers */}
-        {heroImages.map((img, i) => {
-          const isActive = i === activeImg;
-          const kbX = i % 2 === 0 ? "52%" : "48%";
-          const kbY = i % 3 === 0 ? "45%" : "55%";
-          const zoomIn = i % 2 === 0;
-          const activeScale = zoomIn ? bgScale * 1.15 : bgScale * 0.94;
-          const inactiveScale = zoomIn ? bgScale * 0.96 : bgScale * 1.12;
-          return (
-            <div key={i} style={{
-              position: "absolute", inset: "-5%",
-              overflow: "hidden",
-              transform: `scale(${isActive ? activeScale : inactiveScale})`,
-              opacity: isActive ? 1 : 0,
-              transition: "opacity 2s cubic-bezier(0.4, 0, 0.2, 1), transform 8s linear",
-            }}>
-              <img
-                src={img.src}
-                alt={img.alt}
-                loading={i === 0 ? "eager" : "lazy"}
-                fetchPriority={i === 0 ? "high" : "auto"}
-                decoding={i === 0 ? "sync" : "async"}
-                style={{
-                  width: "100%", height: "100%",
-                  objectFit: "cover",
-                  objectPosition: `${kbX} ${kbY}`,
-                  filter: "brightness(0.7) saturate(0.9)",
-                }}
-              />
-            </div>
-          );
-        })}
-        {/* Static dot grid texture (no animation) */}
+        {/* Video background – desktop gets autoplay video, mobile gets poster image */}
+        {isMobile ? (
+          <div style={{
+            position: "absolute", inset: "-5%",
+            transform: `scale(${bgScale})`,
+          }}>
+            <img
+              src={heroImages[0].src}
+              alt={heroImages[0].alt}
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+              style={{
+                width: "100%", height: "100%",
+                objectFit: "cover", objectPosition: "center",
+                filter: "brightness(0.7) saturate(0.9)",
+              }}
+            />
+          </div>
+        ) : (
+          <div style={{
+            position: "absolute", inset: "-5%",
+            transform: `scale(${bgScale})`,
+          }}>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="img/hero-poster.jpg"
+              style={{
+                width: "100%", height: "100%",
+                objectFit: "cover", objectPosition: "center",
+                filter: "brightness(0.7) saturate(0.9)",
+              }}
+            >
+              <source src="img/hero-reel.webm" type="video/webm" />
+              <source src="img/hero-reel.mp4" type="video/mp4" />
+            </video>
+          </div>
+        )}
+
+        {/* Static dot grid texture */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,
           backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)`,
@@ -88,7 +92,7 @@ export default function Hero() {
           pointerEvents: "none",
         }} />
 
-        {/* Single static warm glow (replaces 3 floating orbs) */}
+        {/* Single static warm glow */}
         <div style={{
           position: "absolute", top: "20%", left: "15%", width: "50vw", height: "50vw",
           borderRadius: "50%",
@@ -100,21 +104,6 @@ export default function Hero() {
         {/* Gradient overlays */}
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "linear-gradient(to top, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.78) 18%, rgba(10,10,10,0.6) 32%, rgba(10,10,10,0.25) 42%, rgba(10,10,10,0.06) 48%, transparent 54%)" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 2, background: "radial-gradient(ellipse at 30% 80%, rgba(255,77,0,0.05) 0%, transparent 60%)" }} />
-        {/* Image counter / slideshow indicator */}
-        <div style={{
-          position: "absolute", bottom: T.s.lg + 4, left: T.s.lg + 4, zIndex: 5,
-          display: "flex", gap: 6, alignItems: "center",
-          opacity: loaded ? 0.6 : 0, transition: "opacity 0.8s ease 1s",
-        }}>
-          {heroImages.map((_, i) => (
-            <div key={i} style={{
-              width: i === activeImg ? 20 : 6, height: 3,
-              borderRadius: T.r.sm,
-              background: i === activeImg ? T.accent : "rgba(255,255,255,0.25)",
-              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-            }} />
-          ))}
-        </div>
 
         {/* Main hero content */}
         <div style={{
