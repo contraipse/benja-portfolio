@@ -22,10 +22,6 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
   50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
   100% { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-@keyframes archiveFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
 /* ── Footer haze (CSS-only background) ── */
 @keyframes footerHaze1 {

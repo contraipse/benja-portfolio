@@ -49,12 +49,15 @@ export function HighlightsStrip() {
           maxWidth: 1200, margin: "48px auto 0", textAlign: "center",
           opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 0.6s",
         }}>
-          <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>Featured In</span>
+          <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>Featured In</span>
           <div style={{
-            marginTop: 16, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 36px",
+            marginTop: 16, display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "8px 0",
           }}>
-            {press.map(p => (
-              <span key={p} style={{ fontFamily: T.serif, fontSize: isMobile ? 18 : 22, fontWeight: 400, color: T.textFaint, fontStyle: "italic" }}>{p}</span>
+            {press.map((p, i) => (
+              <span key={p} style={{ display: "inline-flex", alignItems: "center", gap: 0 }}>
+                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 12 : 14, fontWeight: 600, color: "rgba(255,255,255,0.5)", letterSpacing: "2px", textTransform: "uppercase" }}>{p}</span>
+                {i < press.length - 1 && <span style={{ margin: "0 16px", color: "rgba(255,255,255,0.15)", fontSize: 14 }}>|</span>}
+              </span>
             ))}
           </div>
         </div>

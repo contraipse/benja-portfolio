@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { T } from '../data/tokens';
 import { selectedWork, featured } from '../data/projects';
@@ -11,6 +11,9 @@ const LARGE_TITLES = [
   "PepsiCo Boutique Sensorium",
   "Stripe Convergence",
 ];
+
+/* Show 3 rows initially (desktop & mobile) */
+const INITIAL_ROWS = 3;
 
 /* Reorder archive: place large tiles at indices 0, 5, 10, 15 so the
    mosaic pattern tiles perfectly (1 large + 4 small per block). */
@@ -30,7 +33,6 @@ function buildMosaicOrder(projects) {
       if (si < small.length) result.push(small[si++]);
     }
   }
-  // Append any remaining
   while (li < large.length) result.push(large[li++]);
   while (si < small.length) result.push(small[si++]);
   return result;
@@ -52,7 +54,7 @@ function getLargeColumn(blockIndex) {
 
 export function ArchiveList() {
   const [expanded, setExpanded] = useState(false);
-  const [animating, setAnimating] = useState(false);
+  const gridRef = useRef(null);
   const sectionRef = useRef(null);
   const isMobile = useIsMobile();
   const cols = isMobile ? 2 : 4;
@@ -60,18 +62,56 @@ export function ArchiveList() {
   const pad = isMobile ? `0 ${T.mobilePadX}px` : `0 ${T.padX}`;
   const rowH = isMobile ? "clamp(130px, 28vw, 180px)" : "clamp(150px, 16vw, 210px)";
 
+  /* Calculate collapsed max-height: INITIAL_ROWS * row height + gaps.
+     Start with a CSS-safe fallback, then refine after mount. */
+  const fallbackCollapsed = isMobile
+    ? `calc(${INITIAL_ROWS} * clamp(130px, 28vw, 180px) + ${INITIAL_ROWS - 1} * 6px)`
+    : `calc(${INITIAL_ROWS} * clamp(150px, 16vw, 210px) + ${INITIAL_ROWS - 1} * clamp(6px, 0.8vw, 10px))`;
+  const [collapsedHeight, setCollapsedHeight] = useState(null);
+  const [fullHeight, setFullHeight] = useState(null);
+
+  const measureHeights = useCallback(() => {
+    if (!gridRef.current) return;
+    const grid = gridRef.current;
+    const rows = grid.getGridComputedStyle
+      ? null
+      : window.getComputedStyle(grid).gridTemplateRows.split(" ");
+    if (!rows) return;
+    const gapPx = parseFloat(window.getComputedStyle(grid).rowGap) || 0;
+
+    /* collapsed = first INITIAL_ROWS rows + gaps between them */
+    let collapsed = 0;
+    for (let r = 0; r < Math.min(INITIAL_ROWS, rows.length); r++) {
+      collapsed += parseFloat(rows[r]);
+      if (r < INITIAL_ROWS - 1) collapsed += gapPx;
+    }
+    setCollapsedHeight(collapsed + "px");
+
+    /* full = all rows + all gaps */
+    let full = 0;
+    for (let r = 0; r < rows.length; r++) {
+      full += parseFloat(rows[r]);
+      if (r < rows.length - 1) full += gapPx;
+    }
+    setFullHeight(full + "px");
+  }, [isMobile]);
+
+  useEffect(() => {
+    measureHeights();
+    window.addEventListener("resize", measureHeights);
+    return () => window.removeEventListener("resize", measureHeights);
+  }, [measureHeights]);
+
   const handleToggle = () => {
-    if (!expanded) {
-      setExpanded(true);
-      setAnimating(true);
-      setTimeout(() => setAnimating(false), 900);
-    } else {
+    if (expanded) {
       setExpanded(false);
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
         const top = rect.top + window.scrollY - 100;
         window.scrollTo({ top, behavior: 'smooth' });
       }
+    } else {
+      setExpanded(true);
     }
   };
 
@@ -85,42 +125,69 @@ export function ArchiveList() {
       position: "relative", zIndex: 1,
     }}>
       <div style={{ padding: pad }}>
-        {/* Mosaic tile grid — only when expanded */}
-        {expanded && (
-          <div style={{
+        {/* Mosaic tile grid — ALL projects always in DOM for SEO */}
+        <div
+          ref={gridRef}
+          style={{
             display: "grid",
             gridTemplateColumns: `repeat(${cols}, 1fr)`,
             gridAutoRows: rowH,
             gridAutoFlow: "dense",
             gap,
             marginBottom: isMobile ? 24 : 36,
-          }}>
-            {archiveProjects.map((project, i) => {
-              const large = !isMobile && isLargeTile(i);
-              let colStyle = {};
-              if (large) {
-                const col = getLargeColumn(largeBlockCount);
-                colStyle = { gridColumn: col, gridRow: "span 2" };
-                largeBlockCount++;
-              }
-              return (
-                <div key={project.title} style={{
-                  ...colStyle,
-                  borderRadius: T.r.md,
-                  overflow: "hidden",
-                  opacity: animating ? 0 : 1,
-                  transform: animating ? "translateY(20px)" : "translateY(0)",
-                  animation: `archiveFadeIn 0.4s ease ${i * 0.035}s forwards`,
-                }}>
-                  <ProjectCard project={project} index={i} variant="square" compact={!large} mosaic />
-                </div>
-              );
-            })}
-          </div>
+            maxHeight: expanded
+              ? (fullHeight || "5000px")
+              : (collapsedHeight || fallbackCollapsed),
+            overflow: "hidden",
+            transition: "max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
+          {archiveProjects.map((project, i) => {
+            const large = !isMobile && isLargeTile(i);
+            let colStyle = {};
+            if (large) {
+              const col = getLargeColumn(largeBlockCount);
+              colStyle = { gridColumn: col, gridRow: "span 2" };
+              largeBlockCount++;
+            }
+            /* If we're in the last block and it's incomplete, stretch
+               the remaining small tiles to span 2 rows so there's no gap */
+            const lastLargeIdx = (LARGE_TITLES.length - 1) * 5;
+            const tilesAfterLastLarge = archiveProjects.length - lastLargeIdx - 1;
+            const inLastBlock = !large && i > lastLargeIdx && tilesAfterLastLarge < 4;
+            if (!isMobile && inLastBlock) {
+              colStyle = { gridRow: "span 2" };
+            }
+            return (
+              <div key={project.title} style={{
+                ...colStyle,
+                borderRadius: T.r.md,
+                overflow: "hidden",
+              }}>
+                <ProjectCard project={project} index={i} variant="square" compact={!large} mosaic />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Gradient fade at bottom when collapsed */}
+        {!expanded && (
+          <div style={{
+            position: "relative",
+            marginTop: -120,
+            height: 120,
+            background: "linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.85) 40%, rgba(10,10,10,0.4) 70%, transparent 100%)",
+            pointerEvents: "none",
+            zIndex: 2,
+          }} />
         )}
 
-        {/* Single button — always at the bottom */}
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        {/* Expand / Collapse button */}
+        <div style={{
+          display: "flex", justifyContent: "center",
+          marginTop: expanded ? 0 : -16,
+          position: "relative", zIndex: 3,
+        }}>
           <button onClick={handleToggle} style={{
             display: "inline-flex", alignItems: "center", gap: 10,
             padding: "12px 28px",
@@ -153,7 +220,6 @@ export function ArchiveList() {
           </button>
         </div>
       </div>
-
     </section>
   );
 }
