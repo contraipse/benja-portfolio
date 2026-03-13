@@ -4,7 +4,7 @@ import { useIsMobile } from '../hooks/useIsMobile';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { ProjectContext } from '../context/ProjectContext';
 
-export function ProjectCard({ project, index, variant = "square" }) {
+export function ProjectCard({ project, index, variant = "square", compact = false, mosaic = false }) {
   const [hovered, setHovered] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
   const { setActiveProject } = useContext(ProjectContext);
@@ -33,12 +33,14 @@ export function ProjectCard({ project, index, variant = "square" }) {
         transform: `translateY(${enterY + parallaxY}px)`,
         cursor: "pointer",
         outline: "none",
+        ...(mosaic ? { height: "100%" } : {}),
       }}
     >
       <div data-cursor="View" style={{
         position: "relative", overflow: "hidden",
         borderRadius: T.r.md,
-        aspectRatio: aspectMap[variant],
+        aspectRatio: mosaic ? undefined : aspectMap[variant],
+        ...(mosaic ? { height: "100%" } : {}),
         background: !imgLoaded ? `linear-gradient(90deg, ${T.surface} 25%, ${T.bgLight} 50%, ${T.surface} 75%)` : T.surface,
         backgroundSize: !imgLoaded ? "200% 100%" : "auto",
         animation: !imgLoaded ? "shimmer 1.5s ease-in-out infinite" : "none",
@@ -65,28 +67,28 @@ export function ProjectCard({ project, index, variant = "square" }) {
           transition: "background 0.5s ease",
         }} />
         {!isMobile && <div style={{
-          position: "absolute", top: 16, left: 16,
-          padding: "6px 14px", borderRadius: T.r.xl,
-          background: "rgba(255,255,255,0.1)", backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255,255,255,0.1)",
+          position: "absolute", top: compact ? 10 : 16, left: compact ? 10 : 16,
+          padding: compact ? "4px 10px" : "6px 14px", borderRadius: T.r.xl,
+          background: "rgba(0,0,0,0.45)", backdropFilter: "blur(12px)",
+          border: "1px solid rgba(255,255,255,0.15)",
           fontFamily: T.sans, fontSize: 10, fontWeight: 600,
-          color: "rgba(255,255,255,0.8)", letterSpacing: "1.5px", textTransform: "uppercase",
+          color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.4)", letterSpacing: "1.5px", textTransform: "uppercase",
           opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(-10px)",
           transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         }}>
           {project.category}
         </div>}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 20px 18px" }}>
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: compact ? "12px 14px 10px" : "20px 20px 18px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
             <div>
               <span style={{
-                fontFamily: T.sans, fontSize: 11, color: T.textFaint, letterSpacing: "1px",
+                fontFamily: T.sans, fontSize: compact ? 9 : 11, color: T.textFaint, letterSpacing: "1px",
                 display: "block", marginBottom: 6,
                 opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(8px)",
                 transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s",
               }}>{project.year}</span>
               <h3 style={{
-                fontFamily: T.serif, fontSize: "clamp(22px, 2.5vw, 36px)",
+                fontFamily: T.serif, fontSize: compact ? "clamp(14px, 1.6vw, 20px)" : "clamp(22px, 2.5vw, 36px)",
                 fontWeight: 400, color: "#fff", margin: 0, lineHeight: 1.1,
                 transform: hovered ? "translateY(0)" : "translateY(4px)",
                 transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -95,7 +97,7 @@ export function ProjectCard({ project, index, variant = "square" }) {
               </h3>
             </div>
             <div style={{
-              width: 36, height: 36, borderRadius: "50%",
+              width: compact ? 28 : 36, height: compact ? 28 : 36, borderRadius: "50%",
               border: `1px solid ${hovered ? T.accent : "rgba(255,255,255,0.15)"}`,
               display: "flex", alignItems: "center", justifyContent: "center",
               background: hovered ? T.accent : "rgba(255,255,255,0.05)",

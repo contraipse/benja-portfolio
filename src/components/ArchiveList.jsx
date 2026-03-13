@@ -1,99 +1,127 @@
-import { useState, useRef, useEffect } from 'react';
-import { useInView } from '../hooks/useInView';
+import { useState, useRef } from 'react';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { T } from '../data/tokens';
-import { selectedWork } from '../data/projects';
-import { ArchiveRow } from './ArchiveRow';
+import { selectedWork, featured } from '../data/projects';
+import { ProjectCard } from './ProjectCard';
+
+/* These 4 projects get the 2x2 large treatment, alternating left→right */
+const LARGE_TITLES = [
+  "Red Bull Hack The Hits",
+  "TwitchQuest",
+  "PepsiCo Boutique Sensorium",
+  "Stripe Convergence",
+];
+
+/* Reorder archive: place large tiles at indices 0, 5, 10, 15 so the
+   mosaic pattern tiles perfectly (1 large + 4 small per block). */
+function buildMosaicOrder(projects) {
+  const large = [];
+  const small = [];
+  for (const p of projects) {
+    if (LARGE_TITLES.includes(p.title)) large.push(p);
+    else small.push(p);
+  }
+  const result = [];
+  let li = 0, si = 0;
+  for (let i = 0; i < projects.length; i++) {
+    if (i % 5 === 0 && li < large.length) {
+      result.push(large[li++]);
+    } else {
+      if (si < small.length) result.push(small[si++]);
+    }
+  }
+  // Append any remaining
+  while (li < large.length) result.push(large[li++]);
+  while (si < small.length) result.push(small[si++]);
+  return result;
+}
+
+const rawArchive = selectedWork.filter(
+  sw => !featured.some(f => f.title === sw.title)
+);
+const archiveProjects = buildMosaicOrder(rawArchive);
+
+function isLargeTile(index) {
+  return index % 5 === 0 && index / 5 < LARGE_TITLES.length;
+}
+
+/* Alternate the 2x2 tile between left (cols 1-2) and right (cols 3-4) */
+function getLargeColumn(blockIndex) {
+  return blockIndex % 2 === 0 ? "1 / 3" : "3 / 5";
+}
 
 export function ArchiveList() {
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [expanded, setExpanded] = useState(false);
+  const [animating, setAnimating] = useState(false);
+  const sectionRef = useRef(null);
   const isMobile = useIsMobile();
-  const listRef = useRef(null);
-  const [collapsedHeight, setCollapsedHeight] = useState(0);
-  const [fullHeight, setFullHeight] = useState(0);
-  const gridCols = isMobile ? "32px 1fr 28px" : "48px 1fr 140px 100px 36px";
-  const VISIBLE_ROWS = 3;
+  const cols = isMobile ? 2 : 4;
+  const gap = isMobile ? 6 : "clamp(6px, 0.8vw, 10px)";
+  const pad = isMobile ? `0 ${T.mobilePadX}px` : `0 ${T.padX}`;
+  const rowH = isMobile ? "clamp(130px, 28vw, 180px)" : "clamp(150px, 16vw, 210px)";
 
-  // Measure row heights after render to calculate collapsed height
-  useEffect(() => {
-    if (!listRef.current) return;
-    const rows = listRef.current.children;
-    if (rows.length === 0) return;
-    let h = 0;
-    for (let i = 0; i < Math.min(VISIBLE_ROWS, rows.length); i++) {
-      h += rows[i].offsetHeight;
+  const handleToggle = () => {
+    if (!expanded) {
+      setExpanded(true);
+      setAnimating(true);
+      setTimeout(() => setAnimating(false), 900);
+    } else {
+      setExpanded(false);
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const top = rect.top + window.scrollY - 100;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
     }
-    setCollapsedHeight(h);
-    let total = 0;
-    for (let i = 0; i < rows.length; i++) {
-      total += rows[i].offsetHeight;
-    }
-    setFullHeight(total);
-  }, [isMobile]);
+  };
+
+  /* Count which large tile block we're on for left/right alternation */
+  let largeBlockCount = 0;
 
   return (
-    <section style={{
-      padding: isMobile ? "60px 0" : "clamp(80px, 10vw, 140px) 0",
+    <section ref={sectionRef} aria-label="All projects" style={{
+      paddingTop: isMobile ? 6 : gap,
+      paddingBottom: isMobile ? 60 : "clamp(80px, 10vw, 120px)",
       position: "relative", zIndex: 1,
     }}>
-      <div style={{ position: "relative", zIndex: 1, padding: isMobile ? `0 ${T.mobilePadX}px` : `0 ${T.padX}` }}>
-        <div style={{ marginBottom: isMobile ? 28 : 48, display: "flex", justifyContent: isMobile ? "center" : "space-between", alignItems: "flex-end", textAlign: isMobile ? "center" : "left" }}>
-          <div>
-            <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent, letterSpacing: "3px", textTransform: "uppercase" }}>Index</span>
-            <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? 28 : "clamp(32px, 4vw, 56px)", fontWeight: 300, color: T.text, margin: "8px 0 0", lineHeight: 1 }}>
-              Selected Work
-            </h2>
-          </div>
-        </div>
-
-        {/* Header row */}
-        <div style={{
-          display: "grid", gridTemplateColumns: gridCols,
-          gap: isMobile ? 8 : 16, padding: "0 0 16px",
-          borderBottom: `1px solid ${T.border}`,
-        }}>
-          <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>No.</span>
-          <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>Project</span>
-          {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>Discipline</span>}
-          {!isMobile && <span style={{ fontFamily: T.sans, fontSize: 10, fontWeight: 600, color: T.textFaint, letterSpacing: "1.5px", textTransform: "uppercase" }}>Client</span>}
-          <span />
-        </div>
-
-        {/* All rows rendered in DOM for SEO - visibility controlled by max-height */}
-        <div
-          ref={listRef}
-          style={{
-            maxHeight: expanded ? "9999px" : (collapsedHeight || 200) + 200,
-            paddingTop: 200,
-            marginTop: -200,
-            overflow: "hidden",
-            transition: "max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-            position: "relative",
-          }}
-        >
-          {selectedWork.map((project, i) => (
-            <ArchiveRow key={project.title + i} project={project} index={i}
-              isHovered={hoveredIndex === i}
-              onHover={() => setHoveredIndex(i)}
-              onLeave={() => setHoveredIndex(-1)}
-            />
-          ))}
-        </div>
-
-        {/* Fade overlay when collapsed */}
-        {!expanded && (
+      <div style={{ padding: pad }}>
+        {/* Mosaic tile grid — only when expanded */}
+        {expanded && (
           <div style={{
-            position: "relative", marginTop: -48, height: 48,
-            background: `linear-gradient(to top, ${T.bg || "#0A0A0A"}, transparent)`,
-            pointerEvents: "none",
-            transition: "opacity 0.3s ease",
-          }} />
+            display: "grid",
+            gridTemplateColumns: `repeat(${cols}, 1fr)`,
+            gridAutoRows: rowH,
+            gridAutoFlow: "dense",
+            gap,
+            marginBottom: isMobile ? 24 : 36,
+          }}>
+            {archiveProjects.map((project, i) => {
+              const large = !isMobile && isLargeTile(i);
+              let colStyle = {};
+              if (large) {
+                const col = getLargeColumn(largeBlockCount);
+                colStyle = { gridColumn: col, gridRow: "span 2" };
+                largeBlockCount++;
+              }
+              return (
+                <div key={project.title} style={{
+                  ...colStyle,
+                  borderRadius: T.r.md,
+                  overflow: "hidden",
+                  opacity: animating ? 0 : 1,
+                  transform: animating ? "translateY(20px)" : "translateY(0)",
+                  animation: `archiveFadeIn 0.4s ease ${i * 0.035}s forwards`,
+                }}>
+                  <ProjectCard project={project} index={i} variant="square" compact={!large} mosaic />
+                </div>
+              );
+            })}
+          </div>
         )}
 
-        {/* Expand / Collapse button */}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: expanded ? 24 : 8 }}>
-          <button onClick={() => setExpanded(!expanded)} style={{
+        {/* Single button — always at the bottom */}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button onClick={handleToggle} style={{
             display: "inline-flex", alignItems: "center", gap: 10,
             padding: "12px 28px",
             background: expanded ? "transparent" : T.accent,
@@ -125,6 +153,7 @@ export function ArchiveList() {
           </button>
         </div>
       </div>
+
     </section>
   );
 }

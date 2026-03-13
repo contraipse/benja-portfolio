@@ -63,7 +63,7 @@ export const selectedWork = [
     stats: [{ stat: "2,000+", label: "Prizes Distributed" }, { stat: "3+ hrs", label: "Avg Wait Time" }],
     gallery: ["img/bayc-dsc06079.jpg","img/bayc-dsc06915.jpg","img/bayc-dsc03492.jpg","img/bayc-dsc03514.jpg","img/bayc-dsc03989.jpg","img/bayc-dsc04016.jpg","img/bayc-dsc04237.jpg","img/bayc-dsc04781.jpg","img/bayc-dsc05226.jpg","img/bayc--06064.jpg","img/bayc--06547.jpg","img/bayc--06817.jpg","img/bayc-dsc03509.jpg","img/bayc-dsc03591.jpg","img/bayc-dsc04327.jpg","img/bayc-dsc04687.jpg","img/bayc-dsc05696.jpg"],
     video: "qFBbX3saST4" },
-  { title: "USC Next Level Sports", category: "Executive Production", year: "2024", client: "USC", image: "img/uscnls-03.jpeg",
+  { title: "USC Next Level Sports", category: "Executive Production", year: "2024", client: "USC", image: "img/uscnls-01.jpeg",
     desc: "Produced USC's premier sports, media, and business conference at Intuit Dome featuring 30+ speakers including NBA Commissioner Adam Silver, Maverick Carter, and ESPN's Jimmy Pitaro.",
     stats: [{ stat: "30+", label: "Speakers" }, { stat: "Intuit Dome", label: "Venue" }],
     gallery: ["img/uscnls-01.jpeg","img/uscnls-02.jpeg","img/uscnls-03.jpeg","img/uscnls-04.jpeg","img/uscnls-05.jpeg","img/uscnls-06.jpeg","img/uscnls-07.jpeg","img/uscnls-08.jpeg","img/uscnls-09.jpg","img/uscnls-10.jpeg","img/uscnls-11.jpeg"],
