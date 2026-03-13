@@ -59,7 +59,6 @@ export default function Hero() {
               filter: "brightness(0.7) saturate(0.9)",
             }}
           >
-            <source src="img/hero-reel.webm" type="video/webm" />
             <source src="img/hero-reel.mp4" type="video/mp4" />
           </video>
         </div>
