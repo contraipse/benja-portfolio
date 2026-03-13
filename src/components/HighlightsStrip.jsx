@@ -9,9 +9,9 @@ export function HighlightsStrip() {
 
   const highlights = [
     { stat: "$1B", label: "Pipeline Generated", detail: "Google Cloud Space" },
-    { stat: "20%", label: "NPS Increase", detail: "GreenBiz VERGE" },
+    { stat: "22%", label: "NPS Increase", detail: "GreenBiz VERGE" },
     { stat: "36,000+", label: "Attendees", detail: "Google Cloud Next '25" },
-    { stat: "50%", label: "Social Lift", detail: "PepsiCo Sensorium" },
+    { stat: "53%", label: "Social Lift", detail: "PepsiCo Sensorium" },
   ];
 
   const press = ["Vice", "LA Times", "East Bay Times", "SF Magazine", "Laughing Squid", "Medium"];
@@ -49,12 +49,12 @@ export function HighlightsStrip() {
           maxWidth: 1200, margin: "48px auto 0", textAlign: "center",
           opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 0.6s",
         }}>
-          <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>Featured In</span>
+          <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>Featured In</span>
           <div style={{
-            marginTop: 12, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px 24px",
+            marginTop: 16, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px 36px",
           }}>
             {press.map(p => (
-              <span key={p} style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 400, color: T.textFaint, fontStyle: "italic" }}>{p}</span>
+              <span key={p} style={{ fontFamily: T.serif, fontSize: isMobile ? 18 : 22, fontWeight: 400, color: T.textFaint, fontStyle: "italic" }}>{p}</span>
             ))}
           </div>
         </div>
