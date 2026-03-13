@@ -157,7 +157,7 @@ export const selectedWork = [
     video: null },
 ];
 
-export const clients = ["Google", "Riot Games", "Nike", "Red Bull", "GoPro", "Apple", "PepsiCo", "Yuga Labs", "Twitch", "Stripe", "Doritos", "USC"];
+export const clients = ["Google", "Riot Games", "Nike", "Red Bull", "GoPro", "Apple", "PepsiCo", "HubSpot", "Twitch", "Stripe", "Doritos", "USC"];
 
 export const disciplines = ["Experiential Strategy", "Creative Leadership", "Brand Experience", "Audience Engagement", "Immersive Design", "Large-Scale Production"];
 
