@@ -17,6 +17,7 @@ export function FeaturedShowcase() {
           <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? 32 : "clamp(40px, 5vw, 72px)", fontWeight: 300, color: T.text, margin: 0, lineHeight: 1 }}>
             Selected Work
           </h2>
+          <div style={{ width: 44, height: 3, background: T.accent, borderRadius: 2, marginTop: 14 }} />
         </div>
       </div>
       <div style={{ padding: pad, display: "flex", flexDirection: "column", gap }}>
