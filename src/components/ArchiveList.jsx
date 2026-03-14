@@ -190,11 +190,11 @@ export function ArchiveList() {
         }}>
           <button onClick={handleToggle} style={{
             display: "inline-flex", alignItems: "center", gap: 10,
-            padding: "12px 28px",
+            padding: "16px 40px",
             background: expanded ? "transparent" : T.accent,
             border: `1px solid ${T.accent}`,
             borderRadius: T.r.xl,
-            cursor: "pointer", fontFamily: T.sans, fontSize: 13, fontWeight: 600,
+            cursor: "pointer", fontFamily: T.sans, fontSize: 15, fontWeight: 600,
             color: expanded ? T.accent : "#fff",
             letterSpacing: "0.5px",
             transition: "all 0.3s ease",
