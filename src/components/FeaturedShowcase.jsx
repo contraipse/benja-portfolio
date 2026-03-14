@@ -14,9 +14,8 @@ export function FeaturedShowcase() {
         display: "flex", justifyContent: "space-between", alignItems: "flex-end",
       }}>
         <div>
-          <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent, letterSpacing: "3px", textTransform: "uppercase" }}>Featured</span>
-          <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? 32 : "clamp(40px, 5vw, 72px)", fontWeight: 300, color: T.text, margin: "8px 0 0", lineHeight: 1 }}>
-            Featured Work
+          <h2 style={{ fontFamily: T.serif, fontSize: isMobile ? 32 : "clamp(40px, 5vw, 72px)", fontWeight: 300, color: T.text, margin: 0, lineHeight: 1 }}>
+            Selected Work
           </h2>
         </div>
       </div>
