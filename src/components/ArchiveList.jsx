@@ -12,8 +12,8 @@ const LARGE_TITLES = [
   "Stripe Convergence",
 ];
 
-/* Show 3 rows initially (desktop & mobile) */
-const INITIAL_ROWS = 3;
+/* Start fully collapsed — archive tiles only visible after clicking the button */
+const INITIAL_ROWS = 0;
 
 /* Reorder archive: place large tiles at indices 0, 5, 10, 15 so the
    mosaic pattern tiles perfectly (1 large + 4 small per block). */
@@ -170,8 +170,8 @@ export function ArchiveList() {
           })}
         </div>
 
-        {/* Gradient fade at bottom when collapsed */}
-        {!expanded && (
+        {/* Gradient fade at bottom when collapsed (only if rows are visible) */}
+        {!expanded && INITIAL_ROWS > 0 && (
           <div style={{
             position: "relative",
             marginTop: -120,
@@ -185,7 +185,7 @@ export function ArchiveList() {
         {/* Expand / Collapse button */}
         <div style={{
           display: "flex", justifyContent: "center",
-          marginTop: expanded ? 0 : -16,
+          marginTop: expanded ? 0 : (INITIAL_ROWS > 0 ? -16 : 0),
           position: "relative", zIndex: 3,
         }}>
           <button onClick={handleToggle} style={{
