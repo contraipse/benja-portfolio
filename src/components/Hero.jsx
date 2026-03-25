@@ -104,7 +104,7 @@ export default function Hero() {
           position: "absolute",
           inset: 0,
           zIndex: 2,
-          background: "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.7) 15%, rgba(10,10,10,0.4) 28%, rgba(10,10,10,0.1) 36%, transparent 42%)"
+          background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.82) 15%, rgba(10,10,10,0.55) 28%, rgba(10,10,10,0.15) 38%, transparent 46%)"
         }} />
         <div style={{
           position: "absolute",
