@@ -67,7 +67,7 @@ export default function Hero() {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center",
-              filter: "saturate(0.9)",
+              filter: "none",
             }}
           >
             <source src="img/hero-reel.mp4" type="video/mp4" />
