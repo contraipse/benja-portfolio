@@ -176,7 +176,7 @@ export function ArchiveList() {
             position: "relative",
             marginTop: -120,
             height: 120,
-            background: "linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.85) 40%, rgba(10,10,10,0.4) 70%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(var(--grad-base),1) 0%, rgba(var(--grad-base),0.85) 40%, rgba(var(--grad-base),0.4) 70%, transparent 100%)",
             pointerEvents: "none",
             zIndex: 2,
           }} />
@@ -195,7 +195,7 @@ export function ArchiveList() {
             border: `1px solid ${T.accent}`,
             borderRadius: T.r.xl,
             cursor: "pointer", fontFamily: T.sans, fontSize: 15, fontWeight: 600,
-            color: expanded ? T.accent : "#fff",
+            color: expanded ? T.accent : "var(--bg)",
             letterSpacing: "0.5px",
             transition: "all 0.3s ease",
           }}

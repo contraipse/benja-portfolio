@@ -54,19 +54,22 @@ function FooterShader({ containerRef }) {
         vec2 p = uv;
         p.y += 0.5;
         float f = fbm(vec2(p.x * 2.5, p.y * 1.5 + t));
+        float f2 = fbm(vec2(p.x * 3.0 - t * 0.5, p.y * 2.0 + t * 0.8));
         float curtain = smoothstep(0.15, 0.55, f) * (1.0 - p.y * 0.8);
         float d = length(uv - mouse);
         float flare = smoothstep(0.35, 0.0, d);
-        vec3 c1 = vec3(0.95, 0.3, 0.0);
-        vec3 c2 = vec3(1.0, 0.55, 0.15);
-        vec3 c3 = vec3(0.8, 0.15, 0.05);
-        vec3 fc = vec3(1.0, 0.85, 0.6);
-        vec3 color = mix(c1, c2, p.y + 0.3) * curtain * 0.35;
-        color += c3 * fbm(p * 3.0 - t) * 0.15;
-        color += fc * flare * curtain * 1.2;
+        vec3 c1 = vec3(1.0, 0.35, 0.0);
+        vec3 c2 = vec3(1.0, 0.6, 0.2);
+        vec3 fc = vec3(1.0, 0.9, 0.7);
+        vec3 color = mix(c1, c2, p.y + 0.3) * curtain;
+        color += c1 * f2 * 0.3;
+        color += fc * flare * 1.5;
         float vignette = smoothstep(1.2, 0.3, length(uv * vec2(0.8, 1.0)));
-        color *= vignette * 0.5;
-        gl_FragColor = vec4(color, 1.0);
+        color *= vignette;
+        color = clamp(color, 0.0, 1.0);
+        float lum = dot(color, vec3(0.299, 0.587, 0.114));
+        float alpha = smoothstep(0.02, 0.08, lum) * 0.4;
+        gl_FragColor = vec4(color, alpha);
       }
     `;
     const uniforms = {
@@ -199,7 +202,7 @@ function Footer() {
       {/* Top fade */}
       <div style={{
         position: "absolute", top: 0, left: 0, right: 0, height: "30%",
-        background: `linear-gradient(to bottom, ${T.bg} 0%, transparent 100%)`,
+        background: "linear-gradient(to bottom, rgba(var(--grad-base),1) 0%, transparent 100%)",
         pointerEvents: "none", zIndex: 2,
       }} />
       {/* Background: WebGL shader on desktop, CSS haze on mobile */}
@@ -258,7 +261,7 @@ function Footer() {
               padding: isMobile ? `${T.s.md}px ${T.s.xl}px` : `${T.s.lg - 4}px ${T.s.xxl - 8}px`,
               borderRadius: T.r.full,
               background: T.accent,
-              color: "#fff", textDecoration: "none", fontFamily: T.sans,
+              color: "var(--bg)", textDecoration: "none", fontFamily: T.sans,
               fontSize: isMobile ? 14 : 16, fontWeight: 600, position: "relative",
               transform: `scale(${btnHover ? 1.05 : 1})`,
               transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease",
@@ -268,7 +271,7 @@ function Footer() {
             Let's connect
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
               style={{ transform: btnHover ? "translateX(4px)" : "translateX(0)", transition: "transform 0.3s ease" }}>
-              <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="var(--bg)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
         </div>

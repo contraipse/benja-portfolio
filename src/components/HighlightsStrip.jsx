@@ -55,8 +55,8 @@ export function HighlightsStrip() {
           }}>
             {press.map((p, i) => (
               <span key={p} style={{ display: "inline-flex", alignItems: "center", gap: 0 }}>
-                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 12 : 14, fontWeight: 600, color: "rgba(255,255,255,0.5)", letterSpacing: "2px", textTransform: "uppercase" }}>{p}</span>
-                {i < press.length - 1 && <span style={{ margin: "0 16px", color: "rgba(255,255,255,0.15)", fontSize: 14 }}>|</span>}
+                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 12 : 14, fontWeight: 600, color: "var(--text-faint)", letterSpacing: "2px", textTransform: "uppercase" }}>{p}</span>
+                {i < press.length - 1 && <span style={{ margin: "0 16px", color: "var(--border-light)", fontSize: 14 }}>|</span>}
               </span>
             ))}
           </div>

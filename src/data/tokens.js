@@ -1,17 +1,19 @@
 // ─── DESIGN TOKENS ───
+// Colors reference CSS custom properties defined in global.css
+// so they automatically adapt to dark/light mode via prefers-color-scheme.
 export const T = {
   // Colors
-  bg: "#0A0A0A",
-  bgLight: "#111111",
-  surface: "#1A1A1A",
-  text: "#FFFFFF",
-  textMuted: "rgba(255,255,255,0.65)",
-  textFaint: "rgba(255,255,255,0.55)",
-  accent: "#FF4D00",
-  accentDark: "#E64400",
-  accentGlow: "rgba(255,77,0,0.15)",
-  border: "rgba(255,255,255,0.08)",
-  borderLight: "rgba(255,255,255,0.15)",
+  bg: "var(--bg)",
+  bgLight: "var(--bg-light)",
+  surface: "var(--surface)",
+  text: "var(--text)",
+  textMuted: "var(--text-muted)",
+  textFaint: "var(--text-faint)",
+  accent: "var(--accent)",
+  accentDark: "var(--accent-dark)",
+  accentGlow: "var(--accent-glow)",
+  border: "var(--border)",
+  borderLight: "var(--border-light)",
 
   // Typography
   serif: "'Fraunces', Georgia, serif",

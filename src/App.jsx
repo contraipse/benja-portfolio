@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ProjectContext } from './context/ProjectContext';
+import { ThemeContext } from './context/ThemeContext';
+import { useTheme } from './hooks/useTheme';
 import { CustomCursor } from './components/CustomCursor';
 import { EtherealBackground } from './components/EtherealBackground';
 import { ScrollProgress } from './components/ScrollProgress';
@@ -18,8 +20,10 @@ import ProjectDetailOverlay from './components/ProjectDetailOverlay';
 
 export default function App() {
   const [activeProject, setActiveProject] = useState(null);
+  const { theme, toggle } = useTheme();
 
   return (
+    <ThemeContext.Provider value={{ theme, toggle }}>
     <ProjectContext.Provider value={{ activeProject, setActiveProject }}>
       <CustomCursor />
       <EtherealBackground />
@@ -37,5 +41,6 @@ export default function App() {
       <Footer />
       <ProjectDetailOverlay />
     </ProjectContext.Provider>
+    </ThemeContext.Provider>
   );
 }

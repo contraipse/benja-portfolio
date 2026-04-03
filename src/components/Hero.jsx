@@ -104,7 +104,7 @@ export default function Hero() {
           position: "absolute",
           inset: 0,
           zIndex: 2,
-          background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.82) 15%, rgba(10,10,10,0.55) 28%, rgba(10,10,10,0.15) 38%, transparent 46%)"
+          background: "linear-gradient(to top, rgba(var(--grad-base),0.95) 0%, rgba(var(--grad-base),0.82) 15%, rgba(var(--grad-base),0.55) 28%, rgba(var(--grad-base),0.15) 38%, transparent 46%)"
         }} />
         <div style={{
           position: "absolute",
@@ -142,7 +142,7 @@ export default function Hero() {
               letterSpacing: isMobile ? "4px" : "8px",
               textTransform: "uppercase",
               color: "#FF8044",
-              textShadow: "0 0 10px rgba(255,100,40,0.6), 0 0 30px rgba(255,77,0,0.3), 0 2px 8px rgba(0,0,0,0.8)",
+              textShadow: "0 0 10px rgba(255,100,40,0.4), 0 0 30px rgba(255,77,0,0.2)",
             }}>
               Experiential Creative Leader
             </span>
@@ -154,11 +154,9 @@ export default function Hero() {
             fontSize: isMobile ? "clamp(30px, 9vw, 46px)" : "clamp(56px, 8vw, 128px)",
             fontWeight: isMobile ? 400 : 600,
             lineHeight: isMobile ? 1.0 : 0.9,
-            color: "#FFFFFF",
+            color: "var(--text)",
             margin: 0,
-            textShadow: isMobile
-              ? "0 0 30px rgba(255,255,255,0.2), 0 2px 20px rgba(0,0,0,0.6)"
-              : "0 0 40px rgba(255,255,255,0.2), 0 0 80px rgba(255,255,255,0.1), 0 2px 20px rgba(0,0,0,0.8), 0 8px 60px rgba(0,0,0,0.5)",
+            textShadow: "none",
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateY(0)" : "translateY(60px)",
             transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s",
@@ -215,7 +213,7 @@ export default function Hero() {
             fontFamily: T.sans,
             fontSize: isMobile ? 14 : "clamp(16px, 1.4vw, 20px)",
             fontWeight: 400,
-            color: "rgba(255,255,255,0.75)",
+            color: "var(--text-muted)",
             lineHeight: 1.5,
             maxWidth: isMobile ? "90%" : 520,
             margin: 0,
@@ -223,7 +221,7 @@ export default function Hero() {
             opacity: loaded ? 1 : 0,
             transform: loaded ? "translateY(0)" : "translateY(30px)",
             transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s",
-            textShadow: "0 2px 12px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5)",
+            textShadow: "0 2px 12px rgba(0,0,0,0.15)",
           }}>
             Leading teams and creative vision behind immersive experiences for the world's most ambitious brands.
           </p>
@@ -247,13 +245,13 @@ export default function Hero() {
                   fontFamily: T.sans,
                   fontSize: isMobile ? 22 : "clamp(28px, 3vw, 48px)",
                   fontWeight: 700,
-                  color: "#FFFFFF",
+                  color: "var(--text)",
                 }}>{s.num}</span>
                 <span style={{
                   fontFamily: T.sans,
                   fontSize: isMobile ? 9 : 11,
                   fontWeight: 500,
-                  color: "rgba(255,255,255,0.8)",
+                  color: "var(--text-muted)",
                   letterSpacing: "1.5px",
                   textTransform: "uppercase",
                 }}>{s.label}</span>

@@ -70,7 +70,7 @@ export function ProjectCard({ project, index, variant = "square", compact = fals
           position: "absolute", top: compact ? 10 : 16, left: compact ? 10 : 16,
           padding: compact ? "4px 10px" : "6px 14px", borderRadius: T.r.xl,
           background: "rgba(0,0,0,0.45)", backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255,255,255,0.15)",
+          border: "1px solid var(--border-light)",
           fontFamily: T.sans, fontSize: 10, fontWeight: 600,
           color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.4)", letterSpacing: "1.5px", textTransform: "uppercase",
           opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(-10px)",
@@ -98,9 +98,9 @@ export function ProjectCard({ project, index, variant = "square", compact = fals
             </div>
             <div style={{
               width: compact ? 28 : 36, height: compact ? 28 : 36, borderRadius: "50%",
-              border: `1px solid ${hovered ? T.accent : "rgba(255,255,255,0.15)"}`,
+              border: `1px solid ${hovered ? T.accent : "var(--border-light)"}`,
               display: "flex", alignItems: "center", justifyContent: "center",
-              background: hovered ? T.accent : "rgba(255,255,255,0.05)",
+              background: hovered ? T.accent : "var(--border)",
               transform: hovered ? "rotate(-45deg) scale(1.1)" : "rotate(0deg)",
               transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
               flexShrink: 0,

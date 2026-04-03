@@ -1,8 +1,53 @@
+/* ── Theme CSS custom properties ── */
+:root {
+  --bg: #0A0A0A;
+  --bg-light: #111111;
+  --surface: #1A1A1A;
+  --text: #FFFFFF;
+  --text-muted: rgba(255,255,255,0.65);
+  --text-faint: rgba(255,255,255,0.55);
+  --accent: #FF4D00;
+  --accent-dark: #E64400;
+  --accent-glow: rgba(255,77,0,0.15);
+  --border: rgba(255,255,255,0.08);
+  --border-light: rgba(255,255,255,0.15);
+  --logo-fill: rgba(255,255,255,0.95);
+  --card-overlay: rgba(0,0,0,0.45);
+  --grad-base: 10,10,10;
+  --selection-bg: rgba(255,77,0,0.3);
+  --selection-text: #fff;
+  --ethereal-opacity: 1;
+  --shader-alpha-boost: 0.0;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+    --bg: #FAF8F5;
+    --bg-light: #F3F0EC;
+    --surface: #EDEAE5;
+    --text: #1A1A1A;
+    --text-muted: rgba(26,26,26,0.65);
+    --text-faint: rgba(26,26,26,0.50);
+    --accent: #E04400;
+    --accent-dark: #C73D00;
+    --accent-glow: rgba(224,68,0,0.12);
+    --border: rgba(26,26,26,0.10);
+    --border-light: rgba(26,26,26,0.18);
+    --logo-fill: rgba(26,26,26,0.85);
+    --card-overlay: rgba(0,0,0,0.35);
+    --grad-base: 250,248,245;
+    --selection-bg: rgba(224,68,0,0.2);
+    --selection-text: #1A1A1A;
+    --ethereal-opacity: 1;
+    --shader-alpha-boost: 1.0;
+  color-scheme: light;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { background: #0A0A0A; color: #fff; }
-body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior-y: none; }
+html { background: var(--bg); color: var(--text); }
+body { background: var(--bg); overflow-x: hidden; color: var(--text); overscroll-behavior-y: none; }
 @media (pointer: fine) { body { cursor: none; } *, *::before, *::after { cursor: none !important; } }
-::selection { background: rgba(255,77,0,0.3); color: #fff; }
+::selection { background: var(--selection-bg); color: var(--selection-text); }
 :focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
 button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
 ::-webkit-scrollbar { display: none; }

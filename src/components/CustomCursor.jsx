@@ -71,12 +71,12 @@ export function CustomCursor() {
       <div id="custom-cursor" style={{
         position: "fixed", top: 0, left: 0, width: 8, height: 8, borderRadius: "50%",
         background: T.accent,
-        pointerEvents: "none", zIndex: 10001, mixBlendMode: "difference",
+        pointerEvents: "none", zIndex: 10001,
       }} />
       {/* Outer ring â expands on hover, follows slightly behind */}
       <div id="cursor-ring" data-x="-100" data-y="-100" style={{
         position: "fixed", top: 0, left: 0, width: 48, height: 48, borderRadius: "50%",
-        border: `2px solid ${isHovering ? T.accent : "rgba(255,255,255,0.45)"}`,
+        border: `2px solid ${isHovering ? T.accent : "var(--text-faint)"}`,
         background: "transparent",
         pointerEvents: "none", zIndex: 10000,
         opacity: isHovering ? 1 : 0.5,

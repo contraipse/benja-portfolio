@@ -5,14 +5,14 @@ export function EtherealBackground() {
   // No child divs with edges = no subpixel flicker on high-refresh monitors.
   // Animation via CSS background-position shifts on the container.
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden" }}>
+    <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", overflow: "hidden", opacity: "var(--ethereal-opacity, 1)" }}>
       <div style={{
         position: "absolute", inset: 0,
         background: [
-          "radial-gradient(ellipse 60% 60% at 25% 20%, rgba(255,77,0,0.12) 0%, rgba(255,77,0,0.06) 25%, rgba(255,77,0,0.02) 45%, transparent 70%)",
-          "radial-gradient(ellipse 55% 50% at 70% 45%, rgba(255,120,60,0.10) 0%, rgba(255,100,40,0.04) 30%, transparent 65%)",
-          "radial-gradient(ellipse 65% 45% at 40% 75%, rgba(255,50,0,0.08) 0%, rgba(255,60,10,0.03) 30%, transparent 65%)",
-          "radial-gradient(ellipse 45% 45% at 55% 50%, rgba(160,140,255,0.04) 0%, rgba(160,140,255,0.015) 35%, transparent 60%)",
+          "radial-gradient(ellipse 80% 80% at 20% 15%, rgba(255,77,0,0.28) 0%, rgba(255,77,0,0.12) 25%, rgba(255,77,0,0.04) 45%, transparent 70%)",
+          "radial-gradient(ellipse 70% 65% at 75% 40%, rgba(255,120,60,0.22) 0%, rgba(255,100,40,0.08) 30%, transparent 65%)",
+          "radial-gradient(ellipse 75% 55% at 35% 80%, rgba(255,50,0,0.18) 0%, rgba(255,60,10,0.06) 30%, transparent 65%)",
+          "radial-gradient(ellipse 55% 55% at 55% 50%, rgba(160,140,255,0.08) 0%, rgba(160,140,255,0.03) 35%, transparent 60%)",
         ].join(", "),
       }} />
       {/* Film grain */}
