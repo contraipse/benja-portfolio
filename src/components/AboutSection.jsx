@@ -4,7 +4,6 @@ import { useInView } from '../hooks/useInView';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { T } from '../data/tokens';
 
-const disciplines = ["Experiential Strategy", "Creative Leadership", "Brand Experience", "Audience Engagement", "Immersive Design", "Large-Scale Production"];
 
 export function AboutSection() {
   const sectionRef = useRef(null);
@@ -147,21 +146,7 @@ export function AboutSection() {
             Fifteen years leading experiential creative for the world's most ambitious brands. I've managed multidisciplinary teams of 50+ across five continents and budgets exceeding $30M, from large-scale activations to intimate immersive moments that turn complex narratives into human stories. I also serve on the Board of Directors for Take 3 Presents, a nonprofit nurturing creativity through experiential art.
           </p>
 
-          {/* Discipline tags ÃÂ¢ÃÂÃÂ cascading entrance, evenly stacked */}
-          <div style={{ marginTop: 32, display: "grid", gridTemplateColumns: isMobile ? "repeat(2, auto)" : "repeat(3, auto)", gap: 8, justifyContent: isMobile ? "center" : "start", justifyItems: "start" }}>
-            {disciplines.map((d, i) => (
-              <span key={d} style={{
-                fontFamily: T.sans, fontSize: 11, fontWeight: 500, color: T.textMuted,
-                padding: "8px 16px", borderRadius: T.r.xl,
-                border: `1px solid ${T.border}`,
-                letterSpacing: "0.5px", textAlign: "center",
-                whiteSpace: "nowrap",
-                animation: visible ? `aboutTagIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${1.0 + i * 0.06}s both` : "none",
-                opacity: visible ? undefined : 0,
-              }}>{d}</span>
-            ))}
-          </div>
-
+          
         </div>
       </div>
     </section>
