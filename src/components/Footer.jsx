@@ -253,7 +253,6 @@ function Footer() {
             href="mailto:benjajuster@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
-            data-cursor={isMobile ? undefined : ""}
             onMouseEnter={isMobile ? undefined : () => setBtnHover(true)}
             onMouseLeave={isMobile ? undefined : () => setBtnHover(false)}
             style={{

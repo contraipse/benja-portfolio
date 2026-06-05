@@ -35,7 +35,7 @@ export function ProjectCard({ project, index, variant = "square", compact = fals
         ...(mosaic ? { height: "100%" } : {}),
       }}
     >
-      <div data-cursor="View" style={{
+      <div style={{
         position: "relative", overflow: "hidden",
         borderRadius: T.r.md,
         aspectRatio: mosaic ? undefined : aspectMap[variant],
