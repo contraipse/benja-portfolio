@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ProjectContext } from './context/ProjectContext';
-import { CustomCursor } from './components/CustomCursor';
 import { EtherealBackground } from './components/EtherealBackground';
 import { ScrollProgress } from './components/ScrollProgress';
 import Nav from './components/Nav';
@@ -21,7 +20,6 @@ export default function App() {
 
   return (
     <ProjectContext.Provider value={{ activeProject, setActiveProject }}>
-      <CustomCursor />
       <EtherealBackground />
       <ScrollProgress />
       <Nav />
