@@ -11,7 +11,6 @@ export function ProjectCard({ project, index, variant = "square", compact = fals
   const isMobile = useIsMobile();
   const cardRef = useRef(null);
   const progress = useScrollProgress(cardRef);
-  const ref = cardRef;
   // Card fades/slides in based on scroll position — appears during 0.05–0.3 range
   const enterOpacity = Math.max(0, Math.min(1, (progress - 0.05) * 4));
   const enterY = Math.max(0, 60 * (1 - enterOpacity));
@@ -20,7 +19,7 @@ export function ProjectCard({ project, index, variant = "square", compact = fals
 
   return (
     <div
-      ref={(el) => { ref.current = el; cardRef.current = el; }}
+      ref={cardRef}
       role="button"
       tabIndex={0}
       aria-label={`View ${project.title}`}

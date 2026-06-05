@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { T } from '../data/tokens';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { useInView } from '../hooks/useInView';
@@ -129,7 +129,7 @@ function ClientLogoItem({ name, visible, index, isMobile }) {
       cursor: "default",
     }}
       onMouseEnter={e => { e.currentTarget.style.opacity = "0.9"; }}
-      onMouseLeave={e => { if (e.currentTarget.closest('section').__visible) e.currentTarget.style.opacity = "0.58"; }}
+      onMouseLeave={e => { if (visible) e.currentTarget.style.opacity = "0.58"; }}
     >
       <div role="img" aria-label={`${name} logo`} style={{ height: h, display: "flex", alignItems: "center" }}>
         {logo.svg("rgba(255,255,255,0.95)")}
@@ -141,17 +141,12 @@ function ClientLogoItem({ name, visible, index, isMobile }) {
 export function ClientLogos() {
   const [ref, visible] = useInView({ threshold: 0.15 });
   const isMobile = useIsMobile();
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    if (sectionRef.current) sectionRef.current.__visible = visible;
-  }, [visible]);
 
   const row1 = clients.slice(0, isMobile ? clients.length : 6);
   const row2 = isMobile ? [] : clients.slice(6);
 
   return (
-    <section ref={(el) => { ref(el); sectionRef.current = el; }} style={{
+    <section ref={ref} style={{
       padding: isMobile ? "40px 20px" : "clamp(48px, 6vw, 80px) clamp(24px, 5vw, 64px)",
       position: "relative", zIndex: 1,
     }}>

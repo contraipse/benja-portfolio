@@ -6,6 +6,17 @@ body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior
 :focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
 button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
 ::-webkit-scrollbar { display: none; }
+/* Respect users who ask their OS to reduce motion: quiet the looping/declarative
+   animations and CSS transitions. (Scroll-driven parallax is JS-based and not
+   fully covered here, but the continuous animations that cause discomfort are.) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 /* ── Essential keyframes (kept) ── */
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes fadeUp {
@@ -38,9 +49,17 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
 
 /* ── About section reveals ── */
 @keyframes aboutLineGrow { 0% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
-@keyframes aboutTagIn {
-  0% { opacity: 0; transform: translateY(12px) scale(0.9); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes clipRevealLeft {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes accentWipe {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+@keyframes splitReveal {
+  0% { opacity: 0; transform: translateY(100%); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Footer "life." wave ── */

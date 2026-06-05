@@ -11,9 +11,10 @@ function FooterShader({ containerRef }) {
     const container = containerRef.current;
     if (!container) return;
     let cleanup = null;
+    let cancelled = false;
 
     import('three').then((THREE) => {
-      if (!container) return;
+      if (!container || cancelled) return;
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.domElement.style.cssText = "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;";
@@ -75,7 +76,8 @@ function FooterShader({ containerRef }) {
       iMouse: { value: new THREE.Vector2(-100, -100) },
     };
     const material = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms, transparent: true });
-    scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+    const geometry = new THREE.PlaneGeometry(2, 2);
+    scene.add(new THREE.Mesh(geometry, material));
 
     const dpr = renderer.getPixelRatio();
     const onResize = () => {
@@ -104,12 +106,13 @@ function FooterShader({ containerRef }) {
       if (canvasRef.current && canvasRef.current.parentNode) {
         canvasRef.current.parentNode.removeChild(canvasRef.current);
       }
+      geometry.dispose();
       material.dispose();
       renderer.dispose();
     };
     });
 
-    return () => { if (cleanup) cleanup(); };
+    return () => { cancelled = true; if (cleanup) cleanup(); };
   }, []);
 
   return null;

@@ -4,22 +4,23 @@ import { useIsMobile } from '../hooks/useIsMobile';
 
 export function CustomCursor() {
   const isMobile = useIsMobile();
-  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const posRef = useRef({ x: -100, y: -100 });
+  const hoverRef = useRef(false);
   const [isHovering, setIsHovering] = useState(false);
   const [label, setLabel] = useState("");
   const smoothPos = useRef({ x: -100, y: -100 });
   const frameRef = useRef(null);
 
   useEffect(() => {
-    const move = (e) => { setPos({ x: e.clientX, y: e.clientY }); };
+    const move = (e) => { posRef.current = { x: e.clientX, y: e.clientY }; };
     window.addEventListener("mousemove", move, { passive: true });
     const over = (e) => {
       const el = e.target.closest("a, button, [data-cursor]");
-      if (el) { setIsHovering(true); setLabel(el.dataset.cursor || ""); }
+      if (el) { setIsHovering(true); hoverRef.current = true; setLabel(el.dataset.cursor || ""); }
     };
     const out = (e) => {
       const el = e.target.closest("a, button, [data-cursor]");
-      if (el) { setIsHovering(false); setLabel(""); }
+      if (el) { setIsHovering(false); hoverRef.current = false; setLabel(""); }
     };
     document.addEventListener("mouseover", over);
     document.addEventListener("mouseout", out);
@@ -33,6 +34,7 @@ export function CustomCursor() {
   // Smooth follow â FASTER lerp factor (was 0.15, now 0.54)
   useEffect(() => {
     const animate = () => {
+      const pos = posRef.current;
       smoothPos.current.x += (pos.x - smoothPos.current.x) * 0.54;
       smoothPos.current.y += (pos.y - smoothPos.current.y) * 0.54;
       const el = document.getElementById("custom-cursor");
@@ -49,13 +51,13 @@ export function CustomCursor() {
         const ny = ry + (pos.y - ry) * 0.24;
         ringEl.dataset.x = nx;
         ringEl.dataset.y = ny;
-        ringEl.style.transform = `translate(${nx}px, ${ny}px) translate(-50%, -50%) scale(${isHovering ? 1 : 0.5})`;
+        ringEl.style.transform = `translate(${nx}px, ${ny}px) translate(-50%, -50%) scale(${hoverRef.current ? 1 : 0.5})`;
       }
       frameRef.current = requestAnimationFrame(animate);
     };
     frameRef.current = requestAnimationFrame(animate);
     return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
-  }, [pos, isHovering]);
+  }, []);
 
   // Hide custom cursor on touch/mobile â restore default cursor
   useEffect(() => {

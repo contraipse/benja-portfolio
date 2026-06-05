@@ -14,6 +14,7 @@ export default function ProjectDetailOverlay() {
   const prevOrientationRef = useRef(null);
   const overlayRef = useRef(null);
   const stripRef = useRef(null);
+  const prevFocusRef = useRef(null);
   const isMobile = useIsMobile();
   const project = activeProject;
   const allProjects = [...featured, ...selectedWork.filter(sw => !featured.some(f => f.title === sw.title))];
@@ -21,13 +22,18 @@ export default function ProjectDetailOverlay() {
 
   useEffect(() => {
     if (project) {
+      // Remember what had focus so we can restore it when the modal closes.
+      prevFocusRef.current = document.activeElement;
       setActiveGalleryIdx(0);
       setHeroOpacity(0);
       setImgOrientation(null);
       prevOrientationRef.current = null;
       if (overlayRef.current) overlayRef.current.scrollTop = 0;
       requestAnimationFrame(() => {
-        if (overlayRef.current) overlayRef.current.scrollTop = 0;
+        if (overlayRef.current) {
+          overlayRef.current.scrollTop = 0;
+          overlayRef.current.focus();
+        }
         setShow(true);
       });
       document.body.style.overflow = "hidden";
@@ -37,7 +43,11 @@ export default function ProjectDetailOverlay() {
 
   const handleClose = () => {
     setShow(false);
-    setTimeout(() => setActiveProject(null), 500);
+    const toRestore = prevFocusRef.current;
+    setTimeout(() => {
+      setActiveProject(null);
+      if (toRestore && typeof toRestore.focus === "function") toRestore.focus();
+    }, 500);
   };
 
   const goToProject = (dir) => {
@@ -51,6 +61,17 @@ export default function ProjectDetailOverlay() {
       if (e.key === "Escape") handleClose();
       if (e.key === "ArrowRight") goToProject(1);
       if (e.key === "ArrowLeft") goToProject(-1);
+      if (e.key === "Tab" && overlayRef.current) {
+        // Keep Tab focus inside the modal.
+        const focusables = Array.from(
+          overlayRef.current.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+        ).filter((el) => el.offsetParent !== null);
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -106,7 +127,9 @@ export default function ProjectDetailOverlay() {
   );
 
   return (
-    <div ref={overlayRef} onClick={handleClose} style={{
+    <div ref={overlayRef} onClick={handleClose}
+      role="dialog" aria-modal="true" aria-label={project.title} tabIndex={-1} style={{
+      outline: "none",
       position: "fixed", inset: 0, zIndex: 9999,
       background: show ? "rgba(0,0,0,0.94)" : "rgba(0,0,0,0)",
       backdropFilter: show ? "blur(24px)" : "blur(0px)",
@@ -296,6 +319,7 @@ export default function ProjectDetailOverlay() {
           }}>
             <iframe
               src={`https://www.youtube.com/embed/${project.video}?rel=0&modestbranding=1`}
+              title={`${project.title} — video`}
               style={{ width: "100%", height: "100%", border: "none" }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

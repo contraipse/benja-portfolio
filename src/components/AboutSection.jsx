@@ -78,8 +78,9 @@ export function AboutSection() {
             />
             {/* Accent bar at bottom */}
             <div style={{
-              position: "absolute", bottom: 0, left: 0, height: 3,
+              position: "absolute", bottom: 0, left: 0, right: 0, height: 3,
               background: T.accent,
+              transformOrigin: "left", transform: visible ? undefined : "scaleX(0)",
               animation: visible ? "accentWipe 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both" : "none",
             }} />
             {/* Corner frame marks */}
@@ -99,7 +100,8 @@ export function AboutSection() {
           {/* Label with animated accent line */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
             <div style={{
-              height: 1, background: T.accent,
+              height: 1, width: 40, background: T.accent,
+              transformOrigin: "left", transform: visible ? undefined : "scaleX(0)",
               animation: visible ? "accentWipe 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both" : "none",
             }} />
             <span style={{
