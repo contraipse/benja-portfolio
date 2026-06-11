@@ -1,17 +1,12 @@
 import { useState } from 'react';
 import { ProjectContext } from './context/ProjectContext';
-import { EtherealBackground } from './components/EtherealBackground';
-import { ScrollProgress } from './components/ScrollProgress';
+import { Grain } from './components/Grain';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import { Marquee } from './components/Marquee';
-import { StatementSection } from './components/StatementSection';
 import { ClientLogos } from './components/ClientLogos';
-import { FeaturedShowcase } from './components/FeaturedShowcase';
-import { PhilosophySection } from './components/PhilosophySection';
-import { ArchiveList } from './components/ArchiveList';
-import { AboutSection } from './components/AboutSection';
-import { HighlightsStrip } from './components/HighlightsStrip';
+import { CaseStudies } from './components/CaseStudies';
+import { WorkIndex } from './components/WorkIndex';
+import { About } from './components/About';
 import Footer from './components/Footer';
 import ProjectDetailOverlay from './components/ProjectDetailOverlay';
 
@@ -20,18 +15,13 @@ export default function App() {
 
   return (
     <ProjectContext.Provider value={{ activeProject, setActiveProject }}>
-      <EtherealBackground />
-      <ScrollProgress />
+      <Grain />
       <Nav />
       <Hero />
-      <Marquee />
-      <StatementSection />
       <ClientLogos />
-      <FeaturedShowcase />
-      <ArchiveList />
-      <PhilosophySection />
-      <HighlightsStrip />
-      <AboutSection />
+      <CaseStudies />
+      <WorkIndex />
+      <About />
       <Footer />
       <ProjectDetailOverlay />
     </ProjectContext.Provider>
