@@ -113,7 +113,7 @@ export default function Hero() {
       <h1 style={{
         ...reveal(0.22),
         fontFamily: T.serif,
-        fontSize: isMobile ? "clamp(34px, 10vw, 52px)" : "clamp(48px, 6.5vw, 112px)",
+        fontSize: isMobile ? "clamp(38px, 11vw, 58px)" : "clamp(64px, 8.6vw, 148px)",
         fontWeight: isMobile ? 400 : 600,
         lineHeight: isMobile ? 1.08 : 1.02,
         letterSpacing: "-0.02em",
@@ -184,23 +184,6 @@ export default function Hero() {
             borderRadius: isMobile ? T.r.md : T.r.lg,
           }} />
         </div>
-        <figcaption style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: 14,
-          gap: 16,
-          flexWrap: "wrap",
-        }}>
-          <span style={{
-            fontFamily: T.sans, fontSize: 10, fontWeight: 500,
-            letterSpacing: "2px", textTransform: "uppercase", color: T.textFaint,
-          }}>Showreel</span>
-          <span style={{
-            fontFamily: T.sans, fontSize: 10, fontWeight: 500,
-            letterSpacing: "2px", textTransform: "uppercase", color: T.textFaint,
-          }}>2014—2026</span>
-        </figcaption>
       </figure>
 
       {showSnake && <SnakeGame onClose={() => setShowSnake(false)} />}

@@ -62,7 +62,7 @@ export default function Nav() {
             fontWeight: 400,
             color: T.text,
           }}>
-            Benja
+            Benja Juster
           </span>
         </a>
 

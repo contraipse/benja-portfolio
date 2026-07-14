@@ -8,7 +8,7 @@ export function PhilosophySection() {
   const ref = useRef(null);
   const progress = useScrollProgress(ref);
   const [inViewRef, visible] = useInView({ threshold: 0.1 });
-  const text = "Strategic vision meets meticulous production. I blend creative direction with emerging tools like AI-driven personalization and interactive storytelling to craft experiences that are culturally resonant at global scale. The goal is always work that moves people.";
+  const text = "I blend creative direction with emerging tools like AI-driven personalization and interactive storytelling to craft experiences that are culturally resonant at global scale. The goal is always work that moves people.";
   const words = text.split(" ");
 
   // Entry scale: starts at 0.95, grows to 1
