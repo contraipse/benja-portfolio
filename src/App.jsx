@@ -5,7 +5,6 @@ import { ScrollProgress } from './components/ScrollProgress';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import { Marquee } from './components/Marquee';
-import { StatementSection } from './components/StatementSection';
 import { ClientLogos } from './components/ClientLogos';
 import { FeaturedShowcase } from './components/FeaturedShowcase';
 import { PhilosophySection } from './components/PhilosophySection';
@@ -25,7 +24,6 @@ export default function App() {
       <Nav />
       <Hero />
       <Marquee />
-      <StatementSection />
       <ClientLogos />
       <FeaturedShowcase />
       <ArchiveList />
