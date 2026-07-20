@@ -3,20 +3,8 @@ import { T } from '../data/tokens';
 import { useIsMobile } from '../hooks/useIsMobile';
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
-  }, []);
-
-  // Close menu on scroll
-  useEffect(() => {
-    if (menuOpen) setMenuOpen(false);
-  }, [scrolled]);
 
   // Close menu on Escape
   useEffect(() => {
@@ -31,9 +19,9 @@ export default function Nav() {
     <>
       <a href="#work" style={{
         position: "fixed", top: -100, left: 16, zIndex: 9999,
-        padding: "12px 24px", background: T.accent, color: "#fff",
+        padding: "12px 24px", background: T.text, color: T.bg,
         fontFamily: T.sans, fontSize: 14, fontWeight: 600,
-        borderRadius: T.r.md, textDecoration: "none",
+        textDecoration: "none",
         transition: "top 0.2s ease",
       }} onFocus={(e) => { e.target.style.top = "12px"; }}
          onBlur={(e) => { e.target.style.top = "-100px"; }}>
@@ -50,15 +38,14 @@ export default function Nav() {
         alignItems: "center",
         padding: isMobile ? "0 20px" : "0 clamp(24px, 5vw, 64px)",
         height: isMobile ? 60 : 72,
-        background: scrolled || menuOpen ? "rgba(10,10,10,0.92)" : "transparent",
-        backdropFilter: scrolled || menuOpen ? "blur(20px) saturate(1.4)" : "none",
-        borderBottom: scrolled ? `1px solid ${T.border}` : "1px solid transparent",
-        transition: "background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease",
+        background: "rgba(250,247,242,0.9)",
+        backdropFilter: "blur(16px)",
+        borderBottom: `1px solid ${T.borderLight}`,
       }}>
         <a href="#" style={{ textDecoration: "none" }}>
           <span style={{
             fontFamily: T.serif,
-            fontSize: isMobile ? 22 : 26,
+            fontSize: isMobile ? 22 : 24,
             fontWeight: 400,
             color: T.text,
           }}>
@@ -66,46 +53,37 @@ export default function Nav() {
           </span>
         </a>
 
-        {/* Desktop nav pills */}
+        {/* Desktop nav links */}
         {!isMobile && (
           <div style={{
             display: "flex",
-            gap: 0,
+            gap: 32,
             alignItems: "center",
-            background: scrolled ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.03)",
-            borderRadius: T.r.xl,
-            padding: "6px 4px",
-            border: `1px solid ${scrolled ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.04)"}`,
-            transition: "background 0.2s ease, border-color 0.2s ease",
           }}>
-            {navLinks.map((item) => (
-              <a
-                key={item}
-                href={item === "Contact" ? "mailto:benjajuster@gmail.com" : `#${item.toLowerCase()}`}
-                style={{
-                  fontFamily: T.sans,
-                  fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "1.5px",
-                  color: T.textMuted,
-                  textDecoration: "none",
-                  textTransform: "uppercase",
-                  transition: "color 0.15s, background 0.15s",
-                  padding: "8px 18px",
-                  borderRadius: T.r.xl,
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.color = T.text;
-                  e.target.style.background = "rgba(255,255,255,0.06)";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.color = T.textMuted;
-                  e.target.style.background = "transparent";
-                }}
-              >
-                {item}
-              </a>
-            ))}
+            {navLinks.map((item) => {
+              const isContact = item === "Contact";
+              return (
+                <a
+                  key={item}
+                  href={isContact ? "mailto:benjajuster@gmail.com" : `#${item.toLowerCase()}`}
+                  style={{
+                    fontFamily: T.sans,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    letterSpacing: "1.5px",
+                    color: isContact ? T.text : T.textMuted,
+                    textDecoration: "none",
+                    textTransform: "uppercase",
+                    transition: "color 0.15s",
+                    ...(isContact ? { borderBottom: `1px solid ${T.text}`, paddingBottom: 2 } : {}),
+                  }}
+                  onMouseEnter={(e) => { e.target.style.color = T.text; }}
+                  onMouseLeave={(e) => { e.target.style.color = isContact ? T.text : T.textMuted; }}
+                >
+                  {item}
+                </a>
+              );
+            })}
           </div>
         )}
 
@@ -134,7 +112,6 @@ export default function Nav() {
               width: 22,
               height: 1.5,
               background: T.text,
-              borderRadius: 1,
               transform: menuOpen ? "rotate(45deg) translateY(0)" : "rotate(0) translateY(0)",
               position: menuOpen ? "absolute" : "relative",
               transition: "all 0.3s ease",
@@ -145,7 +122,6 @@ export default function Nav() {
                 width: 22,
                 height: 1.5,
                 background: T.text,
-                borderRadius: 1,
               }} />
             )}
             <span style={{
@@ -153,7 +129,6 @@ export default function Nav() {
               width: 22,
               height: 1.5,
               background: T.text,
-              borderRadius: 1,
               transform: menuOpen ? "rotate(-45deg) translateY(0)" : "rotate(0) translateY(0)",
               position: menuOpen ? "absolute" : "relative",
               transition: "all 0.3s ease",
@@ -171,7 +146,7 @@ export default function Nav() {
           right: 0,
           bottom: 0,
           zIndex: 99,
-          background: "rgba(10,10,10,0.96)",
+          background: "rgba(250,247,242,0.97)",
           backdropFilter: "blur(24px)",
           display: "flex",
           flexDirection: "column",

@@ -30,38 +30,19 @@ export function AboutSection() {
       position: "relative", overflow: "hidden", zIndex: 1,
       minHeight: isMobile ? "auto" : "100vh", display: "flex", alignItems: "center",
     }}>
-      {/* Large decorative accent number in background */}
-      {!isMobile && <div style={{
-        position: "absolute", top: "10%", right: "5%", fontFamily: T.serif,
-        fontSize: "clamp(200px, 25vw, 400px)", fontWeight: 300, color: "transparent",
-        WebkitTextStroke: `1px rgba(255,77,0,${visible ? 0.06 : 0})`,
-        lineHeight: 0.85, userSelect: "none", pointerEvents: "none",
-        transition: "all 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
-        transform: visible ? "translateY(0)" : "translateY(40px)",
-      }}>15+</div>}
-
-      {/* Animated vertical divider line ÃÂ¢ÃÂÃÂ desktop only */}
-      {!isMobile && <div style={{
-        position: "absolute", left: "50%", top: "15%", bottom: "15%", width: 1,
-        background: `linear-gradient(to bottom, transparent, ${T.accent}, transparent)`,
-        transformOrigin: "top center",
-        animation: visible ? "aboutLineGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both" : "none",
-        opacity: visible ? 0.3 : 0,
-      }} />}
-
       <div style={{
         display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
         gap: isMobile ? 32 : "clamp(40px, 6vw, 100px)", alignItems: "center",
         width: "100%",
       }}>
-        {/* Image side ÃÂ¢ÃÂÃÂ clip-path wipe reveal */}
+        {/* Image side — clip-path wipe reveal */}
         <div style={{
           transform: `translateY(${imageY}px)`,
           animation: visible ? "clipRevealLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both" : "none",
           opacity: visible ? 1 : 0,
         }}>
           <div style={{
-            borderRadius: T.r.md, overflow: "hidden", aspectRatio: "4/3.7",
+            overflow: "hidden", aspectRatio: "4/3.7",
             position: "relative", maxHeight: "70vh",
           }}>
             <img
@@ -76,36 +57,20 @@ export function AboutSection() {
                 transition: "opacity 0.15s ease",
               }}
             />
-            {/* Accent bar at bottom */}
-            <div style={{
-              position: "absolute", bottom: 0, left: 0, right: 0, height: 3,
-              background: T.accent,
-              transformOrigin: "left", transform: visible ? undefined : "scaleX(0)",
-              animation: visible ? "accentWipe 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both" : "none",
-            }} />
-            {/* Corner frame marks */}
-            <div style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24,
-              borderTop: `1.5px solid ${T.accent}`, borderLeft: `1.5px solid ${T.accent}`,
-              opacity: visible ? 0.5 : 0, transition: "opacity 0.6s ease 0.6s",
-            }} />
-            <div style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24,
-              borderBottom: `1.5px solid ${T.accent}`, borderRight: `1.5px solid ${T.accent}`,
-              opacity: visible ? 0.5 : 0, transition: "opacity 0.6s ease 0.6s",
-            }} />
           </div>
         </div>
 
-        {/* Text side ÃÂ¢ÃÂÃÂ staggered reveal */}
+        {/* Text side — staggered reveal */}
         <div style={{ transform: `translateY(${textY}px)` }}>
-          {/* Label with animated accent line */}
+          {/* Label with animated ink rule */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
             <div style={{
-              height: 1, width: 40, background: T.accent,
+              height: 1, width: 40, background: T.text,
               transformOrigin: "left", transform: visible ? undefined : "scaleX(0)",
               animation: visible ? "accentWipe 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both" : "none",
             }} />
             <span style={{
-              fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.accent,
+              fontFamily: T.sans, fontSize: 11, fontWeight: 600, color: T.textMuted,
               letterSpacing: "3px", textTransform: "uppercase",
               opacity: visible ? 1 : 0, transition: "opacity 0.5s ease 0.5s",
             }}>About</span>
@@ -131,14 +96,14 @@ export function AboutSection() {
                 }}>{word}</span>
               ))}
               <span style={{
-                display: "inline-block", fontStyle: "italic", color: T.accent,
+                display: "inline-block", fontStyle: "italic", color: T.text,
                 animation: visible ? `splitReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both` : "none",
                 opacity: visible ? undefined : 0,
               }}>remember.</span>
             </span>
           </h2>
 
-          {/* Body text ÃÂ¢ÃÂÃÂ fade up */}
+          {/* Body text — fade up */}
           <p style={{
             fontFamily: T.sans, fontSize: "clamp(14px, 1.2vw, 16px)", color: T.textMuted,
             lineHeight: 1.75, marginTop: 24, maxWidth: 480,
@@ -147,8 +112,6 @@ export function AboutSection() {
           }}>
             Fifteen years leading experiential creative for the world's most ambitious brands. I've managed multidisciplinary teams of 50+ across five continents and budgets exceeding $30M, from large-scale activations to intimate immersive moments that turn complex narratives into human stories. I also serve on the Board of Directors for Take 3 Presents, a nonprofit nurturing creativity through experiential art.
           </p>
-
-          
         </div>
       </div>
     </section>

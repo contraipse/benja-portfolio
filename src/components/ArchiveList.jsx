@@ -170,53 +170,30 @@ export function ArchiveList() {
           })}
         </div>
 
-        {/* Gradient fade at bottom when collapsed (only if rows are visible) */}
-        {!expanded && INITIAL_ROWS > 0 && (
-          <div style={{
-            position: "relative",
-            marginTop: -120,
-            height: 120,
-            background: "linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.85) 40%, rgba(10,10,10,0.4) 70%, transparent 100%)",
-            pointerEvents: "none",
-            zIndex: 2,
-          }} />
-        )}
-
         {/* Expand / Collapse button */}
         <div style={{
           display: "flex", justifyContent: "center",
-          marginTop: expanded ? 0 : (INITIAL_ROWS > 0 ? -16 : 0),
           position: "relative", zIndex: 3,
         }}>
           <button onClick={handleToggle} style={{
-            display: "inline-flex", alignItems: "center", gap: 10,
             padding: "16px 40px",
-            background: expanded ? "transparent" : T.accent,
-            border: `1px solid ${T.accent}`,
-            borderRadius: T.r.xl,
-            cursor: "pointer", fontFamily: T.sans, fontSize: 15, fontWeight: 600,
-            color: expanded ? T.accent : "#fff",
+            background: "transparent",
+            border: `1px solid ${T.text}`,
+            cursor: "pointer", fontFamily: T.sans, fontSize: 14, fontWeight: 500,
+            color: T.text,
             letterSpacing: "0.5px",
-            transition: "all 0.3s ease",
+            transition: "background .25s, color .25s",
           }}
             onMouseEnter={(e) => {
-              if (!expanded) {
-                e.currentTarget.style.background = "#e64400";
-                e.currentTarget.style.borderColor = "#e64400";
-              } else {
-                e.currentTarget.style.background = "rgba(255,77,0,0.1)";
-              }
+              e.currentTarget.style.background = T.text;
+              e.currentTarget.style.color = T.bg;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = expanded ? "transparent" : T.accent;
-              e.currentTarget.style.borderColor = T.accent;
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = T.text;
             }}
           >
             {expanded ? "Show Less" : `View All ${selectedWork.length} Projects`}
-            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"
-              style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
-              <path d="M3 6L8 11L13 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
           </button>
         </div>
       </div>

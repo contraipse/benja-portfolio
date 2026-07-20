@@ -1,24 +1,26 @@
-// ─── DESIGN TOKENS ───
+// ─── DESIGN TOKENS ─── "Paper" theme.
+// Radius scale intentionally all-zero: square edges site-wide.
 export const T = {
   // Colors
-  bg: "#0A0A0A",
-  bgLight: "#111111",
-  surface: "#1A1A1A",
-  text: "#FFFFFF",
-  textMuted: "rgba(255,255,255,0.65)",
-  textFaint: "rgba(255,255,255,0.55)",
-  accent: "#FF4D00",
-  accentDark: "#E64400",
-  accentGlow: "rgba(255,77,0,0.15)",
-  border: "rgba(255,255,255,0.08)",
-  borderLight: "rgba(255,255,255,0.15)",
+  bg: "#FAF7F2",
+  bgLight: "#F3EFE7",
+  surface: "#EDE8DE",
+  text: "#211E19",
+  textMuted: "#6E6A62",
+  textFaint: "#8F8A80",
+  accent: "#211E19",        // former orange -> ink. No glows anywhere.
+  accentDark: "#211E19",
+  accentGlow: "transparent",
+  border: "#DED9D0",
+  borderLight: "#EAE5DC",
+  dot: "#C9C3B8",
 
   // Typography
   serif: "'Fraunces', Georgia, serif",
   sans: "'Space Grotesk', 'Inter', system-ui, sans-serif",
 
   // Border Radius Scale
-  r: { sm: 4, md: 8, lg: 16, xl: 24, full: 9999 },
+  r: { sm: 0, md: 0, lg: 0, xl: 0, full: 0 },
 
   // Spacing Scale (8pt grid)
   s: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48, xxxl: 64 },
