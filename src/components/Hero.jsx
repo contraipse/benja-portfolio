@@ -1,36 +1,61 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { T } from '../data/tokens';
 import { useIsMobile } from '../hooks/useIsMobile';
 import { SnakeGame } from './SnakeGame';
-
-const STATS = [
-  { num: "15+", label: "Years" },
-  { num: "100+", label: "Projects" },
-  { num: "25+", label: "Brands" },
-];
 
 export default function Hero() {
   const isMobile = useIsMobile();
   const [loaded, setLoaded] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [showSnake, setShowSnake] = useState(false);
+  const sectionRef = useRef(null);
+  const inViewRef = useRef(true);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 200);
     return () => clearTimeout(t);
   }, []);
 
-  // Track mouse position for kinetic "movements" text
+  // Track mouse position for the kinetic "movements." word —
+  // rAF-throttled, and only while the hero is in view.
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { inViewRef.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     const onMove = (e) => {
-      setMousePos({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight
+      if (!inViewRef.current || rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        setMousePos({
+          x: e.clientX / window.innerWidth,
+          y: e.clientY / window.innerHeight,
+        });
       });
     };
     window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("mousemove", onMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
+
+  // Secret trigger: press S to find the snake (desktop only)
+  useEffect(() => {
+    if (isMobile) return;
+    const onKey = (e) => {
+      if (showSnake) return;
+      if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === "s" || e.key === "S") setShowSnake(true);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMobile, showSnake]);
 
   const reveal = (delay) => ({
     opacity: loaded ? 1 : 0,
@@ -48,8 +73,7 @@ export default function Hero() {
           {"movements".split("").map((ch, i) => (
             <span key={i} style={{
               display: "inline-block",
-              color: "transparent",
-              WebkitTextStroke: `1.5px ${T.accent}`,
+              color: T.text,
               animation: loaded ? `mobileLetterWave 3s ease-in-out ${i * 0.15}s infinite` : "none",
               transformOrigin: "center bottom",
             }}>{ch}</span>
@@ -62,21 +86,18 @@ export default function Hero() {
           const dy = mousePos.y - 0.5;
           const dist = Math.sqrt(dx * dx + dy * dy);
           const influence = Math.max(0, 1 - dist * 1.8);
-          const yOff = influence * dy * -50;
+          const yOff = influence * dy * -40;
           const xOff = influence * dx * -20;
-          const rotate = influence * dx * 18;
-          const scale = 1 + influence * 0.15;
-          const strokeWidth = 1.5 + influence * 1.5;
+          const rotate = influence * dx * 12;
 
           return (
             <span key={i} style={{
               display: "inline-block",
-              color: influence > 0.3 ? `rgba(255,77,0,${influence * 0.4})` : "transparent",
-              WebkitTextStroke: `${strokeWidth}px ${T.accent}`,
+              color: T.text,
               transform: loaded
-                ? `translate(${xOff}px, ${yOff}px) rotate(${rotate}deg) scale(${scale})`
+                ? `translate(${xOff}px, ${yOff}px) rotate(${rotate}deg)`
                 : "none",
-              transition: "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, -webkit-text-stroke 0.2s ease",
+              transition: "transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)",
               transformOrigin: "center bottom",
             }}>{ch}</span>
           );
@@ -86,24 +107,24 @@ export default function Hero() {
   );
 
   return (
-    <section style={{
+    <section ref={sectionRef} style={{
       position: "relative",
       zIndex: 1,
       padding: isMobile
-        ? `108px ${T.mobilePadX}px 0`
-        : `clamp(140px, 18vh, 200px) ${T.padX} 0`,
+        ? `108px ${T.mobilePadX}px 48px`
+        : `clamp(140px, 18vh, 200px) ${T.padX} clamp(48px, 7vw, 96px)`,
     }}>
 
       {/* Overline */}
       <div style={{ ...reveal(0.1), display: "flex", alignItems: "center", gap: 14, marginBottom: isMobile ? 20 : 28 }}>
-        <span style={{ width: 36, height: 1, background: T.accent, display: "inline-block" }} />
+        <span style={{ width: 36, height: 1, background: T.text, display: "inline-block" }} />
         <span style={{
           fontFamily: T.sans,
           fontSize: isMobile ? 11 : 13,
-          fontWeight: 700,
+          fontWeight: 500,
           letterSpacing: isMobile ? "3px" : "5px",
           textTransform: "uppercase",
-          color: T.accent,
+          color: T.textMuted,
         }}>
           Experiential Creative Leader
         </span>
@@ -120,6 +141,8 @@ export default function Hero() {
         color: T.text,
         maxWidth: 1500,
         margin: 0,
+        paddingBottom: isMobile ? 32 : 48,
+        borderBottom: `1px solid ${T.border}`,
       }}>
         {isMobile ? (
           <>I create experiences that turn moments into {kineticWord}.</>
@@ -128,44 +151,10 @@ export default function Hero() {
         )}
       </h1>
 
-      {/* Stats row above the line */}
-      <div style={{
-        ...reveal(0.38),
-        display: "flex",
-        gap: isMobile ? T.s.xl : "clamp(40px, 6vw, 96px)",
-        marginTop: isMobile ? 28 : "clamp(36px, 5vh, 64px)",
-        paddingBottom: isMobile ? 32 : 48,
-        borderBottom: `1px solid ${T.border}`,
-      }}>
-        {STATS.map((s) => (
-          <div key={s.label} style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: isMobile ? T.s.xs : T.s.sm,
-          }}>
-            <span style={{
-              fontFamily: T.sans,
-              fontSize: isMobile ? 22 : "clamp(28px, 2.6vw, 44px)",
-              fontWeight: 700,
-              color: T.text,
-            }}>{s.num}</span>
-            <span style={{
-              fontFamily: T.sans,
-              fontSize: isMobile ? 9 : 11,
-              fontWeight: 500,
-              color: T.textMuted,
-              letterSpacing: "1.5px",
-              textTransform: "uppercase",
-            }}>{s.label}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Showreel — framed below the line */}
+      {/* Showreel — square corners, below the line */}
       <figure style={{ ...reveal(0.5), margin: 0, paddingTop: isMobile ? 32 : 48 }}>
         <div style={{
           position: "relative",
-          borderRadius: isMobile ? T.r.md : T.r.lg,
           overflow: "hidden",
           aspectRatio: "16/8.2",
           background: T.surface,
@@ -178,11 +167,6 @@ export default function Hero() {
           >
             <source src="img/hero-reel.mp4" type="video/mp4" />
           </video>
-          <div style={{
-            position: "absolute", inset: 0, pointerEvents: "none",
-            boxShadow: `inset 0 0 0 1px ${T.borderLight}`,
-            borderRadius: isMobile ? T.r.md : T.r.lg,
-          }} />
         </div>
       </figure>
 

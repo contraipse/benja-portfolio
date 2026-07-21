@@ -37,9 +37,9 @@ export function HighlightsStrip() {
               opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(30px)",
               transition: `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${0.1 + i * 0.1}s`,
             }}>
-              <div style={{ fontFamily: T.serif, fontSize: isMobile ? 32 : 44, fontWeight: 600, color: T.accent, lineHeight: 1 }}>{h.stat}</div>
+              <div style={{ fontFamily: T.serif, fontSize: "clamp(32px, 3vw, 44px)", fontWeight: 600, color: T.text, lineHeight: 1 }}>{h.stat}</div>
               <div style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 600, color: T.text, letterSpacing: "0.5px", marginTop: 8 }}>{h.label}</div>
-              <div style={{ fontFamily: T.sans, fontSize: 11, color: T.textMuted, marginTop: 4 }}>{h.detail}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 11, color: T.textFaint, marginTop: 4 }}>{h.detail}</div>
             </div>
           ))}
         </div>
@@ -49,14 +49,14 @@ export function HighlightsStrip() {
           maxWidth: 1200, margin: "48px auto 0", textAlign: "center",
           opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 0.6s",
         }}>
-          <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.accent }}>Featured In</span>
+          <span style={{ fontFamily: T.sans, fontSize: 11, fontWeight: 600, letterSpacing: "3px", textTransform: "uppercase", color: T.textFaint }}>Featured In</span>
           <div style={{
             marginTop: 16, display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "8px 0",
           }}>
             {press.map((p, i) => (
               <span key={p} style={{ display: "inline-flex", alignItems: "center", gap: 0 }}>
-                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 12 : 14, fontWeight: 600, color: "rgba(255,255,255,0.5)", letterSpacing: "2px", textTransform: "uppercase" }}>{p}</span>
-                {i < press.length - 1 && <span style={{ margin: "0 16px", color: "rgba(255,255,255,0.15)", fontSize: 14 }}>|</span>}
+                <span style={{ fontFamily: T.sans, fontSize: isMobile ? 12 : 14, fontWeight: 600, color: "rgba(33,30,25,0.5)", letterSpacing: "2px", textTransform: "uppercase" }}>{p}</span>
+                {i < press.length - 1 && <span style={{ margin: "0 16px", color: "#D5CFC4", fontSize: 14 }}>|</span>}
               </span>
             ))}
           </div>

@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { ProjectContext } from './context/ProjectContext';
-import { EtherealBackground } from './components/EtherealBackground';
 import { ScrollProgress } from './components/ScrollProgress';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import { Marquee } from './components/Marquee';
 import { ClientLogos } from './components/ClientLogos';
 import { FeaturedShowcase } from './components/FeaturedShowcase';
-import { PhilosophySection } from './components/PhilosophySection';
 import { ArchiveList } from './components/ArchiveList';
 import { AboutSection } from './components/AboutSection';
 import { HighlightsStrip } from './components/HighlightsStrip';
@@ -19,7 +17,6 @@ export default function App() {
 
   return (
     <ProjectContext.Provider value={{ activeProject, setActiveProject }}>
-      <EtherealBackground />
       <ScrollProgress />
       <Nav />
       <Hero />
@@ -27,9 +24,8 @@ export default function App() {
       <ClientLogos />
       <FeaturedShowcase />
       <ArchiveList />
-      <PhilosophySection />
-      <HighlightsStrip />
       <AboutSection />
+      <HighlightsStrip />
       <Footer />
       <ProjectDetailOverlay />
     </ProjectContext.Provider>

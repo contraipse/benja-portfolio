@@ -42,16 +42,17 @@ export function SnakeGame({ onClose }) {
   const draw = useCallback((g) => {
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
-    ctx.fillStyle = '#0A0A0A'; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 0.5;
+    ctx.fillStyle = T.bg; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(33,30,25,0.05)'; ctx.lineWidth = 0.5;
     for (let x = 0; x <= W; x += CELL) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
     for (let y = 0; y <= H; y += CELL) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
-    ctx.fillStyle = T.accent; ctx.shadowColor = 'rgba(255,77,0,0.6)'; ctx.shadowBlur = 8;
-    ctx.beginPath(); ctx.arc(g.food[0] * CELL + CELL / 2, g.food[1] * CELL + CELL / 2, CELL / 2 - 2, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
-    g.snake.forEach((seg, i) => {
-      ctx.fillStyle = i === 0 ? '#fff' : `rgba(255,77,0,${1 - (i / g.snake.length) * 0.5})`;
-      if (i === 0) { ctx.shadowColor = 'rgba(255,255,255,0.4)'; ctx.shadowBlur = 6; }
-      ctx.beginPath(); ctx.roundRect(seg[0] * CELL + 1, seg[1] * CELL + 1, CELL - 2, CELL - 2, 3); ctx.fill(); ctx.shadowBlur = 0;
+    // Food — hollow ink circle
+    ctx.strokeStyle = T.text; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(g.food[0] * CELL + CELL / 2, g.food[1] * CELL + CELL / 2, 6, 0, Math.PI * 2); ctx.stroke();
+    // Snake — ink squares
+    ctx.fillStyle = T.text;
+    g.snake.forEach((seg) => {
+      ctx.fillRect(seg[0] * CELL + 1, seg[1] * CELL + 1, CELL - 2, CELL - 2);
     });
   }, []);
 
@@ -134,58 +135,58 @@ export function SnakeGame({ onClose }) {
     <div style={{
       position: 'fixed', inset: 0, zIndex: 9999,
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'rgba(10,10,10,0.6)', backdropFilter: 'blur(12px)',
+      background: 'rgba(250,247,242,0.85)', backdropFilter: 'blur(12px)',
+      padding: 16,
     }} onClick={onClose}>
       <div onClick={e => e.stopPropagation()} style={{
-        background: '#0A0A0A',
-        border: `1px solid rgba(255,77,0,0.2)`,
-        borderRadius: 12,
+        background: T.bg,
+        border: `1px solid ${T.border}`,
         padding: 16,
-        boxShadow: '0 20px 80px rgba(0,0,0,0.8)',
+        maxWidth: '100%',
       }}>
         {/* Header */}
         <div style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          marginBottom: 12, padding: '0 4px',
+          marginBottom: 12, padding: '0 4px', gap: 16,
         }}>
-          <span style={{ fontFamily: T.sans, fontSize: 12, fontWeight: 600, color: T.accent, letterSpacing: 2 }}>
-            SNAKE
+          <span style={{ fontFamily: T.serif, fontStyle: 'italic', fontSize: 20, color: T.text }}>
+            you found the snake
           </span>
           <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-            <span style={{ fontFamily: T.sans, fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
+            <span style={{ fontFamily: T.sans, fontSize: 12, color: T.textMuted }}>
               Best: {best}
             </span>
-            <span style={{ fontFamily: T.sans, fontSize: 12, fontWeight: 600, color: '#fff' }}>
+            <span style={{ fontFamily: T.sans, fontSize: 12, fontWeight: 600, color: T.text }}>
               {score}
             </span>
             <button onClick={onClose} style={{
-              background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)',
-              fontFamily: T.sans, fontSize: 11, cursor: 'pointer', padding: '2px 6px',
-            }}>ESC</button>
+              background: 'none', border: 'none', color: T.textMuted,
+              fontFamily: T.sans, fontSize: 12, cursor: 'pointer', padding: '2px 6px',
+            }}>esc to leave</button>
           </div>
         </div>
 
         {/* Canvas */}
-        <div style={{ position: 'relative', borderRadius: 6, overflow: 'hidden' }}>
-          <canvas ref={canvasRef} width={W} height={H} style={{ display: 'block' }} />
+        <div style={{ position: 'relative', border: `1px solid ${T.border}`, overflow: 'hidden' }}>
+          <canvas ref={canvasRef} width={W} height={H} style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
 
           {/* Death overlay */}
           {dead && (
             <div style={{
               position: 'absolute', inset: 0,
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              background: 'rgba(10,10,10,0.75)', backdropFilter: 'blur(4px)',
+              background: 'rgba(250,247,242,0.85)', backdropFilter: 'blur(4px)',
             }}>
-              <div style={{ fontFamily: T.serif, fontSize: 28, color: '#fff', marginBottom: 4 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 28, color: T.text, marginBottom: 4 }}>
                 {score >= 10 ? 'Nice run.' : 'Game Over'}
               </div>
-              <div style={{ fontFamily: T.sans, fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 16 }}>
+              <div style={{ fontFamily: T.sans, fontSize: 13, color: T.textFaint, marginBottom: 16 }}>
                 Score: {score}
               </div>
               <button onClick={restart} style={{
-                background: T.accent, border: 'none', borderRadius: 20,
+                background: T.text, border: 'none',
                 padding: '8px 24px', fontFamily: T.sans, fontSize: 13,
-                fontWeight: 600, color: '#fff', cursor: 'pointer',
+                fontWeight: 600, color: T.bg, cursor: 'pointer',
               }}>Play Again</button>
             </div>
           )}
@@ -195,7 +196,7 @@ export function SnakeGame({ onClose }) {
         <div style={{
           textAlign: 'center', marginTop: 10,
           fontFamily: T.sans, fontSize: 11,
-          color: waiting && !dead ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.25)',
+          color: waiting && !dead ? T.textMuted : T.textFaint,
         }}>
           {waiting && !dead ? 'Press an arrow key to start' : 'Arrow keys or WASD'}
         </div>

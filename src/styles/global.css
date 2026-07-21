@@ -1,13 +1,16 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { background: #0A0A0A; color: #fff; }
-body { background: #0A0A0A; overflow-x: hidden; color: #fff; overscroll-behavior-y: none; }
-::selection { background: rgba(255,77,0,0.3); color: #fff; }
-:focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
-button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 2px solid rgba(255,77,0,0.7); outline-offset: 2px; border-radius: 4px; }
+html { background: #FAF7F2; color: #211E19; }
+body { background: #FAF7F2; overflow-x: hidden; color: #211E19; overscroll-behavior-y: none; }
+::selection { background: rgba(33,30,25,0.14); color: #211E19; }
+:focus-visible { outline: 2px solid rgba(33,30,25,0.6); outline-offset: 2px; }
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 2px solid rgba(33,30,25,0.6); outline-offset: 2px; }
 ::-webkit-scrollbar { display: none; }
+
+/* Fixed-nav offset for in-page anchors */
+#work, #about { scroll-margin-top: 84px; }
+
 /* Respect users who ask their OS to reduce motion: quiet the looping/declarative
-   animations and CSS transitions. (Scroll-driven parallax is JS-based and not
-   fully covered here, but the continuous animations that cause discomfort are.) */
+   animations (marquee, lifeWave, letter waves) and CSS transitions. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -16,37 +19,12 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
     scroll-behavior: auto !important;
   }
 }
+
 /* ── Essential keyframes (kept) ── */
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-@keyframes scaleIn {
-  0% { opacity: 0; transform: scale(0.92); }
-  100% { opacity: 1; transform: scale(1); }
-}
 @keyframes mobileLetterWave { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-4px); } }
-  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-  50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
-  100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-/* ── Footer haze (CSS-only background) ── */
-@keyframes footerHaze1 {
-  0% { transform: translate(0%, 0%) rotate(0deg); }
-  33% { transform: translate(5%, -3%) rotate(2deg); }
-  66% { transform: translate(-3%, 4%) rotate(-1deg); }
-  100% { transform: translate(4%, -2%) rotate(1.5deg); }
-}
-@keyframes footerHaze2 {
-  0% { transform: translate(0%, 0%) rotate(0deg); }
-  50% { transform: translate(-4%, 3%) rotate(-2deg); }
-  100% { transform: translate(3%, -4%) rotate(1deg); }
-}
 
 /* ── About section reveals ── */
-@keyframes aboutLineGrow { 0% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
 @keyframes clipRevealLeft {
   0% { clip-path: inset(0 100% 0 0); }
   100% { clip-path: inset(0 0 0 0); }
@@ -60,7 +38,7 @@ button:focus-visible, a:focus-visible, [role="button"]:focus-visible { outline: 
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Footer "life." wave ── */
+/* ── Footer "hello." wave ── */
 @keyframes lifeWave {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
