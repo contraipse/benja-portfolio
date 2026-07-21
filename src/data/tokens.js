@@ -8,9 +8,6 @@ export const T = {
   text: "#211E19",
   textMuted: "#6E6A62",
   textFaint: "#8F8A80",
-  accent: "#211E19",        // former orange -> ink. No glows anywhere.
-  accentDark: "#211E19",
-  accentGlow: "transparent",
   border: "#DED9D0",
   borderLight: "#EAE5DC",
   dot: "#C9C3B8",
