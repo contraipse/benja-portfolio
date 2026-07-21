@@ -72,10 +72,13 @@ export function SnakeGame({ onClose }) {
     if (g.waiting) { draw(g); return; }
 
     g.dir = g.nextDir;
-    const head = [g.snake[0][0] + g.dir[0], g.snake[0][1] + g.dir[1]];
+    // Walls wrap — only running into yourself ends the game.
+    const head = [
+      (g.snake[0][0] + g.dir[0] + COLS) % COLS,
+      (g.snake[0][1] + g.dir[1] + ROWS) % ROWS,
+    ];
 
-    if (head[0] < 0 || head[0] >= COLS || head[1] < 0 || head[1] >= ROWS ||
-        g.snake.some(s => s[0] === head[0] && s[1] === head[1])) {
+    if (g.snake.some(s => s[0] === head[0] && s[1] === head[1])) {
       die(g);
       return;
     }
