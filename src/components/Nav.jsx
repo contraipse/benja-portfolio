@@ -60,30 +60,26 @@ export default function Nav() {
             gap: 32,
             alignItems: "center",
           }}>
-            {navLinks.map((item) => {
-              const isContact = item === "Contact";
-              return (
-                <a
-                  key={item}
-                  href={isContact ? "mailto:benjajuster@gmail.com" : `#${item.toLowerCase()}`}
-                  style={{
-                    fontFamily: T.sans,
-                    fontSize: 11,
-                    fontWeight: 500,
-                    letterSpacing: "1.5px",
-                    color: isContact ? T.text : T.textMuted,
-                    textDecoration: "none",
-                    textTransform: "uppercase",
-                    transition: "color 0.15s",
-                    ...(isContact ? { borderBottom: `1px solid ${T.text}`, paddingBottom: 2 } : {}),
-                  }}
-                  onMouseEnter={(e) => { e.target.style.color = T.text; }}
-                  onMouseLeave={(e) => { e.target.style.color = isContact ? T.text : T.textMuted; }}
-                >
-                  {item}
-                </a>
-              );
-            })}
+            {navLinks.map((item) => (
+              <a
+                key={item}
+                href={item === "Contact" ? "mailto:benjajuster@gmail.com" : `#${item.toLowerCase()}`}
+                style={{
+                  fontFamily: T.sans,
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: "1.5px",
+                  color: T.textMuted,
+                  textDecoration: "none",
+                  textTransform: "uppercase",
+                  transition: "color 0.15s",
+                }}
+                onMouseEnter={(e) => { e.target.style.color = T.text; }}
+                onMouseLeave={(e) => { e.target.style.color = T.textMuted; }}
+              >
+                {item}
+              </a>
+            ))}
           </div>
         )}
 
