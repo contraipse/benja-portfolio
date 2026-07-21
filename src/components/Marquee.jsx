@@ -9,7 +9,7 @@ export function Marquee() {
     <div style={{
       overflow: "hidden", padding: "28px 0",
       borderTop: `1px solid ${T.borderLight}`, borderBottom: `1px solid ${T.borderLight}`,
-      margin: "0 0 clamp(80px, 10vw, 140px)", position: "relative", zIndex: 1,
+      margin: "0 0 clamp(48px, 7vw, 96px)", position: "relative", zIndex: 1,
     }}>
       <div style={{ display: "flex", gap: 56, animation: "marquee 40s linear infinite", width: "max-content" }}>
         {doubled.map((item, i) => (

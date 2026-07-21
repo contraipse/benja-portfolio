@@ -145,7 +145,7 @@ export function ClientLogos() {
 
   return (
     <section ref={ref} style={{
-      padding: isMobile ? "40px 20px" : "clamp(48px, 6vw, 80px) clamp(24px, 5vw, 64px)",
+      padding: isMobile ? "0 20px 48px" : "0 clamp(24px, 5vw, 64px) clamp(48px, 7vw, 96px)",
       position: "relative", zIndex: 1,
     }}>
       <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 36 }}>
@@ -160,7 +160,7 @@ export function ClientLogos() {
         display: "flex", flexWrap: "wrap",
         justifyContent: "center", alignItems: "center",
         gap: isMobile ? "16px clamp(16px, 5vw, 28px)" : "28px clamp(24px, 3.2vw, 48px)",
-        padding: "28px 12px",
+        padding: "28px 12px 0",
       }}>
         {clients.map((name) => (
           <ClientLogoItem key={name} name={name} visible={visible} isMobile={isMobile} />

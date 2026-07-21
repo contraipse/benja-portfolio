@@ -112,7 +112,7 @@ export default function Hero() {
       zIndex: 1,
       padding: isMobile
         ? `108px ${T.mobilePadX}px 48px`
-        : `clamp(140px, 18vh, 200px) ${T.padX} clamp(56px, 7vw, 96px)`,
+        : `clamp(140px, 18vh, 200px) ${T.padX} clamp(48px, 7vw, 96px)`,
     }}>
 
       {/* Overline */}
