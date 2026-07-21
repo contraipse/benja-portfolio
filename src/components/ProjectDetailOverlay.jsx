@@ -73,7 +73,11 @@ export default function ProjectDetailOverlay() {
   if (!project) return null;
 
   const allMedia = [...((project.gallery && project.gallery.length > 0) ? project.gallery : [project.image])];
-  const hasVideo = !!project.video;
+  const videoSrc = project.video
+    ? `https://www.youtube.com/embed/${project.video}?rel=0&modestbranding=1`
+    : project.vimeo
+      ? `https://player.vimeo.com/video/${project.vimeo}`
+      : null;
   const goNext = () => setActiveGalleryIdx((activeGalleryIdx + 1) % allMedia.length);
 
   const CloseButton = (
@@ -232,14 +236,14 @@ export default function ProjectDetailOverlay() {
           );
         })()}
 
-        {/* YouTube video embed — works on benja.art (domain-restricted on localhost) */}
-        {hasVideo && (
+        {/* Video embed (YouTube or Vimeo) — works on benja.art (domain-restricted on localhost) */}
+        {videoSrc && (
           <div style={{
             width: "100%", aspectRatio: "16/9", overflow: "hidden",
             marginBottom: 32, background: T.surface,
           }}>
             <iframe
-              src={`https://www.youtube.com/embed/${project.video}?rel=0&modestbranding=1`}
+              src={videoSrc}
               title={`${project.title} — video`}
               style={{ width: "100%", height: "100%", border: "none" }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
