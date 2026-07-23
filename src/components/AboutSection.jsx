@@ -26,9 +26,9 @@ export function AboutSection() {
 
   return (
     <section id="about" ref={(el) => { ref(el); sectionRef.current = el; }} style={{
-      padding: isMobile ? "60px 20px" : "clamp(80px, 12vw, 160px) clamp(24px, 5vw, 64px)",
+      padding: isMobile ? "60px 20px" : "clamp(80px, 12vw, 160px) clamp(24px, 5vw, 64px) 80px",
       position: "relative", overflow: "hidden", zIndex: 1,
-      minHeight: isMobile ? "auto" : "100vh", display: "flex", alignItems: "center",
+      minHeight: "auto", display: "flex", alignItems: "center",
     }}>
       <div style={{
         display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",

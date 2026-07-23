@@ -14,7 +14,7 @@ export function HighlightsStrip() {
     { stat: "53%", label: "Social Lift", detail: "PepsiCo Sensorium" },
   ];
 
-  const press = ["Vice", "LA Times", "East Bay Times", "SF Magazine", "Laughing Squid", "Medium"];
+  const press = ["Vice", "LA Times", "East Bay Times", "SF Magazine", "Laughing Squid", "Medium", "Sightline", "Reddit for Business"];
 
   return (
     <section ref={ref} style={{
